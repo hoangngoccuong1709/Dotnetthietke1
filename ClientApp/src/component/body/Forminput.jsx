@@ -1,5 +1,5 @@
 import React from 'react'
-import '../body/css /Forminput.css'
+import '../body/css/Forminput.css'
 export default function Forminput() {
   return (
     <div className="thongtin">
