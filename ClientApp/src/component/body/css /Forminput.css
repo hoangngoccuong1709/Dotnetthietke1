@@ -1,0 +1,50 @@
+.thongtin{
+    text-align: center;
+    margin-top: 29rem;
+}
+.thongtin h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 5.8rem;
+    color: #484a4b;
+    line-height: 7rem;
+    margin-bottom: 0;
+}
+.thongtin p{
+    font-family: 'Josefin Slab', serif;
+    font-size: 2.5rem;
+    color: #484a4b;
+    margin-top: 1.5rem;
+    line-height: 3rem;
+    margin-bottom: 0;
+}
+.form input{
+    font-size: 1.6rem;
+    padding: 2rem;
+    width: 65%;
+    margin-top: 2.8rem;
+   
+}
+.form textarea{
+    font-size: 1.6rem;
+    padding: 2rem ;
+    margin-top: 3rem;
+    width: 65%;
+    height: 14.0rem;
+}
+.form button{
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-size: 2rem;
+    width: 20.3rem;
+    height: 5.2rem;
+    margin-top: 4.8rem;
+    background-color: #c87e6b;
+    color: white;
+    border:#c87e6b ;
+    border-radius: 50px;
+}
+::placeholder{
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-size: 1.825rem;
+    padding: 20px 40px;
+    color: #bdbdbd;
+}
