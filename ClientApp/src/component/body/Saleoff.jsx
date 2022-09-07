@@ -1,5 +1,5 @@
 import React from 'react'
-import '../body/css /Saleoff.css'
+import '../body/css/Saleoff.css'
 export default function Saleoff() {
   return (
     <div className="sale">

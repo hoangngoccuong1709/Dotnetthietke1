@@ -1,5 +1,5 @@
 import React from 'react'
-import '../body/css /Product.css'
+import '../body/css/Product.css'
 import { useEffect,useState } from 'react';
 export default function Product() {
   

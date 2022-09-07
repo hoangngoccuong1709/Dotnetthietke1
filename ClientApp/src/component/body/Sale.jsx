@@ -1,5 +1,5 @@
 import React from 'react'
-import '../body/css /Sale.css'
+import '../body/css/Sale.css'
 export default function Sale() {
   return (
     <div className="giamgia">

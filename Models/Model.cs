@@ -1,6 +1,9 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace dotnetthietke1{
     public class ListProduct{
-        public int Id{get;set;}
+        [Key]
+        public int Idproduct{get;set;}
 
         public string NameProduct{get;set;}
 

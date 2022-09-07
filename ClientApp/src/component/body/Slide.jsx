@@ -1,5 +1,5 @@
 import React from 'react'
-import '../body/css /Slide.css'
+import '../body/css/Slide.css'
 export default function Slide() {
   return (
     <div className="slide-container">

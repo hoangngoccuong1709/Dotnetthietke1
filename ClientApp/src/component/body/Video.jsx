@@ -1,5 +1,5 @@
 import React from 'react'
-import Video from '../body/css /Video.css'
+import Video from '../body/css/Video.css'
 
 export default function Videoproduct() {
   return (

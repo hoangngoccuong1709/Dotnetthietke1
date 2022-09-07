@@ -1,5 +1,5 @@
 import React from 'react'
-import '../body/css /Introduce1.css'
+import '../body/css/Introduce1.css'
 export default function Introduce1() {
   return (
     <div>

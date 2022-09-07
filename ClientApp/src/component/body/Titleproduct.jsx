@@ -1,5 +1,5 @@
 import React, { Profiler } from 'react'
-import '../body/css /Title.css'
+import '../body/css/Title.css'
 import Product from './Product'
 import { useEffect,useState } from 'react';
 import Slider from "react-slick";
