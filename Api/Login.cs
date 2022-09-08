@@ -10,11 +10,11 @@ using Microsoft.EntityFrameworkCore;
 namespace dotnetthietke1.Api
 {
     [Produces("application/json")]
-    [Route("api/Menuheader")]
-    public class MenuheaderController : Controller
+    [Route("api/login")]
+    public class LoginController : Controller
     {
         ApplicationDbContext db;
-        public MenuheaderController(ApplicationDbContext db)
+        public LoginController(ApplicationDbContext db)
         {
             this.db = db;
         }
@@ -23,7 +23,7 @@ namespace dotnetthietke1.Api
         [AllowAnonymous]
         public async Task<IActionResult> GetList()
         {
-            var list = await db.Conten.ToListAsync();
+            var list = await db.User.ToListAsync();
 
             return Ok(list);
 

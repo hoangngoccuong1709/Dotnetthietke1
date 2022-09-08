@@ -7,14 +7,13 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 
-namespace dotnetthietke1.Api
+namespace dotnetthietke1
 {
-    [Produces("application/json")]
-    [Route("api/Menuheader")]
-    public class MenuheaderController : Controller
+    [Route("api/Conten")]
+    public class ContenController : Controller
     {
         ApplicationDbContext db;
-        public MenuheaderController(ApplicationDbContext db)
+        public ContenController(ApplicationDbContext db)
         {
             this.db = db;
         }
@@ -23,9 +22,9 @@ namespace dotnetthietke1.Api
         [AllowAnonymous]
         public async Task<IActionResult> GetList()
         {
-            var list = await db.Conten.ToListAsync();
+            var Conten = await db.Conten.ToListAsync();
 
-            return Ok(list);
+            return Ok(Conten);
 
         }
     }

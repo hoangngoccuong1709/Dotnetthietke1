@@ -9,6 +9,7 @@ import Service from './pages/service/Service';
 import Abount from './pages/abount/Abount';
 import Contact from './pages/contact/Contact';
 import Signin from './pages/signin/Signin';
+import Account from './pages/account/Account'
 function App() {
   return (
      <div className="App">   
@@ -19,6 +20,7 @@ function App() {
       <Route path="abount" element={<Abount />} />
       <Route path="contact" element={<Contact/>} />
       <Route path="signin" element={<Signin />} />
+      {/* <Route path="login" element={<Account />} /> */}
         {/* <Route path="/service">
           <Service />
         </Route> */}

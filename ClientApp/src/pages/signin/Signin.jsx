@@ -1,20 +1,11 @@
 import { Button, Input, Typography, Form, Checkbox } from 'antd';
 import { useDispatch, useSelector } from 'react-redux'
-import { login } from '../../actions/account';
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router';
+import { login } from '../../actions/user';
 
 const AccountLogin = props => {
     const [form] = Form.useForm();
     const dispatch = useDispatch();
-    const account = useSelector(state => state.account);
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        if (account.loggedIn) {
-            navigate('/');
-        }
-    }, [account])
+    const loginError = useSelector(state => state.user.loginError);
 
     const onFinish = () => {
         dispatch(login(form.getFieldsValue()));
@@ -23,7 +14,9 @@ const AccountLogin = props => {
     return (
         <div style={{ width: 500, margin: '20px auto' }}>
             <Typography.Title level={3}>Login</Typography.Title>
-
+            {
+                loginError && <div>{loginError.message}</div>
+            }
             <Form
                 name="basic"
                 labelCol={{ span: 8 }}

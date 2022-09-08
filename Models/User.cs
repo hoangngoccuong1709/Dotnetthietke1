@@ -2,7 +2,8 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
 
 namespace dotnetthietke1{
-   public class User : IdentityUser<int>
+   public class User 
+//    : IdentityUser<int>
    {
         [Key]
         public int Iduser{get;set;}
@@ -11,7 +12,7 @@ namespace dotnetthietke1{
 
         public string Password{get;set;}
 
-        public DateTime Date{get;set;}
+        public string Date{get;set;}
     
     }
 }

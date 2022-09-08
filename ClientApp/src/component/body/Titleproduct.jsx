@@ -3,6 +3,7 @@ import '../body/css/Title.css'
 import Product from './Product'
 import { useEffect,useState } from 'react';
 import Slider from "react-slick";
+import { Button } from 'antd';
 export default function Titleproduct() {
   const SampleNextArrow = (props) => {
     const { onClick } = props
@@ -75,7 +76,7 @@ export default function Titleproduct() {
     <div className="cot">
     {product.map((item) =>{
       return(
-          <div className="griditem">
+          <div key={item.Idproduct} className="griditem">
             <img src={item.image} />
             <label className='icontim'>{count}</label> <br />
             <a href className="icon" onClick={increment}>
@@ -84,7 +85,7 @@ export default function Titleproduct() {
             <div className="text">
               <h2> {item.nameProduct}</h2>
               <p>{item.title}</p>
-              <button>READ MORE</button>
+              <Button>READ MORE</Button>
             </div>
           </div>
       )
