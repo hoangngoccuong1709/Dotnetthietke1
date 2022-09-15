@@ -17,7 +17,7 @@ namespace dotnetthietke1{
         [ForeignKey("Iduser")]
         public virtual User user{get; set;}
         [ForeignKey("Idproduct")]
-        public virtual ListProduct Product{get; set;}
+        public virtual Products Product{get; set;}
     
     }
 }

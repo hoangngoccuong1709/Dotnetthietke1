@@ -17,7 +17,6 @@ namespace dotnetthietke1
         {
             this.db = db;
         }
-
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> GetList()

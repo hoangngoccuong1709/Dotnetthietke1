@@ -11,7 +11,7 @@ export default function Slide() {
       method: 'GET',
       redirect: 'follow'
     };
-    fetch('https://localhost:7015/api/Conten',requestOptions)
+    fetch('/api/Conten',requestOptions)
       .then(response => response.json())
       .then(data => setConten(data)) 
       .catch(error => console.log('error', error));

@@ -6,15 +6,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace dotnetthietke1.Migrations
 {
-    public partial class thembang : Migration
+    public partial class Migrations : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.RenameColumn(
-                name: "Id",
-                table: "Products",
-                newName: "Idproduct");
-
             migrationBuilder.CreateTable(
                 name: "Conten",
                 columns: table => new
@@ -31,6 +26,21 @@ namespace dotnetthietke1.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Products",
+                columns: table => new
+                {
+                    Idproduct = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    NameProduct = table.Column<string>(type: "text", nullable: false),
+                    Image = table.Column<string>(type: "text", nullable: false),
+                    Title = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Products", x => x.Idproduct);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "User",
                 columns: table => new
                 {
@@ -38,22 +48,7 @@ namespace dotnetthietke1.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     NameUser = table.Column<string>(type: "text", nullable: false),
                     Password = table.Column<string>(type: "text", nullable: false),
-                    Date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    Id = table.Column<int>(type: "integer", nullable: false),
-                    UserName = table.Column<string>(type: "text", nullable: true),
-                    NormalizedUserName = table.Column<string>(type: "text", nullable: true),
-                    Email = table.Column<string>(type: "text", nullable: true),
-                    NormalizedEmail = table.Column<string>(type: "text", nullable: true),
-                    EmailConfirmed = table.Column<bool>(type: "boolean", nullable: false),
-                    PasswordHash = table.Column<string>(type: "text", nullable: true),
-                    SecurityStamp = table.Column<string>(type: "text", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "text", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "text", nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(type: "boolean", nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(type: "boolean", nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    LockoutEnabled = table.Column<bool>(type: "boolean", nullable: false),
-                    AccessFailedCount = table.Column<int>(type: "integer", nullable: false)
+                    Date = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -109,12 +104,10 @@ namespace dotnetthietke1.Migrations
                 name: "Order");
 
             migrationBuilder.DropTable(
-                name: "User");
+                name: "Products");
 
-            migrationBuilder.RenameColumn(
-                name: "Idproduct",
-                table: "Products",
-                newName: "Id");
+            migrationBuilder.DropTable(
+                name: "User");
         }
     }
 }

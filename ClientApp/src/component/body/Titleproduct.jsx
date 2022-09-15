@@ -13,11 +13,6 @@ export default function Titleproduct() {
       <img src="image/Shape1.png" style={{marginRight: '24px'}} /> 
       </a>
       </div>
-      // <div className='control-btn' onClick={onClick}>
-      //   <button className='next'>
-      //     <i className='fa fa-long-arrow-alt-right'></i>
-      //   </button>
-      // </div>
     )
   }
   const SamplePrevArrow = (props) => {
@@ -28,11 +23,6 @@ export default function Titleproduct() {
       <img src="image/Shape2.png" style={{marginLeft: '24px'}} /> 
       </a>
       </div>
-      // <div className='control-btn' onClick={onClick}>
-      //   <button className='prev'>
-      //     <i className='fa fa-long-arrow-alt-left'></i>
-      //   </button>
-      // </div>
     )
   }
   const [product, setProduct] = useState([]);
@@ -44,7 +34,7 @@ export default function Titleproduct() {
       method: 'GET',
       redirect: 'follow'
     };
-    fetch('https://localhost:7015/api/Products',requestOptions)
+    fetch(`api/products`,requestOptions)
       .then(response => response.json())
       .then(data => setProduct(data)) 
       .catch(error => console.log('error', error));
@@ -62,7 +52,6 @@ export default function Titleproduct() {
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
   }
-  
   return (
     <div>
     <div className="tieude">
@@ -76,15 +65,15 @@ export default function Titleproduct() {
     <div className="cot">
     {product.map((item) =>{
       return(
-          <div key={item.Idproduct} className="griditem">
-            <img src={item.image} />
+          <div  className="griditem">
+            <img src={item.Image} />
             <label className='icontim'>{count}</label> <br />
             <a href className="icon" onClick={increment}>
               <img src="image/Heart1.png" /> 
             </a>
             <div className="text">
-              <h2> {item.nameProduct}</h2>
-              <p>{item.title}</p>
+              <h2> {item.NameProduct}</h2>
+              <p>{item.Title}</p>
               <Button>READ MORE</Button>
             </div>
           </div>

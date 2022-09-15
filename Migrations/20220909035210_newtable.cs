@@ -5,29 +5,30 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace dotnetthietke1.Migrations
 {
-    public partial class init : Migration
+    public partial class newtable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Products",
+                name: "Menu",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
+                    idMenu = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    NameProduct = table.Column<string>(type: "text", nullable: false),
-                    Image = table.Column<string>(type: "text", nullable: false)
+                    nameMenu = table.Column<string>(type: "text", nullable: false),
+                    linkMenu = table.Column<string>(type: "text", nullable: false),
+                    type = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Products", x => x.Id);
+                    table.PrimaryKey("PK_Menu", x => x.idMenu);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Products");
+                name: "Menu");
         }
     }
 }

@@ -72,6 +72,31 @@ namespace dotnetthietke1.Migrations
                     b.ToTable("Products");
                 });
 
+            modelBuilder.Entity("dotnetthietke1.Menu", b =>
+                {
+                    b.Property<int>("idMenu")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("idMenu"));
+
+                    b.Property<string>("linkMenu")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("nameMenu")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("type")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("idMenu");
+
+                    b.ToTable("Menu");
+                });
+
             modelBuilder.Entity("dotnetthietke1.Order", b =>
                 {
                     b.Property<int>("Idorder")

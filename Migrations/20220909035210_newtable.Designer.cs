@@ -12,8 +12,8 @@ using dotnetthietke1;
 namespace dotnetthietke1.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220907011245_thembang")]
-    partial class thembang
+    [Migration("20220909035210_newtable")]
+    partial class newtable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -74,6 +74,31 @@ namespace dotnetthietke1.Migrations
                     b.ToTable("Products");
                 });
 
+            modelBuilder.Entity("dotnetthietke1.Menu", b =>
+                {
+                    b.Property<int>("idMenu")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("idMenu"));
+
+                    b.Property<string>("linkMenu")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("nameMenu")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("type")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("idMenu");
+
+                    b.ToTable("Menu");
+                });
+
             modelBuilder.Entity("dotnetthietke1.Order", b =>
                 {
                     b.Property<int>("Idorder")
@@ -115,60 +140,16 @@ namespace dotnetthietke1.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Iduser"));
 
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("ConcurrencyStamp")
+                    b.Property<string>("Date")
+                        .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("text");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("boolean");
-
-                    b.Property<int>("Id")
-                        .HasColumnType("integer");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("boolean");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("NameUser")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("NormalizedEmail")
-                        .HasColumnType("text");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasColumnType("text");
-
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("text");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("text");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("text");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("UserName")
                         .HasColumnType("text");
 
                     b.HasKey("Iduser");

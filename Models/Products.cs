@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 
 namespace dotnetthietke1{
-    public class ListProduct{
+    public class Products{
         [Key]
         public int Idproduct{get;set;}
 

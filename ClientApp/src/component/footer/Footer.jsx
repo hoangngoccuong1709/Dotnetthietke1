@@ -36,13 +36,13 @@ export default function footer() {
         <div className="iconfooter">
           <h4>Follow us!</h4>
           <div className="iconthongtin">
-            <a href>
+            <a href='#'>
               <img style={{width: '4.9rem', marginRight: '3.4rem'}} src="image/fb.png" /> 
             </a>
-            <a href>
+            <a href='#'>
               <img style={{width: '4.9rem', marginRight: '2.5rem'}} src="image/ins.png" /> 
             </a>
-            <a href>
+            <a href='#'>
               <img style={{width: '4.9rem'}} src="image/yt.png" /> 
             </a>
           </div>
