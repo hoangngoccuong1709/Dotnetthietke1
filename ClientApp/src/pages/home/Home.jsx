@@ -1,15 +1,17 @@
-import React from 'react'
-import Slide from '../../component/body/Slide'
-import Saleoff from '../../component/body/Saleoff'
-import Sale from '../../component/body/Sale'
-import Titleproduct from '../../component/body/Titleproduct'
-import Video from '../../component/body/Video'
-import Introduce1 from '../../component/body/Introduce1'
-import Forminput from '../../component/body/Forminput'
-import { Input,Typography } from 'antd'
+import React from 'react';
+import Slide from '../../component/body/Slide';
+import Saleoff from '../../component/body/Saleoff';
+import Sale from '../../component/body/Sale';
+import Titleproduct from '../../component/body/Titleproduct';
+import Video from '../../component/body/Video';
+import Introduce1 from '../../component/body/Introduce1';
+import Forminput from '../../component/body/Forminput';
+import Header from '../../component/header/Header';
+import Footer from '../../component/footer/Footer'
 export default function Home() {
   return (
     <div>
+      <Header/>
        <Slide />
        <Sale /> 
        <Titleproduct /> 
@@ -17,6 +19,7 @@ export default function Home() {
        <Saleoff />
        <Introduce1 />
        <Forminput />
+       <Footer/>
     </div>
   )
 }

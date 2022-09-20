@@ -1,9 +1,12 @@
-import React from 'react'
 
-export default function Service() {
+import React from "react";
+
+function Services() {
   return (
-    <div>
-      <h2>Đây là trang service</h2>
-    </div>
-  )
+     <div className="App">   
+     
+     </div>
+  );
 }
+
+export default Services;

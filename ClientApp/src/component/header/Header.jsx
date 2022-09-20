@@ -9,12 +9,12 @@ function Header() {
     const data = useSelector(state => state.posts.data);
     const data2 = useSelector(state => state.posts.data2);
     const data3 = useSelector(state => state.posts.data3);
-    const requesting = useSelector(state => state.posts.requesting);
+    // const requesting = useSelector(state => state.posts.requesting);
     
     const dispatch = useDispatch();
     useEffect (()=>{
     dispatch(loadPosts());
-    console.log(data,requesting)
+    // console.log(data,requesting)
   },[]);
 
     if(!data) {
@@ -41,7 +41,8 @@ function Header() {
                     {data.map((dataMenu) =>{
                         return(
                             <li key={dataMenu.id}>
-                            <Link to={dataMenu.linkMenu}  className="noidung" >{dataMenu.nameMenu}</Link>
+                            <Link  to={dataMenu.linkMenu}  className="noidung" >{dataMenu.nameMenu} 
+                            </Link>
                             </li>
                     )
                 })}
@@ -51,7 +52,6 @@ function Header() {
                         {data2.map((dataMenu)=>{
                             return(
                                     <Link to={dataMenu.linkMenu}>
-                                    {console.log(dataMenu)}
                                         <img 
                                         style={{width: '2rem', height: '2.3rem'}} 
                                         src={dataMenu.nameMenu} alt='img'/> 
