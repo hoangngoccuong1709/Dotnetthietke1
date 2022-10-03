@@ -1,23 +1,24 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace dotnetthietke1{
-    public class Order{
+namespace dotnetthietke1.Models
+{
+    public class Orders
+    {
         [Key]
-        public int Idorder{get;set;}
+        public string Id { get; set; }
 
-        public int Iduser{get;set;}
+        public string UserId { get; set; }
+        public int Quantity { get; set; }
 
-        public int Idproduct{get;set;}
-        public string NameProduct{get;set;}
+        public DateTime Date { get; set; }
 
-        public DateTime Date{get;set;}
+        public float Total { get; set; }
 
-        public float Total{get ;set;}
-        [ForeignKey("Iduser")]
-        public virtual User user{get; set;}
+        [ForeignKey("UserId")] // răng k để là UserId ni
+        public virtual User User { get; set; }
+        public int Idproduct { get; set; }
         [ForeignKey("Idproduct")]
-        public virtual ListProduct Product{get; set;}
-    
+        public virtual Product Product { get; set; }
     }
 }

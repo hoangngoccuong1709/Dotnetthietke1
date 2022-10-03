@@ -1,12 +1,17 @@
 import { Button, Input, Typography, Form, Checkbox } from 'antd';
 import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../../actions/user';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router';
 
 const AccountLogin = props => {
     const [form] = Form.useForm();
     const dispatch = useDispatch();
-    const loginError = useSelector(state => state.user.loginError);
+    //const loginError = useSelector(state => state.user.loginError);
+    //const account = useSelector(state => state.user);
+    const navigate = useNavigate();
 
+    
     const onFinish = () => {
         dispatch(login(form.getFieldsValue()));
     }
@@ -15,7 +20,7 @@ const AccountLogin = props => {
         <div style={{ width: 500, margin: '20px auto' }}>
             <Typography.Title level={3}>Login</Typography.Title>
             {
-                loginError && <div>{loginError.message}</div>
+              // loginError && <div>{loginError.message}</div>
             }
             <Form
                 name="basic"
@@ -48,6 +53,7 @@ const AccountLogin = props => {
 
                 <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
                     <Button type="primary" htmlType="submit">
+                    
                         Đăng nhập
                     </Button>
                 </Form.Item>

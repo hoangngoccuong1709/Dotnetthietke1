@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using CRUD_ASP.NET_CORE_WEBAPI.Models;
 using dotnetthietke1;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -13,54 +15,43 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
-namespace the_third.Controllers
+namespace dotnetthietke1.Controllers
 {
     [Route("/user")]
     public class UserController : ControllerBase
     {
         ApplicationDbContext db;
-        private readonly UserManager<IdentityUser> userManager;
-        private readonly SignInManager<IdentityUser> signInManager;
+        private readonly UserManager<User> userManager;
+        private readonly SignInManager<User> signInManager;
         private readonly RoleManager<IdentityRole> roleManager;
+        IConfiguration configuration;
 
-        public UserController(ApplicationDbContext dbContext, UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, RoleManager<IdentityRole> roleManager)
+        public UserController(ApplicationDbContext dbContext, UserManager<User> userManager, SignInManager<User> signInManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration)
         {
             this.db = dbContext;
             this.userManager = userManager;
             this.roleManager = roleManager;
             this.signInManager = signInManager;
+            this.configuration = configuration;
         }
-
-        [HttpGet("info")]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public async Task<IActionResult> GetInfo()
-        {
-            var userName = User.Identity.Name;
-            //var user = await userManager.FindByNameAsync(userName);
-
-            var user2 = await db.User.Select(u => new
+[HttpPost]
+public async Task<IActionResult> PostAsync([FromBody] Info user )
+{
+      if (!ModelState.IsValid) return BadRequest("lỗi");
+    var user2 =  new User()
             {
-                u.NameUser,
-                u.Password,
-                u.Date,
-                // u.Email,
+                // Id = user.Id,
+                FullName= user.FullName,
+                PhoneNumber=user.PhoneNumber,
+                Email=user.Email,
+                Avatar= user.Avatar,
+                Description= user.Description,
                 // u.PhoneNumber
-            }).Where(u => u.NameUser == userName)
-            .FirstOrDefaultAsync();
-
-            // return Ok(new
-            // {
-            //     User = new
-            //     {
-            //         user.UserName,
-            //         user.Email,
-            //         user.PhoneNumber
-            //     }
-            // });
-
-            return Ok(user2);
-        }
-
+            };
+            await db.Users.AddAsync(user2);
+	        await db.SaveChangesAsync();
+	return Ok(user);
+}
         [HttpPost("login")]
         public async Task<IActionResult> LoginUser([FromBody] LoginModel model)
         {
@@ -115,9 +106,11 @@ namespace the_third.Controllers
                 new Claim(ClaimTypes.Name,  user.UserName),
                 new Claim("AspNet.Identity.SecurityStamp",  user.SecurityStamp)
             };
-
-          //  var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Startup.SecurityKey);
-           // var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            var securityKey = configuration.GetValue<string>("SecurityKey");
+            // var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Program.securityKey));
+            // var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(securityKey));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             // Create the JWT and write it to a string
             var jwt = new JwtSecurityToken(
@@ -125,12 +118,11 @@ namespace the_third.Controllers
                 audience: "RS",
                 claims: claims,
                 notBefore: now,
-                expires: expires
-              //  signingCredentials: creds
+                expires: expires,
+                signingCredentials: creds
             );
 
             var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
-
             return Ok(new
             {
                 AccessToken = encodedJwt,
@@ -140,15 +132,75 @@ namespace the_third.Controllers
                     user.UserName,
                     user.Email,
                     user.PhoneNumber
-                }
-            });
+                }// đoạn ăng nhập ni trả về ừng trả về thông tin user
+                 // thông tin user chạy 1 api riêng
+                
+
+            }
+            );
+        }
+        [HttpGet("info")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public async Task<IActionResult> GetInfo()
+        {
+             var userName = User.Identity?.Name;
+            //var user = await userManager.FindByNameAsync(userName);
+
+            var user2 = await db.Users.Select(u => new
+            {
+                u.FullName,
+                u.Description,
+                u.Avatar,
+                u.UserName,
+                u.Email,
+                u.PhoneNumber
+            }).Where(u => u.UserName == userName)
+            .FirstOrDefaultAsync();
+
+
+
+            // var user = User.Claims.Where(c => c.Type == "AspNet.Identity.SecurityStamp")
+            //             .Select(c => c.Value).FirstOrDefault();
+            // var userName = User.Identity.Name;
+            //var user = await userManager.Users.Where(u => u.UserName == model.UserName).FirstOrDefaultAsync();
+            
+
+            return Ok(user2);
+        }
+
+        [HttpGet("Register")]
+        public async Task<IActionResult> CreateUser(string username, string password)
+        {
+            var result = await userManager.CreateAsync(new User
+            {
+                UserName = username,
+                Email = username + "@gmail.com"
+            }, password);
+
+            if (result.Succeeded)
+            {
+                return Ok("Tạo tài khoản thành công");
+            }
+            return BadRequest(result.Errors);
         }
     }
-
     public class LoginModel
     {
         public string UserName { get; set; }
         public string Password { get; set; }
         public bool Remember { get; set; }
+    }
+    public class RegisterViewModel
+    {
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public string UserName { get; set; }
+    }
+    public class Info{
+        public string  FullName  {get ; set;}
+        public string PhoneNumber{get; set;}
+         public string Email{get; set;}
+        public string Avatar{get; set;}
+        public string Description{get; set;}
     }
 }

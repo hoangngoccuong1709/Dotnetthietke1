@@ -8,7 +8,7 @@ export function checkToken(params) {
             dispatch(tokenChecked(true))
         }
         else {
-            fetch(`/user/info`, {
+            fetch  (`/user/info`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -16,8 +16,9 @@ export function checkToken(params) {
                 }
             })
                 .then(res => {
+                    console.log(res,'reslogi');
                     res.json()
-                        .then(data => {
+                        .then(data => { 
                             if (res.status == 200) {
                                 dispatch(setAccount(data))
                             }
@@ -36,12 +37,11 @@ export function checkToken(params) {
                 })
         }
     }
-}
-
+};
 
 export function login(params) {
     return (dispatch) => {
-        fetch(`/user/login`, {
+        fetch  (`/user/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(params)

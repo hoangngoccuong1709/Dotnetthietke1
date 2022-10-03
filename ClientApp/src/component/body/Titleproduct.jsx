@@ -4,6 +4,7 @@ import Product from './Product'
 import { useEffect,useState } from 'react';
 import Slider from "react-slick";
 import { Button } from 'antd';
+import { Link } from "react-router-dom";
 export default function Titleproduct() {
   const SampleNextArrow = (props) => {
     const { onClick } = props
@@ -44,9 +45,9 @@ export default function Titleproduct() {
       method: 'GET',
       redirect: 'follow'
     };
-    fetch('https://localhost:7015/api/Products',requestOptions)
+    fetch('/api/product',requestOptions)
       .then(response => response.json())
-      .then(data => setProduct(data)) 
+      .then(data => setProduct(data))
       .catch(error => console.log('error', error));
   }
   const [count, setCount] = useState(0)
@@ -70,13 +71,14 @@ export default function Titleproduct() {
     <div className="ndtieude">
       <h2>Our Top Products</h2>
       <a>Lorem ipsum dolor sit amet, consectetur.</a>
+      
     </div>
     <img className="imgtd2" src="image/Leaf2.png" /> 
     </div>
     <div className="cot">
     {product.map((item) =>{
       return(
-          <div key={item.Idproduct} className="griditem">
+          <div key={item.idproduct} className="griditem">
             <img src={item.image} />
             <label className='icontim'>{count}</label> <br />
             <a href className="icon" onClick={increment}>
@@ -85,11 +87,12 @@ export default function Titleproduct() {
             <div className="text">
               <h2> {item.nameProduct}</h2>
               <p>{item.title}</p>
-              <Button>READ MORE</Button>
+              {/* <p>{item.price}</p> */}
+              <Link className='link' key={item.idproduct} item={item} setProduct={setProduct} to={`${item.idproduct}`} >READ MORE</Link>
             </div>
           </div>
       )
-  //  <Product {...product} />
+      
     })}
     </div>
     <div className="chuyentrang">

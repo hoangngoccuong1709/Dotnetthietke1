@@ -1,6 +1,22 @@
 import React from 'react'
 import '../body/css/Introduce1.css'
+import { useEffect,useState } from 'react';
 export default function Introduce1() {
+  const [conten, setConten] = useState([]);
+  useEffect(() => {
+  fetchData(14);
+}, [])
+function fetchData(id) {
+  var requestOptions = {
+    method: 'GET',
+    redirect: 'follow'
+  };
+//  /get-conten-by-id?id=${id}
+  fetch(`/api/conten/get-conten-by-id?id=${id}`,requestOptions)
+    .then(response => response.json())
+    .then(data => setConten(data))
+    .catch(error => console.log('error', error));
+}
   return (
     <div>
     <div className="gioithieu1">
@@ -10,10 +26,9 @@ export default function Introduce1() {
         </div>
       </div>
       <div className="contengioithieu1">
-        <img src="image/nam.png " /> 
-        <h2>We select the<br />
-          best flowers</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur<br /> adipisicing elit, sed do eiusmod tempor<br /> incididunt ut labore et dolore magna.</p>
+        <img src="image/nam.png "/> 
+        <h2>{conten.nameConten}</h2>
+        <p>{conten.pharagraph}</p>
         <button>READ MORE</button>
       </div>
     </div>

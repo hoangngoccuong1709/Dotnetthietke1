@@ -11,7 +11,7 @@ namespace dotnetthietke1.Api
 {
     [Produces("application/json")]
     [Route("api/Menuheader")]
-    public class MenuheaderController : Controller
+    public class MenuheaderController : ControllerBase
     {
         ApplicationDbContext db;
         public MenuheaderController(ApplicationDbContext db)
@@ -23,7 +23,7 @@ namespace dotnetthietke1.Api
         [AllowAnonymous]
         public async Task<IActionResult> GetList()
         {
-            var list = await db.Conten.ToListAsync();
+            var list = await db.Contens.ToListAsync();
 
             return Ok(list);
 

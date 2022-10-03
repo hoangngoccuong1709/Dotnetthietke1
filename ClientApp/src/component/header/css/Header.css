@@ -1,9 +1,10 @@
+
 html{
     font-size: 10px;
   }
 .containner{
     display: block;
-    width: 1440px;
+    width: auto;
     height: auto;
     /* background: url('../image/Background.png'); */
     position: relative;
@@ -33,7 +34,7 @@ menu{
 }
 .menu ul{
     display:flex ;
-    padding: 3.2rem  0;
+    padding: 4.2rem  0;
    
 }
 img{

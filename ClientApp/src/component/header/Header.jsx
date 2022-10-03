@@ -1,6 +1,8 @@
 import React from 'react'
 import '../header/css/Header.css'
 import { Link } from 'react-router-dom'
+import  {connect} from  'react-redux'
+
 export default function Header() {
   return (
     <div>
@@ -25,9 +27,10 @@ export default function Header() {
           <Link to={'/signin'}>
             <img style={{width: '2rem', height: '2.3rem'}} src="image/Sesion.png" /> 
           </Link>
-          <a href>
+          <Link to="/giohang">
+             {/* cart : {this.props.numberCart} */}
             <img style={{width: '1.9rem', height: '2.3rem'}} src="image/Shop.png" /> 
-          </a>
+          </Link>
           <a href>
             <img style={{width: '2.7rem', height: '1.5rem'}} src="image/Menu.png" /> 
           </a>
@@ -37,4 +40,11 @@ export default function Header() {
     </div>
   )
 }
+// const mapStateToProps = state =>{
+//   return{
+//       numberCart:state._todoProduct.numberCart
+//   }
+// }
+// export default connect(mapStateToProps,null)(Header)
+
 

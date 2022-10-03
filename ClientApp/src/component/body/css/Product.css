@@ -30,6 +30,7 @@ a.icon img{
     margin-left: 42px;
     margin-right: 42px; 
     margin-top: 31px;
+    margin-bottom: 2rem;
 }
 .text h2{
     font-family: 'Playfair Display', serif;
@@ -42,6 +43,7 @@ a.icon img{
     font-size: 13px;
     color: #765a33;
     margin: 0 0;
+    margin-bottom: 1rem;
 }
 .text button {
     font-family: 'Montserrat Alternates', sans-serif;
@@ -76,4 +78,26 @@ button:hover, a:hover {
     margin-top: 38px;
     position: absolute;
     left: 0;
+}
+article{
+    margin: 5rem;
+}
+article h3{
+    font-size: 3rem;
+}
+.tacgia{
+    font-size: 2rem;
+}
+.btn-them{
+    margin-top: 3rem;
+    padding: 1rem;
+    font-size: 2rem;
+    background-color: #765a33;
+}
+.link{
+    padding:0.5rem;
+    font-size: 1rem;
+    background-color:#454545;
+    color: #ccc;
+    border-radius: 3px;
 }

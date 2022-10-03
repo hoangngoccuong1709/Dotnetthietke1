@@ -3,11 +3,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@900&display=swap");
-/* @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.cs"); */
+@import url("./responsive.css");  
 @import url("https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital@1&display=swap");
+
 .App{
   display: block;
-  width: 1440px;
+  width: 100%;
   height: auto;
   background: url('../public/image/Background.png');
   position: relative;
@@ -23,8 +24,8 @@ h3{
   margin: 0;
 }
 .container{
-  padding-left:20rem ;
-  padding-right: 20rem;
+  text-align: center;
+  padding: 5rem 20rem;
 }
 
 body {
@@ -40,9 +41,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-html{
-  font-size: 62.5%
-}
+/* html{
+  font-size: 100%
+} */
 img,
 video,
 iframe {
@@ -411,3 +412,4 @@ template {
 [hidden] {
   display: none;
 }
+/* response */

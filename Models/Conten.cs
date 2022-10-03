@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
 
-namespace dotnetthietke1{
-   public class Conten 
+namespace dotnetthietke1.Models{
+   public class Contens 
    {
        [Key]
         public int Idconten{get;set;}
@@ -11,5 +11,7 @@ namespace dotnetthietke1{
 
         public string Title{get;set;}
         public string Paragraph{get;set;}
+        public string Posion{get;set;}
+         public string Imageconten{get;set;}
     }
 }
