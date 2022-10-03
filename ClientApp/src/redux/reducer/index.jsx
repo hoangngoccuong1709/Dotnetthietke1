@@ -1,10 +1,9 @@
-// reducers/index.jsjs
+// reducers/index.js
 import { combineReducers } from 'redux';
 import postReducer from './postReducer';
 
 
 const reducers = combineReducers({
-	posts: postReducer
-	
+	posts: postReducer,
 });
 export default (state, action) => reducers(state, action);

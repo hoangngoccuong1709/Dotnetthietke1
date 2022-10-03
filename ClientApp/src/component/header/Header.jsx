@@ -30,7 +30,7 @@ function Header() {
                         <div className="logo">
                             {data3.map((logo)=>{
                                 return(
-                                    <a href = {logo.linkMenu}>
+                                    <a href = {logo.linkMenu} key= {logo.idMenu}>
                                         <img style={{width: '15rem', height: '4.3rem'}} src={logo.nameMenu} alt='img'/> 
                                     </a>
                                 )
@@ -40,18 +40,21 @@ function Header() {
                             <ul >
                     {data.map((dataMenu) =>{
                         return(
-                            <li key={dataMenu.id}>
+                            <li key={dataMenu.idMenu}>
                             <Link  to={dataMenu.linkMenu}  className="noidung" >{dataMenu.nameMenu} 
                             </Link>
                             </li>
                     )
                 })}
+                            <li>
+                            <Link to={'/loguser'} className="buttonthoat">SIGN IN</Link>
+                            </li>   
                             </ul>
                     </div>
                     <div className="iconmenu">
                         {data2.map((dataMenu)=>{
                             return(
-                                    <Link to={dataMenu.linkMenu}>
+                                    <Link to={dataMenu.linkMenu} key = {dataMenu.idMenu}>
                                         <img 
                                         style={{width: '2rem', height: '2.3rem'}} 
                                         src={dataMenu.nameMenu} alt='img'/> 
@@ -61,7 +64,6 @@ function Header() {
                     </div>
                 </div>
                 </div>
-                
             </div>
             
     );}

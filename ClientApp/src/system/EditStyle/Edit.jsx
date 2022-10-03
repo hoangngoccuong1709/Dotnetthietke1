@@ -1,5 +1,5 @@
 import { Footer } from 'antd/lib/layout/layout';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Forminput from '../../component/body/Forminput';
 import Introduce1 from '../../component/body/Introduce1';
 import Sale from '../../component/body/Sale';
@@ -9,32 +9,30 @@ import Titleproduct from '../../component/body/Titleproduct';
 import Videoproduct from '../../component/body/Video';
 import Header from '../../component/header/Header';
 import Footers from '../../component/footer/Footer';
-import tableMenu from '../table/displaytable'
-import {ReactTable} from 'react-table';
-import DisplayTable from '../table/displaytable'
+import DisplayTable from '../table/displaytable';
+import ToggleVisibility from './ToggleVisibility';
+import DisplaytableProduct from '../table/displaytableProduct';
+// import {getMenuApi,getIconApi,getLogoApi} from '../api/menuApi'
 
 export default function Edit() {
-  
-  const handleEdit = ()=>{
-      
-  }
   return (
     <div>
         <Header />
-        <button onClick={handleEdit()} style={{position:'absolute'}}>Edit Header</button>
+        <ToggleVisibility>
         <DisplayTable/>
+        </ToggleVisibility>
         <Slide/>
-        {/* <Sale/> 
-        <Titleproduct/> 
+        <Sale/> 
+        <Titleproduct/>
+        <ToggleVisibility>
+        <DisplaytableProduct/>
+        </ToggleVisibility>
         <Videoproduct/>
         <Saleoff/>
         <Introduce1/>
-        <Forminput/> */}
+        <Forminput/>
         <Footers/>
     </div>
   )
-}
-function showdata(){
-  
 }
 

@@ -15,7 +15,7 @@ internal class Program
         // Add services to the container.
         var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
         builder.Services.AddDbContext<ApplicationDbContext>(x => x.UseNpgsql(connectionString));
-        
+
         builder.Services.AddControllersWithViews();
         var app = builder.Build();
 

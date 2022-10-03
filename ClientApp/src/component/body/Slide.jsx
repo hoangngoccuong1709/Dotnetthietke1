@@ -1,40 +1,22 @@
 import React from 'react'
-import '../body/css/Slide.css'
-import { useEffect,useState } from 'react';
+import './css/Slide.css'
 export default function Slide() {
-  const [conten, setConten] = useState([]);
-    useEffect(() => {
-    fetchData();
-  }, [])
-  function fetchData() {
-    var requestOptions = {
-      method: 'GET',
-      redirect: 'follow'
-    };
-    fetch('/api/Conten',requestOptions)
-      .then(response => response.json())
-      .then(data => setConten(data)) 
-      .catch(error => console.log('error', error));
-  }
   return (
     <div className="slide-container">
     <div className="title-item">
-       <img className="itemimg" src="image/Leaf2.png" /> 
-       <div>
-       { conten.map((item) =>{
-      return(
-        <div key={item.Idconten} className="itemconten">
-        <h3>{item.nameConten}</h3>
-        <h6>{item.title}</h6>
-        <p>{item.paragraph}</p>
+      <img className="itemimg" src="image/Leafs 2.png" /> 
+      <div className="itemconten">
+        <h3>Flower<br /> Arrangements</h3>
+        <h6>• For all special occasions •</h6>
+        <p>Lorem ipsum dolor sit amet, consectetur<br /> 
+          adipisicing elit, sed do eiusmod tempor<br /> 
+          incididunt ut labore et dolore magna aliqua.</p>
         <div className="button-item">
           <button className="buton1">SHOP</button>
           <a className="button2">LEAD MORE</a>
         </div>
-       </div>
-      )})}
-       </div>
-      <img className="itemimg2" src="image/Leaf1.png" /> 
+      </div>
+      <img className="itemimg2" src="image/Leafs 1.png" /> 
     </div>
     <div className="img-item">
       <img className="anh11" src="image/Mask.png" />    

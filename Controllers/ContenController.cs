@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace dotnetthietke1
 {
-    [Route("api/Conten")]
+    [Route("api/v1/[controller]")]
     public class ContenController : Controller
     {
         ApplicationDbContext db;
@@ -25,6 +25,35 @@ namespace dotnetthietke1
 
             return Ok(Conten);
 
+        }
+        [HttpGet("{id}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetListById(int id)
+        {
+            var Conten = await db.Conten.FindAsync(id);
+            if (id == null)
+            {
+                return NotFound();
+            }
+            return Ok(Conten);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+
+        public async Task<ActionResult<Conten>> CreateProduct(Conten content)
+        {
+            var conten = new Conten
+            {
+                NameConten = content.NameConten,
+                Idconten = content.Idconten,
+                Title = content.Title,
+                Paragraph = content.Paragraph
+            };
+            db.Conten.Add(content);
+            await db.SaveChangesAsync();
+
+            return Ok(conten);
         }
     }
 }

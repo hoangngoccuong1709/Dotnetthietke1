@@ -42,14 +42,20 @@ img{
     font-family: 'Montserrat', sans-serif;
     color: white;
 }
+.buttonthoat{
+    padding: 1rem 4.8rem 1rem 3.8rem;
+    font-size: 1.3rem;
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+}
 .menu ul li button{
     margin-left: 5.6rem;
     padding: 0;
 
 }
-.menu ul li a.buttonthoat:hover{
+.buttonthoat:hover{
     font-family: 'Montserrat', sans-serif;
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     background-color: #c87e6b;
     color: white;
     border: 1px solid white;

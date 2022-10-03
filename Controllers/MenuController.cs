@@ -31,5 +31,36 @@ namespace dotnetthietke1
             }).Where(u=>u.type == $"{id}").ToListAsync();
             return Ok(Menu);
         }
+
+        [HttpGet("header")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetListAll(string id)
+        {
+            var Menu = await db.Menu.ToListAsync();
+            return Ok(Menu);
+        }
+        
+        // [HttpGet("menu/idMenu")]
+        // [AllowAnonymous]
+        // public async Task<IActionResult> GetIdMenu(int idMenu){
+        //     var menuId = await db.Menu.FindAsync(idMenu);
+        //      if(menuId == null){
+        //         return NotFound();
+        //     }
+        //     return Ok(menuId) ;
+
+        // }
+        [HttpDelete("idMenu")]
+        [AllowAnonymous]
+        public async Task<IActionResult> DeleteList(int idMenu)
+        {
+            var Menu = await db.Menu.FindAsync(idMenu);
+            if(Menu == null){
+                return NotFound();
+            }
+            db.Menu.Remove(Menu);
+            await db.SaveChangesAsync();
+            return NoContent();
+        }
     }
-}
+}   

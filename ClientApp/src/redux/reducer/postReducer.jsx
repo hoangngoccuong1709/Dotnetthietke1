@@ -12,7 +12,8 @@ const initialState = {
     message: null,
     data: null,
     data2:null,
-    data3:null
+    data3:null,
+    allProduct: null
 }
 
 // bắt từng action type
@@ -30,7 +31,8 @@ function postReducers(state = initialState, payload) {
                 success: true,
                 data: payload.data,
                 data2: payload.data2,
-                data3: payload.data3
+                data3: payload.data3,
+                allProduct:payload.allProduct
             };
         case FETCH_POST_ERROR:
             return {

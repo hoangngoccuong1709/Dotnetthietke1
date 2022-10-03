@@ -1,0 +1,1 @@
+export const allProduct = (state) => state.posts.allProduct
