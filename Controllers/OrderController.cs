@@ -45,31 +45,6 @@ namespace dotnetthietke1.Controller
             }
             return Ok(query);
         }
-
-        // [HttpPost]
-        // public async Task<IActionResult> Postdata([FromBody] BodyOrder  order)
-        // {
-        //     var query =
-        //     from p in db.Orders
-        //     join o in db.Product on p.Idproduct equals o.Idproduct
-        //     join c in db.Users on p.UserId equals c.Id
-        //     select new
-        //     {
-        //         UserName = c.UserName,
-        //         ProductName = o.NameProduct,
-        //         Id = p.Id,
-        //         Total = p.Total,
-        //         Date = p.Date
-        //     };
-        //     await _applicationDbContetext.Orders.AddAsync(order);
-        //     await _applicationDbContetext.SaveChangesAsync();
-        //     foreach (var ownerAndPet in query)
-        //     {
-        //         Console.WriteLine($"\"{ownerAndPet.ProductName}\" is owned by {ownerAndPet.Total}");
-        //     }
-        //     return Ok(query);
-        // }
-        
         [HttpGet]
         [Route("idorder")]
         public async Task<IActionResult> GetInfo(string id)
@@ -147,7 +122,7 @@ namespace dotnetthietke1.Controller
         }
         public class BodyOrder
         {
-            public string OrderId { get; set; }
+             public string OrderId { get; set; }
             public string UserId { get; set; }
             public int Quantity { get; set; }
             public float Total { get; set; }

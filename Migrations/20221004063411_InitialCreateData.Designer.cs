@@ -12,8 +12,8 @@ using dotnetthietke1;
 namespace dotnetthietke1.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220923063149_thaydoibanguser")]
-    partial class thaydoibanguser
+    [Migration("20221004063411_InitialCreateData")]
+    partial class InitialCreateData
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -59,7 +59,7 @@ namespace dotnetthietke1.Migrations
 
             modelBuilder.Entity("dotnetthietke1.Models.Orders", b =>
                 {
-                    b.Property<string>("Idorder")
+                    b.Property<string>("Id")
                         .HasColumnType("text");
 
                     b.Property<DateTime>("Date")
@@ -68,20 +68,21 @@ namespace dotnetthietke1.Migrations
                     b.Property<int>("Idproduct")
                         .HasColumnType("integer");
 
-                    b.Property<int>("Iduser")
-                        .HasColumnType("integer");
-
                     b.Property<int>("Quantity")
                         .HasColumnType("integer");
 
                     b.Property<float>("Total")
                         .HasColumnType("real");
 
-                    b.HasKey("Idorder");
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("Idproduct");
 
-                    b.HasIndex("Iduser");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Orders");
                 });
@@ -114,32 +115,7 @@ namespace dotnetthietke1.Migrations
                     b.ToTable("Product");
                 });
 
-            modelBuilder.Entity("dotnetthietke1.Models.Users", b =>
-                {
-                    b.Property<int>("Iduser")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Iduser"));
-
-                    b.Property<string>("Date")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("NameUser")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Iduser");
-
-                    b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("dotnetthietke1.Usersss", b =>
+            modelBuilder.Entity("dotnetthietke1.User", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("text");
@@ -353,14 +329,14 @@ namespace dotnetthietke1.Migrations
             modelBuilder.Entity("dotnetthietke1.Models.Orders", b =>
                 {
                     b.HasOne("dotnetthietke1.Models.Product", "Product")
-                        .WithMany()
+                        .WithMany("Orders")
                         .HasForeignKey("Idproduct")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("dotnetthietke1.Models.Users", "User")
-                        .WithMany()
-                        .HasForeignKey("Iduser")
+                    b.HasOne("dotnetthietke1.User", "User")
+                        .WithMany("Orders")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -380,7 +356,7 @@ namespace dotnetthietke1.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("dotnetthietke1.Usersss", null)
+                    b.HasOne("dotnetthietke1.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -389,7 +365,7 @@ namespace dotnetthietke1.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("dotnetthietke1.Usersss", null)
+                    b.HasOne("dotnetthietke1.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -404,7 +380,7 @@ namespace dotnetthietke1.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("dotnetthietke1.Usersss", null)
+                    b.HasOne("dotnetthietke1.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -413,11 +389,21 @@ namespace dotnetthietke1.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("dotnetthietke1.Usersss", null)
+                    b.HasOne("dotnetthietke1.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("dotnetthietke1.Models.Product", b =>
+                {
+                    b.Navigation("Orders");
+                });
+
+            modelBuilder.Entity("dotnetthietke1.User", b =>
+                {
+                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }

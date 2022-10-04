@@ -12,8 +12,8 @@ using dotnetthietke1;
 namespace dotnetthietke1.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220929041614_update_order")]
-    partial class update_order
+    [Migration("20221004062220_InitialCreateDb")]
+    partial class InitialCreateDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -329,13 +329,13 @@ namespace dotnetthietke1.Migrations
             modelBuilder.Entity("dotnetthietke1.Models.Orders", b =>
                 {
                     b.HasOne("dotnetthietke1.Models.Product", "Product")
-                        .WithMany()
+                        .WithMany("Orders")
                         .HasForeignKey("Idproduct")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("dotnetthietke1.User", "User")
-                        .WithMany()
+                        .WithMany("Orders")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -394,6 +394,16 @@ namespace dotnetthietke1.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("dotnetthietke1.Models.Product", b =>
+                {
+                    b.Navigation("Orders");
+                });
+
+            modelBuilder.Entity("dotnetthietke1.User", b =>
+                {
+                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }

@@ -4,7 +4,7 @@
 
 namespace dotnetthietke1.Migrations
 {
-    public partial class suatenbang : Migration
+    public partial class InitialCreateDatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

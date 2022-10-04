@@ -15,7 +15,7 @@ namespace dotnetthietke1.Models
 
         public float Total { get; set; }
 
-        [ForeignKey("UserId")] // răng k để là UserId ni
+        [ForeignKey("UserId")] 
         public virtual User User { get; set; }
         public int Idproduct { get; set; }
         [ForeignKey("Idproduct")]

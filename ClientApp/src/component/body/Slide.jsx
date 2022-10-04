@@ -4,7 +4,7 @@ import { useEffect,useState } from 'react';
 export default function Slide() {
   const [conten, setConten] = useState([]);
     useEffect(() => {
-    fetchData(13);
+    fetchData(1);
   }, [])
   function fetchData(id) {
     var requestOptions = {

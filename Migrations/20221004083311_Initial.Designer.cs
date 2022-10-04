@@ -12,8 +12,8 @@ using dotnetthietke1;
 namespace dotnetthietke1.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220927043822_den")]
-    partial class den
+    [Migration("20221004083311_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -59,14 +59,11 @@ namespace dotnetthietke1.Migrations
 
             modelBuilder.Entity("dotnetthietke1.Models.Orders", b =>
                 {
-                    b.Property<string>("Idorder")
+                    b.Property<string>("Id")
                         .HasColumnType("text");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("timestamp with time zone");
-
-                    b.Property<int>("Id")
-                        .HasColumnType("integer");
 
                     b.Property<int>("Idproduct")
                         .HasColumnType("integer");
@@ -81,7 +78,7 @@ namespace dotnetthietke1.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.HasKey("Idorder");
+                    b.HasKey("Id");
 
                     b.HasIndex("Idproduct");
 
@@ -128,8 +125,7 @@ namespace dotnetthietke1.Migrations
 
                     b.Property<string>("Avatar")
                         .IsRequired()
-                        .HasMaxLength(300)
-                        .HasColumnType("character varying(300)");
+                        .HasColumnType("text");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -137,8 +133,7 @@ namespace dotnetthietke1.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("character varying(500)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256)
@@ -332,13 +327,13 @@ namespace dotnetthietke1.Migrations
             modelBuilder.Entity("dotnetthietke1.Models.Orders", b =>
                 {
                     b.HasOne("dotnetthietke1.Models.Product", "Product")
-                        .WithMany()
+                        .WithMany("Orders")
                         .HasForeignKey("Idproduct")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("dotnetthietke1.User", "User")
-                        .WithMany()
+                        .WithMany("Orders")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -397,6 +392,16 @@ namespace dotnetthietke1.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("dotnetthietke1.Models.Product", b =>
+                {
+                    b.Navigation("Orders");
+                });
+
+            modelBuilder.Entity("dotnetthietke1.User", b =>
+                {
+                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }
