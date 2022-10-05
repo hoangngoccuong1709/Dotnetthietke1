@@ -55,6 +55,7 @@ const IdProduct = () => {
             nameProduct: post_name.current.value,
             title: post_title.current.value,
             image: post_image.current.value,
+            image: post_price.current.value,
           };
           try {
             const res = await fetch(`${baseURL}/product`, {
