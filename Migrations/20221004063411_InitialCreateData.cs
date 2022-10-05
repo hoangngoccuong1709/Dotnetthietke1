@@ -4,7 +4,7 @@
 
 namespace dotnetthietke1.Migrations
 {
-    public partial class User : Migration
+    public partial class InitialCreateData : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

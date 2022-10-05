@@ -37,11 +37,21 @@ public async Task<IActionResult> GetProductByIdAsync(int id)
 	return Ok(cake);
 }
 [HttpPost]
-public async Task<IActionResult> PostAsync(Product product)
+public async Task<IActionResult> PostAsync([FromBody] ModelProduct product)
 {
-	_applicationDbContetext.Product.Add(product);
+    if (!ModelState.IsValid) return BadRequest("lỗi");
+    var user2 =  new Product()
+            {
+                // Id = user.Id,
+                NameProduct= product.nameProduct,
+                Image=product.image,
+                Price=product.price,
+                Title= product.title
+            };
+	_applicationDbContetext.Product.Add(user2);
 	await _applicationDbContetext.SaveChangesAsync();
-	return Created($"/get-product-by-id?id={product.Idproduct}", product);
+	//return Created($"/get-product-by-id?id={product.Idproduct}", product);
+return Ok(product);
 }
 [HttpPut]
 public async Task<IActionResult> PutAsync(Product contenToUpdate)
@@ -81,5 +91,12 @@ public async Task<IActionResult> DeleteAsync(int id)
             .FirstOrDefaultAsync();
             return Ok(user2);
         }
+    }
+     public class ModelProduct
+    {
+        public string nameProduct { get; set; }
+        public string image { get; set; }
+        public float price { get; set; }
+         public string title { get; set; }
     }
 }

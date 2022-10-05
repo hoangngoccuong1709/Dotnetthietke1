@@ -6,7 +6,6 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using CRUD_ASP.NET_CORE_WEBAPI.Models;
 using dotnetthietke1;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -139,6 +138,7 @@ public async Task<IActionResult> PostAsync([FromBody] Info user )
             }
             );
         }
+        
         [HttpGet("info")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> GetInfo()
@@ -169,12 +169,15 @@ public async Task<IActionResult> PostAsync([FromBody] Info user )
         }
 
         [HttpGet("Register")]
-        public async Task<IActionResult> CreateUser(string username, string password)
+        public async Task<IActionResult> CreateUser(string username, string password,string avatar ,string description, string fullName)
         {
             var result = await userManager.CreateAsync(new User
             {
                 UserName = username,
-                Email = username + "@gmail.com"
+                Email = username + "@gmail.com",
+                Avatar = avatar,
+                Description = description,
+                FullName = fullName
             }, password);
 
             if (result.Succeeded)

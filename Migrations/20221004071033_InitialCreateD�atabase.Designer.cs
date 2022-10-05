@@ -12,8 +12,8 @@ using dotnetthietke1;
 namespace dotnetthietke1.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220927033626_use")]
-    partial class use
+    [Migration("20221004071033_InitialCreateD�atabase")]
+    partial class InitialCreateDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -59,13 +59,13 @@ namespace dotnetthietke1.Migrations
 
             modelBuilder.Entity("dotnetthietke1.Models.Orders", b =>
                 {
-                    b.Property<string>("Idorder")
+                    b.Property<string>("Id")
                         .HasColumnType("text");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("ProductIdproduct")
+                    b.Property<int>("Idproduct")
                         .HasColumnType("integer");
 
                     b.Property<int>("Quantity")
@@ -75,11 +75,12 @@ namespace dotnetthietke1.Migrations
                         .HasColumnType("real");
 
                     b.Property<string>("UserId")
+                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.HasKey("Idorder");
+                    b.HasKey("Id");
 
-                    b.HasIndex("ProductIdproduct");
+                    b.HasIndex("Idproduct");
 
                     b.HasIndex("UserId");
 
@@ -328,14 +329,16 @@ namespace dotnetthietke1.Migrations
             modelBuilder.Entity("dotnetthietke1.Models.Orders", b =>
                 {
                     b.HasOne("dotnetthietke1.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductIdproduct")
+                        .WithMany("Orders")
+                        .HasForeignKey("Idproduct")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("dotnetthietke1.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
+                        .WithMany("Orders")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Product");
 
@@ -391,6 +394,16 @@ namespace dotnetthietke1.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("dotnetthietke1.Models.Product", b =>
+                {
+                    b.Navigation("Orders");
+                });
+
+            modelBuilder.Entity("dotnetthietke1.User", b =>
+                {
+                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }

@@ -15,12 +15,13 @@ const IdProduct = () => {
     const post_name = useRef(null);
     const post_title = useRef(null);
     const post_image = useRef(null);
+    const post_price = useRef(null);
     const [postResult, setPostResult] = useState(null);
     const fortmatResponse = (res) => {
       return JSON.stringify(res, null, 2)};
     const [data, setData] = useState([]);
-    const [post, setPost] = useState({ idproduct: "", nameProduct: "", title: "",image: "" });
-    const { idproduct, nameProduct, title,image } = post
+    const [post, setPost] = useState({ idproduct: "", nameProduct: "", title: "",image: "" ,price:""});
+    const { idproduct, nameProduct, title,image,price } = post
 
     const [open, setOpen] = useState(false)
 
@@ -54,6 +55,7 @@ const IdProduct = () => {
             nameProduct: post_name.current.value,
             title: post_title.current.value,
             image: post_image.current.value,
+            image: post_price.current.value,
           };
           try {
             const res = await fetch(`${baseURL}/product`, {
@@ -105,6 +107,7 @@ const IdProduct = () => {
         nameProduct: post.nameProduct,
         title: post.title,
         image: post.image,
+        price: post.price,
     }));
 
     const Columns = [
@@ -112,6 +115,7 @@ const IdProduct = () => {
         { field: 'id', headerName: "ID", width: 70, height: 100 },
         { field: 'nameProduct', headerName: "Tên sản phẩm", width: 150, editable: true },
         { field: 'title', headerName: "Tiêu đề sản phẩm", width: 150, editable: true },
+        { field: 'price', headerName: "Giá sản phẩm", width: 150, editable: true },
         { field: 'image', headerName: "Hình ảnh sản phẩm", width: 450, editable: true }];
         
     const actionColumn = [
@@ -183,6 +187,10 @@ const IdProduct = () => {
                                         <div className="form-group " style={{ marginTop: 20 }}>
                                             <label className="required">Nhập image sản phẩm</label>
                                             <input type="text" className="form-control " ref={post_image} ></input>
+                                        </div>
+                                        <div className="form-group " style={{ marginTop: 20 }}>
+                                            <label className="required">Nhập giá sản phẩm</label>
+                                            <input type="text" className="form-control " ref={post_price} ></input>
                                         </div>
                                     </div>
 

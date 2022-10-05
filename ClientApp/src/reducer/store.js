@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
 import ajaxCall from '../lib/ajax';
-import account from './account';
+import account from './user';
 import app from './app';
 import department from './department';
 

@@ -11,7 +11,7 @@ const List = () => {
   const rows = [
     {
       id: 1143155,
-      product: "Cách trồng xoài",
+      product: "Hoa Hồng",
       img: "https://znews-photo.zingcdn.me/w660/Uploaded/sgorvz/2016_06_14/qua_xoai_2.jpg",
       customer: "John Smith",
       date: "1 March",
@@ -20,7 +20,7 @@ const List = () => {
     },
     {
       id: 2235235,
-      product: "Cách trồng dương xỉ",
+      product: "Hoa lan",
       img: "https://khbvptr.vn/wp-content/uploads/2020/09/cay-duong-xi-1-800x800.jpg",
       customer: "Michael Doe",
       date: "1 March",
@@ -29,7 +29,7 @@ const List = () => {
     },
     {
       id: 2342353,
-      product: "Cách trồng lan",
+      product: "Hoa mai ",
       img: "https://www.fao.org.vn/wp-content/uploads/2020/01/loai-hoa-lan-de-trong.jpg",
       customer: "John Smith",
       date: "1 March",
@@ -38,7 +38,7 @@ const List = () => {
     },
     {
       id: 2357741,
-      product: "Cách trồng lúa",
+      product: "Hoa hồng",
       img: "https://free.vector6.com/wp-content/uploads/2021/05/PNG-0000002192-png-bong-lua.png",
       customer: "Jane Smith",
       date: "1 March",
@@ -47,7 +47,7 @@ const List = () => {
     },
     {
       id: 2342355,
-      product: "Cánh trồng tràm",
+      product: "Hoa súng",
       img: "https://hakufarm.vn/wp-content/uploads/2018/08/hinh-anh-la-hoa-cay-tram-gio.jpg",
       customer: "Harold Carol",
       date: "1 March",

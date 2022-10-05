@@ -13,6 +13,6 @@ namespace dotnetthietke1.Models
         // public int Quantity{get ; set;}
         public float Price { get; set; }
         public string Title { get; set; }
-        public virtual ICollection<Orders> Orders { get; set; }
+         public virtual ICollection<Orders> Orders { get; set; }
     }
 }

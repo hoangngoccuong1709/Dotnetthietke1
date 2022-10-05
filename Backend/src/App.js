@@ -8,8 +8,8 @@ import { productInputs, userInputs } from "./formSource";
 import "./style/dark.scss";
 import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
-import Author from "./pages/Author";
-import Pushlic from "./pages/Pushlic";
+import Product from "./pages/Product";
+import Conten from "./pages/Conten";
 import Bill from "./pages/Bill";
 import Customer from "./pages/Customer";
 
@@ -32,7 +32,7 @@ function App() {
               />
             </Route>
             <Route path="sanpham">
-              <Route index element={<Author/>} />
+              <Route index element={<Product/>} />
               {/* <Route path=":productId" element={<Single />} /> */}
               {/* <Route
                 path="new"
@@ -44,7 +44,7 @@ function App() {
   
             </Route> */}
             <Route path="baiviet"
-            element={<Pushlic/>}>
+            element={<Conten/>}>
             </Route>
             <Route path="donhang"
             element={<Bill/>}>
