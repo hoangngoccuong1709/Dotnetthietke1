@@ -74,7 +74,7 @@ internal class Program
                        {
                            context.Token = token;
                        }
-                    return Task.CompletedTask;
+                       return Task.CompletedTask;
                    }
                };
            });
@@ -109,6 +109,7 @@ internal class Program
             pattern: "{controller}/{action=Index}/{id?}");
 
         app.MapFallbackToFile("index.html"); ;
+        app.MapFallbackToFile("/admin", "admin/index.html");
 
         app.Run();
     }
