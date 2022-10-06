@@ -50,7 +50,7 @@ const [post, setPost] = useState({ idorder: "",Idproduct: "",  UserId: "",Quanti
       Email: post_email.current.value,
       Avatar: post_anh.current.value,
       Description: post_mota.current.value,
-     // Cart : props.cart
+      Orders : props.cart
       };
       const Datapost = {
         // Idproduct : props.idproduct,
