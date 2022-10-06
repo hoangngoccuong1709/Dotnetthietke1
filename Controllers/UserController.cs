@@ -44,7 +44,7 @@ public async Task<IActionResult> PostAsync([FromBody] Info user )
                 PhoneNumber=user.PhoneNumber,
                 Email=user.Email,
                 Avatar= user.Avatar,
-                Description= user.Description,
+                Description= user.Description
                 // u.PhoneNumber
             };
             await db.Users.AddAsync(user2);
@@ -205,5 +205,9 @@ public async Task<IActionResult> PostAsync([FromBody] Info user )
          public string Email{get; set;}
         public string Avatar{get; set;}
         public string Description{get; set;}
+        // public int Idproduct {get;set;}
+        // public DateTime Date{get; set;}
+        // public float Total { get; set; }
+        //  public int Quantity { get; set; }
     }
 }
