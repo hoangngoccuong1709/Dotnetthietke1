@@ -10,7 +10,7 @@ namespace dotnetthietke1
     public class User : IdentityUser
     {
         public static object Identity { get; internal set; }
-      
+
         public string Avatar { get; set; }
 
         public string Description { get; set; }
