@@ -235,3 +235,5 @@ _Pvt_Extensions
 .fake/
 Backend/yarn.lock
 ClientApp/yarn.lock
+yarn.lock
+package-lock.json
