@@ -82,11 +82,11 @@ namespace dotnetthietke1.Controller
         public async Task<IActionResult> CreateOrder([FromBody] BodyOrder body)
         {
             if (!ModelState.IsValid) return BadRequest("lỗi");
-            
+
             var order = new Orders()
             {
-               
-                Id = body.OrderId, 
+
+                Id = body.OrderId,
                 Date = DateTime.UtcNow,
                 Quantity = body.Quantity,
                 Total = body.Total,
@@ -122,7 +122,7 @@ namespace dotnetthietke1.Controller
         }
         public class BodyOrder
         {
-             public string OrderId { get; set; }
+            public string OrderId { get; set; }
             public string UserId { get; set; }
             public int Quantity { get; set; }
             public float Total { get; set; }

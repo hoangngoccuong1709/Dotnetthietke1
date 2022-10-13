@@ -1,52 +1,51 @@
-.footer{
-    margin-top: 3.5rem;
-    background-color: #424242;
+.footer {
+  margin-top: 3.5rem;
+  background-color: #424242;
 }
-.footerthongtin{
-    display: flex;
-    margin-left: 6.5%;
-    margin-right: 6.5%;
+.footerthongtin {
+  display: flex;
+  margin-left: 6.5%;
+  margin-right: 6.5%;
 }
-.footer1{
-    margin-top: 12.2rem;
+.footer1 {
+  margin-top: 12.2rem;
 }
-.footer2{
-    margin-left: 14rem;
-    margin-top: 12.2rem;
+.footer2 {
+  margin-left: 14rem;
+  margin-top: 12.2rem;
 }
-.footer3{
-    margin-left: 10rem;
-    margin-top: 12.2rem;
+.footer3 {
+  margin-left: 10rem;
+  margin-top: 12.2rem;
 }
-.footer h3{
-    font-family: 'Montserrat Alternates', sans-serif;
-    font-size: 3.75rem;
-    color: white;
-    margin-bottom: 2.6rem;
+.footer h3 {
+  font-family: "Montserrat Alternates", sans-serif;
+  font-size: 3.75rem;
+  color: white;
+  margin-bottom: 2.6rem;
 }
-.footer ul li{
-    margin-top: 1rem;
-    list-style: none;
-    text-decoration: none;
-    font-family: 'Montserrat Alternates', sans-serif;
-    font-size: 2.5rem;
-    color: white;
-    line-height: 3.4rem;
+.footer ul li {
+  margin-top: 1rem;
+  list-style: none;
+  text-decoration: none;
+  font-family: "Montserrat Alternates", sans-serif;
+  font-size: 2.5rem;
+  color: white;
+  line-height: 3.4rem;
 }
-.iconfooter{
-    display: flex;
-    justify-content: flex-end;
-    margin-right: 13rem;
-    padding: 0 0.5rem 6.3rem 0.5rem;
-
+.iconfooter {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 13rem;
+  padding: 0 0.5rem 6.3rem 0.5rem;
 }
-.iconfooter h4{
-    font-family: 'Montserrat Alternates', sans-serif;
-    font-size: 2.5rem;
-    color: white;
-    padding-top: 4.7rem;
-    margin-right: 4.6rem;
+.iconfooter h4 {
+  font-family: "Montserrat Alternates", sans-serif;
+  font-size: 2.5rem;
+  color: white;
+  padding-top: 4.7rem;
+  margin-right: 4.6rem;
 }
-.iconthongtin{
-    padding-top: 6.3rem;
+.iconthongtin {
+  padding-top: 6.3rem;
 }

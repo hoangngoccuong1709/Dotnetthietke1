@@ -1,3 +1,4 @@
-namespace dotnetthietke1.Models{
+namespace dotnetthietke1.Models
+{
 
 }

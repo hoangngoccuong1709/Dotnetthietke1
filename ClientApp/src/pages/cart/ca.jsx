@@ -1,4 +1,3 @@
-
 import React, { Component } from "react";
 import formatCurrency from "../util.js";
 import Fade from "react-reveal/Fade";
@@ -195,4 +194,4 @@ export default connect(
   }),
   { removeFromCart, createOrder, clearOrder }
 )(Cart);
-Footer
+Footer;

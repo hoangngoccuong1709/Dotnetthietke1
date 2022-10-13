@@ -1,23 +1,22 @@
-.giamgia{
-    background-color: #6b502c;
-    width: 100%;
-    height: 26.4rem;
-
+.giamgia {
+  background-color: #6b502c;
+  width: 100%;
+  height: 26.4rem;
 }
-.ten{
-    display: flex;
-    justify-content: space-around;
-    text-align: center;
-    padding: 3.9rem 2.6rem 0px 7rem;
-    color: white;
+.ten {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  padding: 3.9rem 2.6rem 0px 7rem;
+  color: white;
 }
-.ten h2{
-    margin-bottom: 0;
-    font-family: 'Playfair Display', serif;
-    font-size: 4.8rem;
+.ten h2 {
+  margin-bottom: 0;
+  font-family: "Playfair Display", serif;
+  font-size: 4.8rem;
 }
-.ten h6{
-margin-top: 0;
-font-family: 'Montserrat Alternates', sans-serif;
-font-size: 1.7rem;
+.ten h6 {
+  margin-top: 0;
+  font-family: "Montserrat Alternates", sans-serif;
+  font-size: 1.7rem;
 }

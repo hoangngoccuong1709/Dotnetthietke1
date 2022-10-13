@@ -6,16 +6,16 @@ using Microsoft.AspNetCore.Identity;
 
 namespace dotnetthietke1
 {
-    
+
     // public class ApplicationDbContext : DbContext
-     public class ApplicationDbContext : IdentityDbContext<User, IdentityRole, string>
-    {// cop cho a đoạn lỗi gửi sang a cái
-        
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext>options) : base(options){}
+    public class ApplicationDbContext : IdentityDbContext<User, IdentityRole, string>
+    {
+
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
         public DbSet<Product> Product { get; set; }
         //public DbSet<Users> User { get;  set; }
         public DbSet<Contens> Contens { get; set; }
-        public DbSet<Orders> Orders { get;  set; }
+        public DbSet<Orders> Orders { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

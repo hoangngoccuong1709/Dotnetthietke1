@@ -1,18 +1,12 @@
-import HomePage from './pages/home/Home';
-
+import HomePage from "./pages/home/Home";
 
 const routes = [
-    {
-        path: "/",
-        exact: true,
-        title: 'Home',
-        component: HomePage
-    },
-    // {
-    //     path: "/departments",
-    //     title: 'Phòng ban',
-    //     component: DepartmentPage
-    // },
+  {
+    path: "/",
+    exact: true,
+    title: "Home",
+    component: HomePage,
+  },
 ];
 
 export default routes;

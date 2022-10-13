@@ -1,39 +1,37 @@
-
-th{
+th {
   padding: 3rem;
   font-size: 3rem;
 }
-td{
+td {
   font-size: 3rem;
-  
 }
-.col-md-8 order-md-1{
+.col-md-8 order-md-1 {
   margin-top: 5rem;
 }
-.row{
+.row {
   padding: 2rem;
 }
- input{
+input {
   width: 60%;
   padding: 1rem;
   font-size: 2rem;
 }
-label{
+label {
   font-size: 16px;
 }
-span{
+span {
   font-size: 16px;
 }
-h6{
+h6 {
   font-size: 16px;
 }
-.atice{
+.atice {
   height: 100%;
 }
-strong{
+strong {
   font-size: 16px;
 }
-h4{
+h4 {
   font-size: 16px;
 }
 /* css phần nhập thôgn tin */
@@ -119,21 +117,27 @@ article {
   color: green;
   font-weight: bold;
 }
-.my-0{
+.my-0 {
   padding: 0rem 1rem;
 }
-.justify-content-between span{
+.justify-content-between span {
   padding: 1rem;
 }
-.mb-3{
+.mb-3 {
   padding: 1rem;
 }
-.border-top { border-top: 1px solid #e5e5e5; }
-.border-bottom { border-bottom: 1px solid #e5e5e5; }
-.box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
+.border-top {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
+.box-shadow {
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.05);
+}
 /* btn  checkout */
-.ant-btn-default{
- font-size: 1.6rem;
- background-color: burlywood;
- padding: 1rem;
+.ant-btn-default {
+  font-size: 1.6rem;
+  background-color: burlywood;
+  padding: 1rem;
 }
