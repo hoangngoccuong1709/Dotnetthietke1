@@ -1,6 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import "../body/css/Forminput.css";
 export default function Forminput() {
+  const [form, setForm] = useState({
+    name: "",
+    email: " ",
+    mess: "",
+  });
+
+  const handleNameInput = () => {};
+  const handlMailInput = (e) => {
+    setForm({ ...form, [e.target.email]: e.target.value });
+    console.log(form.email);
+  };
+
   return (
     <div className="thongtin">
       <h2>
@@ -14,9 +26,19 @@ export default function Forminput() {
       </p>
       <div className="form">
         <form>
-          <input type="text" name="Your Name" placeholder="Your Name" />
-          <input type="text" placeholder="Mail" />
-          <textarea placeholder="Messages" defaultValue={""} />
+          <input
+            type="text"
+            name="Your Name"
+            value={form.name}
+            placeholder="Your Name"
+          />
+          <input
+            type="text"
+            placeholder="Mail"
+            value={form.email}
+            onChange={(e) => handlMailInput(e)}
+          />
+          <textarea placeholder="Messages" value={form.mess} />
         </form>
         <button>SEND MESSAGE</button>
       </div>
