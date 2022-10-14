@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using dotnetthietke1;
@@ -11,9 +12,10 @@ using dotnetthietke1;
 namespace dotnetthietke1.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221013034727_newtable")]
+    partial class newtable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -64,8 +66,8 @@ namespace dotnetthietke1.Migrations
                     b.Property<string>("nameMenu")
                         .HasColumnType("text");
 
-                    b.Property<string>("type")
-                        .HasColumnType("text");
+                    b.Property<int>("type")
+                        .HasColumnType("integer");
 
                     b.HasKey("id");
 

@@ -30,12 +30,12 @@ const Sidebar = () => {
           <p className="title">MAIN</p>
           <li>
             <DashboardIcon className="icon" />
-            <Link  to ="/" style={{ textDecoration: "none" }}>
-            <span>Home</span>
+            <Link to="/" style={{ textDecoration: "none" }}>
+              <span>Home</span>
             </Link>
           </li>
           <p className="title">LISTS</p>
-         
+
           <Link to="/sanpham" style={{ textDecoration: "none" }}>
             <li>
               <StoreIcon className="icon" />
@@ -49,16 +49,16 @@ const Sidebar = () => {
           </Link> */}
           </Link>
           <Link to="/baiviet" style={{ textDecoration: "none" }}>
-          <li>
-            <CreditCardIcon className="icon" />
-            <span>Quản lí bài viết</span>
-          </li>
+            <li>
+              <CreditCardIcon className="icon" />
+              <span>Quản lí bài viết</span>
+            </li>
           </Link>
           <Link to="/donhang" style={{ textDecoration: "none" }}>
-          <li>
-            <LocalShippingIcon className="icon" />
-            <span>Quản lí đơn hàng</span>
-          </li>
+            <li>
+              <LocalShippingIcon className="icon" />
+              <span>Quản lí đơn hàng</span>
+            </li>
           </Link>
           {/* <p className="title">USEFUL</p> */}
           {/* <li>
@@ -70,18 +70,17 @@ const Sidebar = () => {
             <span>Notifications</span>
           </li> */}
           <p className="title">SERVICE</p>
-           <Link to="/Customer" style={{ textDecoration: "none" }}>
-          <li>
-            <SettingsSystemDaydreamOutlinedIcon className="icon" />
-            <span>Quản lí khách hàng</span>
-          </li>
+          <Link to="/Customer" style={{ textDecoration: "none" }}>
+            <li>
+              <SettingsSystemDaydreamOutlinedIcon className="icon" />
+              <span>Quản lí khách hàng</span>
+            </li>
           </Link>
           <Link to="/Bill" style={{ textDecoration: "none" }}>
-
-          <li>
-            <PsychologyOutlinedIcon className="icon" />
-            <span>Quản lí Hóa đơn</span>
-          </li>
+            <li>
+              <PsychologyOutlinedIcon className="icon" />
+              <span>Quản lí Hóa đơn</span>
+            </li>
           </Link>
           <p className="title">USER</p>
           <li>
@@ -89,8 +88,10 @@ const Sidebar = () => {
             <span>Quản lí tài khoản</span>
           </li>
           <li>
-            <SettingsApplicationsIcon className="icon" />
-            <span>Settings</span>
+            <Link to="/setting" style={{ textDecoration: "none" }}>
+              <SettingsApplicationsIcon className="icon" />
+              <span>Settings</span>
+            </Link>
           </li>
           <li>
             <ExitToAppIcon className="icon" />

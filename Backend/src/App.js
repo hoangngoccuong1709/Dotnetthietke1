@@ -12,6 +12,7 @@ import Product from "./pages/Product";
 import Conten from "./pages/Conten";
 import Bill from "./pages/Bill";
 import Customer from "./pages/Customer";
+import Setting from "./pages/setting/Setting";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -32,7 +33,7 @@ function App() {
               />
             </Route>
             <Route path="sanpham">
-              <Route index element={<Product/>} />
+              <Route index element={<Product />} />
               {/* <Route path=":productId" element={<Single />} /> */}
               {/* <Route
                 path="new"
@@ -43,18 +44,12 @@ function App() {
             element={<Author/>}>
   
             </Route> */}
-            <Route path="baiviet"
-            element={<Conten/>}>
-            </Route>
-            <Route path="donhang"
-            element={<Bill/>}>
-            </Route>
+            <Route path="baiviet" element={<Conten />}></Route>
+            <Route path="donhang" element={<Bill />}></Route>
 
-            <Route path="Customer"
-            element={<Customer/>}>
-            </Route>
+            <Route path="Customer" element={<Customer />}></Route>
+            <Route path="Setting" element={<Setting />}></Route>
           </Route>
-          
         </Routes>
       </BrowserRouter>
     </div>
