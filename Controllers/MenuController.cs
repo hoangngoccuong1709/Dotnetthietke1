@@ -1,3 +1,4 @@
+using dotnetthietke1.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,13 +13,34 @@ namespace dotnetthietke1.Controller
             this.db = db;
         }
 
-        // get data header and footer by type
+        // get all data 
         [HttpGet]
         public async Task<IActionResult> getMenu()
         {
             var menu = await db.Menu.ToListAsync();
             return Ok(menu);
         }
+
+        //add data 
+        [HttpPost]
+        public async Task<ActionResult<Menu>> CreateMenu(Menu menu)
+        {
+            var newmenu = new Menu
+            {
+                id = menu.id,
+                nameMenu = menu.nameMenu,
+                linkto = menu.linkto,
+                type = menu.type
+            };
+            db.Menu.AddAsync(newmenu);
+            await db.SaveChangesAsync();
+            return Ok(menu);
+
+        }
+
+
+
+        //get data by type
         [HttpGet("{id}")]
         public async Task<IActionResult> getMenuForType(string id)
         {
@@ -28,11 +50,15 @@ namespace dotnetthietke1.Controller
             {
                 u.id,
                 u.nameMenu,
-                u.type,
-                u.linkto
+                u.linkto,
+                u.type
             }).Where(u => u.type == $"{id}").ToListAsync();
             return Ok(Menu);
         }
+
+
+
+        //delete data by id
         [HttpDelete("{id}")]
         public async Task<IActionResult> deleteMenu(int id)
         {
@@ -45,9 +71,24 @@ namespace dotnetthietke1.Controller
             }
             return NotFound();
         }
-        // [HttpPost]
-        // public async Task<IActionResult> postDbMenu(){
 
-        // }
+        //edit menu by id
+        [HttpPut("{id}")]
+        public async Task<IActionResult> editMenu(int id, Menu menu)
+        {
+            var Menu = await db.Menu.FindAsync(id);
+            if (Menu == null)
+            {
+                return NotFound();
+            }
+            Menu.nameMenu = menu.nameMenu;
+            Menu.linkto = menu.linkto;
+            Menu.type = menu.type;
+
+            await db.SaveChangesAsync();
+            return NoContent();
+        }
+
+
     }
 }

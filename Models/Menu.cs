@@ -1,6 +1,6 @@
 namespace dotnetthietke1.Models
 {
-    public class menu
+    public class Menu
     {
         public int id { get; set; }
         public string nameMenu { get; set; }

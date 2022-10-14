@@ -16,7 +16,7 @@ namespace dotnetthietke1
         //public DbSet<Users> User { get;  set; }
         public DbSet<Contens> Contens { get; set; }
         public DbSet<Orders> Orders { get; set; }
-        public DbSet<menu> Menu { get; set; }
+        public DbSet<Menu> Menu { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
