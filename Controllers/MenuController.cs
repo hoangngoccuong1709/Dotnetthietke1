@@ -23,11 +23,10 @@ namespace dotnetthietke1.Controller
 
         //add data 
         [HttpPost]
-        public async Task<ActionResult<Menu>> CreateMenu(Menu menu)
+        public async Task<ActionResult<Menu>> CreateMenu([FromBody] Menu menu)
         {
             var newmenu = new Menu
             {
-                id = menu.id,
                 nameMenu = menu.nameMenu,
                 linkto = menu.linkto,
                 type = menu.type
@@ -74,7 +73,7 @@ namespace dotnetthietke1.Controller
 
         //edit menu by id
         [HttpPut("{id}")]
-        public async Task<IActionResult> editMenu(int id, Menu menu)
+        public async Task<IActionResult> editMenu(int id, [FromBody] Menu menu)
         {
             var Menu = await db.Menu.FindAsync(id);
             if (Menu == null)
