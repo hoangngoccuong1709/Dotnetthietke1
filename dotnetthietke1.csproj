@@ -64,7 +64,7 @@
     <Exec WorkingDirectory="ClientApp\" Command="npm" />
   </Target>
 
-  <Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
+  <Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublishx">
     <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
     <Exec WorkingDirectory="ClientApp" Command="npm" />
     <Exec WorkingDirectory="ClientApp" Command="npm build" />
@@ -80,7 +80,7 @@
     </ItemGroup>
   </Target>
 
-   <Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
+   <Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublishx">
     <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
     <Exec WorkingDirectory="ClientApp" Command="npm" />
     <Exec WorkingDirectory="ClientApp" Command="npm build" />
