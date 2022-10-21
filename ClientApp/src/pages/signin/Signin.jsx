@@ -7,11 +7,14 @@ import { useNavigate } from 'react-router';
 const AccountLogin = props => {
     const [form] = Form.useForm();
     const dispatch = useDispatch();
+    const user = useSelector(state => state.user);
     //const loginError = useSelector(state => state.user.loginError);
-    //const account = useSelector(state => state.user);
-    const navigate = useNavigate();
-
-    
+     const navigate = useNavigate();
+    useEffect(() => {
+        if (user.account) {
+           navigate('thongtinnguoidung');
+        }
+    }, [user])
     const onFinish = () => {
         dispatch(login(form.getFieldsValue()));
     }
@@ -52,8 +55,7 @@ const AccountLogin = props => {
                 </Form.Item>
 
                 <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-                    <Button type="primary" htmlType="submit">
-                    
+                    <Button  type="primary" htmlType="submit">
                         Đăng nhập
                     </Button>
                 </Form.Item>

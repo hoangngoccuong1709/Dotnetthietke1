@@ -1,17 +1,22 @@
 import { configureStore } from '@reduxjs/toolkit'
 import ajaxCall from '../lib/ajax';
-import account from './user';
+import user from './user';
 import app from './app';
-import department from './department';
-
-export default configureStore({
+import logger from "redux-logger";
+import thunk from "redux-thunk";
+import cartReducer from "./cartReducer";
+ const store= configureStore({
     reducer: {
-        account,
-        app,
-        department
+          user,
+          // rootReducer,
+      cartReducer,
+          app
     },
-    middleware: getDefaultMiddleware => [
-        ajaxCall,
-        ...getDefaultMiddleware(),
-    ]
+    // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
+    // middleware: getDefaultMiddleware => [
+    //     ajaxCall,
+    //     ...getDefaultMiddleware(),
+    // ]
+    middleware: [thunk, logger],
 })
+export default store;

@@ -10,6 +10,7 @@ import { Link } from '@mui/material';
 import { addToCart } from '../../reducer/actionCart'
 import Cart from '../../pages/cart/Cart';
 function Product(props) {
+  const dispatch = useDispatch();
   const { idproduct } = useParams();
   const [Writedetails, setData] = useState([]);
   const product_current = {
@@ -49,7 +50,7 @@ function Product(props) {
            <img width={294} height={292} src={Writedetails.image}/>
            {/* <p src='https: //www.phpbb.com' className="title-container" >{item.Contentitle}</p> */}
          </article> 
-         <Button key={Writedetails.idproduct}   onClick={() =>props.addToCart(product_current)} className='btn-them'>Thêm vào giỏ hàng</Button>
+         <Button key={Writedetails.idproduct}   onClick={() => dispatch(addToCart(product_current))} className='btn-them'>Thêm vào giỏ hàng</Button>
         </div> 
      //  })
     //  }
@@ -58,13 +59,16 @@ function Product(props) {
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    addToCart: (Writedetails) => dispatch(addToCart(Writedetails)),
+    addToCart: (product_current) => dispatch(addToCart(product_current)),
+    // Writedetails
+    
   };
 };
 console.log('aaaa',addToCart.prototype)
 const mapStateToProps = (state) => {
   return {
-    cart: state.cart.cart, 
+    //cart: state.cart
+    cart: state.cart, 
     // Writedetails: state.Writedetails,
 
   };

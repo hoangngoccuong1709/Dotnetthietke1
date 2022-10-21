@@ -5,7 +5,7 @@ export const userSlice = createSlice({
     initialState: {
         account: null,
         loginError: null,
-        tokenChecked: false
+        tokenChecked: false,
     },
     reducers: {
         setAccount: (state, action) => {

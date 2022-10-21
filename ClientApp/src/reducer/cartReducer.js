@@ -1,10 +1,11 @@
 import Cart from '../pages/cart/Cart';
 import * as actionTypes from './types'
+import { combineReducers } from "redux";
 
 const INITAL_STATE ={
     cart:[],
     numberCart:0,
-    _products:[]
+   _products:[]
 
   //  currentItem:null
 }
@@ -13,7 +14,7 @@ const cartReducer =(state =INITAL_STATE,action) =>{
     switch (action.type) {
       case actionTypes.ADD_TO_CART:
       const productInCart = state.cart.find(
-        (p) => p.id === action.payload.id
+        (p) => p.id ===  action.payload.id
       );
       if (!productInCart) {
         return {
@@ -60,6 +61,9 @@ const cartReducer =(state =INITAL_STATE,action) =>{
             return state;
     }
 };
+const CartReducer = combineReducers({
+  cart: cartReducer,
+});
 // const CartReducer = combineReducers({
 //   _todoProduct:todoProduct
 // });

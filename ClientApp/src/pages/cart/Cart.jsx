@@ -3,11 +3,13 @@ import '../../pages/cart/cart.css'
 import React, { Component } from "react";
 import { Button } from "antd";
 import { useParams } from 'react-router'
-import { connect } from "react-redux";
+import {connect} from "../../lib/connect"
+//import { connect, useSelector } from "react-redux";
 import { deleteProduct } from "../../reducer/actionCart";
 import { useState ,useRef} from "react";
 import { Modal } from "react-bootstrap";
 import Item from "antd/lib/list/Item";
+import { useSelector } from "react-redux";
 //import { createOrder, clearOrder } from "../../actions/orderActions";
 function Cart(props) {
 // class Cart extends Component {
@@ -20,6 +22,8 @@ function Cart(props) {
 //         showCheckout: false,
 //       };
 //     }
+const cart = useSelector(state =>state.cartReducer.cart )
+console.log(`abc`,cart)
     const post_name = useRef(null);
     const post_sodienthoai = useRef(null);
     const post_email = useRef(null);
@@ -34,15 +38,25 @@ const [post, setPost] = useState({ idorder: "",Idproduct: "",  UserId: "",Quanti
   function handleInput(e){
     this.setState({ [e.target.name]: e.target.value });
   };
-  // console.log('ahcs',props)
-  let Name = props.cart.Name
+  //const { cart } = useSelector((state) => state);
+//  console.log('cart',this.props.cart)
+  //let Name = props.cart.Name
  function TotalPrice(price,tonggia){
     return Number(price * tonggia).toLocaleString('en-US');
   }
-    let TotalCart=0;
-    Object.keys(props.cart).forEach(function(item){
-    TotalCart+=props.cart[item].quantity*props.cart[item].price;
-    });
+  let ListCart = [];
+  let TotalCart=0;
+     Object.keys(cart).forEach(function(item){
+   //return Number(price * tonggia).toLocaleString('en-US');
+      TotalCart+= cart[item].price * cart[item].quantity;
+      //TotalCart+=TotalPrice;
+
+  //     ListCart.push(props.cart[item]);
+   });
+
+    // Object.keys(props.cart).forEach(function(item){
+    // TotalCart+=props.cart[item].quantity*props.cart[item].price;
+    // });
   async function createPost() { 
     const postData = {
       FullName: post_name.current.value,
@@ -52,13 +66,7 @@ const [post, setPost] = useState({ idorder: "",Idproduct: "",  UserId: "",Quanti
       Description: post_mota.current.value,
       Orders : props.cart
       };
-      const Datapost = {
-        // Idproduct : props.idproduct,
-        // Id : props.id,
-        //Total : props.Total,
-         cart : props.cart
-        
-        };
+     
         
       // const postorder ={
       //   idorder :props.cart.idproduct,
@@ -97,11 +105,13 @@ const [post, setPost] = useState({ idorder: "",Idproduct: "",  UserId: "",Quanti
           data: data,
         };
         alert("Thêm thành công !")
+        console.log(`carrtttt`,props.name)
         //setPostResult(fortmatResponse(result));
         // publish()
     } catch (err) {
       // setPostResult(err.message);
       alert("Thêm  ko thành công !")
+
     } 
 }
   return (
@@ -118,8 +128,8 @@ const [post, setPost] = useState({ idorder: "",Idproduct: "",  UserId: "",Quanti
                     {/* <span class="badge badge-secondary badge-pill">3</span> */}
                   </h4>
                   {
-            props.cart.map((item)=>{
-                return(
+              cart.map((item)=>{
+                 return(
                   <ul class="list-group mb-3">
                     <li class="list-group-item d-flex justify-content-between lh-condensed">
                       <div>
@@ -136,7 +146,7 @@ const [post, setPost] = useState({ idorder: "",Idproduct: "",  UserId: "",Quanti
                       <strong> {TotalCart}đ</strong>
                     </li>
                   </ul>
-                )})}
+                )})}  
                 </div>
                 <div class="col-md-8 order-md-1">
                   <h4 class="mb-3">Địa chỉ thanh toán</h4>
@@ -240,7 +250,7 @@ const [post, setPost] = useState({ idorder: "",Idproduct: "",  UserId: "",Quanti
         </thead>
         <tbody>
         {
-            props.cart.map((item)=>{
+            cart?.map((item)=>{
                 return(
                     <tr key={item.idproduct}>   
                     {/* <td><i className="badge badge-danger" onClick={()=>DeleteCart(key)}>X</i></td> */}
@@ -261,9 +271,9 @@ const [post, setPost] = useState({ idorder: "",Idproduct: "",  UserId: "",Quanti
                     </td>
                 </tr>
                 )
-            })
+           })
                  
-        }
+        } 
         <tr>
             <td colSpan="5">Total Carts</td>
             <td>{Number(TotalCart).toLocaleString('en-US')} $</td>
@@ -284,17 +294,17 @@ const [post, setPost] = useState({ idorder: "",Idproduct: "",  UserId: "",Quanti
 
 const mapStateToProps = (state) => {
   return {
-    cart: state.cart.cart,
-    total: state.cart.total,
+    cart: state.cart,
+    //total: state.cart.total,
   };
 };
-
 const mapDispatchToProps = (dispatch) => {
   return {
     deleteProduct: (product_current) =>
       dispatch(deleteProduct(product_current)),
   };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(Cart);
+export default connect(Cart,mapStateToProps, mapDispatchToProps) ;
+// connect(mapStateToProps, mapDispatchToProps)
 //export default  (mapStateToProps,Cart);
 //export default Cart;
