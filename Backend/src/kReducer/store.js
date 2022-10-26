@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import MenuReducer from "./MenuReducer";
 import ajaxCall from "../lib/ajax";
+import Subscribe from "./Subscribe";
+import app from "./app";
 
 export default configureStore({
   reducer: {
-    MenuReducer,
+    Subscribe,
+    app,
   },
   middleware: (getDefaultMiddleware) => [ajaxCall, ...getDefaultMiddleware()],
 });

@@ -82,6 +82,12 @@ const Sidebar = () => {
               <span>Quản lí Hóa đơn</span>
             </li>
           </Link>
+          <Link to="/subscribe" style={{ textDecoration: "none" }}>
+            <li>
+              <PsychologyOutlinedIcon className="icon" />
+              <span>Quản lý Subscribe</span>
+            </li>
+          </Link>
           <p className="title">USER</p>
           <li>
             <AccountCircleOutlinedIcon className="icon" />

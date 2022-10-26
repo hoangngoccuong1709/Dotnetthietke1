@@ -12,6 +12,7 @@ import Product from "./pages/Product";
 import Conten from "./pages/Conten";
 import Bill from "./pages/Bill";
 import Customer from "./pages/Customer";
+import Subscribe from "./CRUD/Info_Customer";
 // import Setting from "./pages/setting/Setting";
 
 function App() {
@@ -34,21 +35,14 @@ function App() {
             </Route>
             <Route path="sanpham">
               <Route index element={<Product />} />
-              {/* <Route path=":productId" element={<Single />} /> */}
-              {/* <Route
-                path="new"
-                element={<New inputs={productInputs} title="Add New Product" />}
-              /> */}
             </Route>
-            {/* <Route path="author"
-            element={<Author/>}>
-  
-            </Route> */}
+
             <Route path="baiviet" element={<Conten />}></Route>
             <Route path="donhang" element={<Bill />}></Route>
 
+            <Route path="subscribe" element={<Subscribe />}></Route>
+
             <Route path="Customer" element={<Customer />}></Route>
-            {/* <Route path="Setting" element={<Setting />}></Route> */}
           </Route>
         </Routes>
       </BrowserRouter>

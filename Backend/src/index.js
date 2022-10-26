@@ -6,7 +6,7 @@ import { DarkModeContextProvider } from "./context/darkModeContext";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import { Provider } from "react-redux";
-import store from "./reducer/store";
+import store from "./kReducer/store";
 
 ReactDOM.render(
   <React.StrictMode>
