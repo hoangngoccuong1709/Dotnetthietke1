@@ -6,6 +6,7 @@ namespace dotnetthietke1.Models
         public string nameMenu { get; set; }
         public string linkto { get; set; }
         public string type { get; set; }
+        public string options { get; set; }
     }
 
 }

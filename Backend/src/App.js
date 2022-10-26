@@ -12,7 +12,7 @@ import Product from "./pages/Product";
 import Conten from "./pages/Conten";
 import Bill from "./pages/Bill";
 import Customer from "./pages/Customer";
-import Setting from "./pages/setting/Setting";
+// import Setting from "./pages/setting/Setting";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -48,7 +48,7 @@ function App() {
             <Route path="donhang" element={<Bill />}></Route>
 
             <Route path="Customer" element={<Customer />}></Route>
-            <Route path="Setting" element={<Setting />}></Route>
+            {/* <Route path="Setting" element={<Setting />}></Route> */}
           </Route>
         </Routes>
       </BrowserRouter>
