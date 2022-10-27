@@ -1,10 +1,10 @@
-import { actions } from '../reducer/app';
+import { actions } from "../reducer/app";
 
 export const getEnums = () => {
-    return {
-        url: '/api/enums',
-        actions: {
-            success: actions.setEnums,
-        }
-    };
+  return {
+    url: "/api/enums",
+    actions: {
+      success: actions.setEnums,
+    },
+  };
 };
