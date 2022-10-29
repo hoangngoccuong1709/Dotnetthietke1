@@ -14,9 +14,16 @@ export const slice = createSlice({
       console.log(action.payload);
       state.list.push(action.payload);
     },
+    updateSub: (state, action) => {},
+    removeSub: (state, action) => {
+      state.list.filter((arrow) => arrow.id !== action.payload);
+    },
   },
 });
 
 export const actions = slice.actions;
 
 export default slice.reducer;
+
+// import actionTypes from "../kAcctions/actionType";
+// const initialState = {};

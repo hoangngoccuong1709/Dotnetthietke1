@@ -23,8 +23,13 @@ const SubscribePage = () => {
   const subscribe = useSelector((state) => state.Subscribe);
 
   useEffect(() => {
-    dispatch(getList());
+    getAllSubscribeFormReact();
   }, []);
+
+  const getAllSubscribeFormReact = async () => {
+    const sub = dispatch(getList());
+    console.log(sub);
+  };
 
   const [open, setOpen] = useState(false);
   const handleClickOpen = () => {
@@ -38,18 +43,17 @@ const SubscribePage = () => {
     var hours = (date.getHours() + 100).toString().substring(1);
     var min = (date.getMinutes() + 100).toString().substring(1);
     var sec = (date.getSeconds() + 100).toString().substring(1);
-    return year + "-" + month + "-" + day + "" + hours + ":" + min + ":" + sec;
+    return year + "-" + month + "-" + day + " " + hours + ":" + min + ":" + sec;
   };
+
   const date = formatDate(new Date());
 
   const handleCreate = () => {
     const listData = {
-      id: "",
       name: nameInput.current.value,
       email: emailInput.current.value,
       message: messageInput.current.value,
       createAt: date,
-      updateAt: "",
     };
     dispatch(addNewSub(listData));
   };
@@ -59,12 +63,12 @@ const SubscribePage = () => {
     name: post.name,
     email: post.email,
     message: post.message,
-    crateAt: post.createAt,
+    createAt: post.createAt,
     updateAt: post.updateAt,
   }));
 
   const Columns = [
-    { field: "id", headerName: "#", width: 50, height: 100 },
+    { field: "id", headerName: "#", width: 50, hide: true },
     { field: "name", headerName: "Customer Name", width: 200, editable: true },
     { field: "email", headerName: "Email", width: 180, editable: true },
     { field: "message", headerName: "Message", width: 200, editable: true },
@@ -125,8 +129,8 @@ const SubscribePage = () => {
             pageSize={9}
             rowsPerPageOptions={[9]}
             checkboxSelection
-            getRowId={(row) => row.id}
           />
+
           <Dialog
             open={open}
             onClose={handleClickOpen}

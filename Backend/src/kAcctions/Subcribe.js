@@ -9,24 +9,25 @@ export const getList = () => {
     },
   };
 };
+
 export const addNewSub = (body) => {
+  console.log(body);
   return {
     url: "/api/subscribe",
     method: "POST",
-    contentType: "application/json; charset=utf-8",
-    body: JSON.stringify(body),
+    params: body,
     actions: {
       success: actions.addNew,
     },
   };
 };
 
-// export const removeSub = (id) => {
-//   return {
-//     url: `/api/subscribe/${id}`,
-//     method: "DELETE",
-//     actions: {
-//       success: actions.addNew,
-//     },
-//   };
-// };
+export const removeSub = (id) => {
+  return {
+    url: `/api/subscribe/${id}`,
+    method: "DELETE",
+    actions: {
+      success: actions.addNew,
+    },
+  };
+};
