@@ -25,8 +25,7 @@ namespace dotnetthietke1.Controller
         [HttpPost]
         public async Task<ActionResult<Subscribe>> CreateSubscribe([FromBody] Subscribe info)
         {
-
-            // if (!ModelState.IsValid) return BadRequest("lỗi");
+            if (!ModelState.IsValid) return BadRequest("lỗi");
             var info2 = new Subscribe()
             {
                 name = info.name,

@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
+import DialogActions, {
+  dialogActionsClasses,
+} from "@mui/material/DialogActions";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import { useDispatch, useSelector } from "react-redux";
-import { getList } from "../kAcctions/Subcribe";
+import { getList, addNewSub } from "../kAcctions/Subcribe";
 import { Link } from "react-router-dom";
 import { DataGrid } from "@mui/x-data-grid";
 import Sidebar from "../components/sidebar/Sidebar";
@@ -12,25 +14,47 @@ import Navbar from "../components/navbar/Navbar";
 import "./Info_Customer.scss";
 
 const SubscribePage = () => {
-  const [open, setOpen] = useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
+  const nameInput = useRef(null);
+  const emailInput = useRef(null);
+  const messageInput = useRef(null);
 
   const dispatch = useDispatch();
+
   const subscribe = useSelector((state) => state.Subscribe);
-  console.log("res", subscribe.list);
+
   useEffect(() => {
-    console.log(getList);
     dispatch(getList());
   }, []);
 
-  const rows = subscribe.list.map((post) => ({
+  const [open, setOpen] = useState(false);
+  const handleClickOpen = () => {
+    setOpen(!open);
+  };
+
+  const formatDate = (date) => {
+    var year = date.getFullYear().toString();
+    var month = (date.getMonth() + 101).toString().substring(1);
+    var day = (date.getDate() + 100).toString().substring(1);
+    var hours = (date.getHours() + 100).toString().substring(1);
+    var min = (date.getMinutes() + 100).toString().substring(1);
+    var sec = (date.getSeconds() + 100).toString().substring(1);
+    return year + "-" + month + "-" + day + "" + hours + ":" + min + ":" + sec;
+  };
+  const date = formatDate(new Date());
+
+  const handleCreate = () => {
+    const listData = {
+      id: "",
+      name: nameInput.current.value,
+      email: emailInput.current.value,
+      message: messageInput.current.value,
+      createAt: date,
+      updateAt: "",
+    };
+    dispatch(addNewSub(listData));
+  };
+
+  const rows = subscribe.list?.map((post) => ({
     id: post.id,
     name: post.name,
     email: post.email,
@@ -41,18 +65,18 @@ const SubscribePage = () => {
 
   const Columns = [
     { field: "id", headerName: "#", width: 50, height: 100 },
-    { field: "name", headerName: "Tên khách hàng", width: 200, editable: true },
+    { field: "name", headerName: "Customer Name", width: 200, editable: true },
     { field: "email", headerName: "Email", width: 180, editable: true },
     { field: "message", headerName: "Message", width: 200, editable: true },
     {
       field: "createAt",
-      headerName: "Thời gian nhập",
+      headerName: "Create At",
       width: 200,
       editable: true,
     },
     {
       field: "updateAt",
-      headerName: "Thời gian sửa",
+      headerName: "Update At",
       width: 200,
       editable: true,
     },
@@ -61,7 +85,7 @@ const SubscribePage = () => {
   const actionColumn = [
     {
       field: "action",
-      headerName: "Tình trạng",
+      headerName: "Status",
       width: 200,
       renderCell: () => {
         return (
@@ -82,7 +106,7 @@ const SubscribePage = () => {
         <Navbar />
         <div className="Table">
           <div className="text-center mt-3 mb-3  bg-primary h2">
-            Quản lý Subscribe
+            Subscribe Manager
           </div>
           <div className="d-flex flex-row mb-3">
             <button className="btn btn-primary ml-3 " onClick={handleClickOpen}>
@@ -101,18 +125,18 @@ const SubscribePage = () => {
             pageSize={9}
             rowsPerPageOptions={[9]}
             checkboxSelection
+            getRowId={(row) => row.id}
           />
-
           <Dialog
             open={open}
-            onClose={handleClose}
+            onClose={handleClickOpen}
             PaperProps={{
               style: {
                 width: "100%",
               },
             }}
           >
-            <DialogTitle>Thêm Subscribe</DialogTitle>
+            <DialogTitle>Add Subscribe</DialogTitle>
 
             <DialogContent>
               <form>
@@ -123,7 +147,7 @@ const SubscribePage = () => {
                       <input
                         type="text"
                         className="form-control "
-                        // ref={post_name}
+                        ref={nameInput}
                       ></input>
                     </div>
 
@@ -132,7 +156,7 @@ const SubscribePage = () => {
                       <input
                         type="text"
                         className="form-control "
-                        // ref={post_title}
+                        ref={emailInput}
                       ></input>
                     </div>
 
@@ -144,7 +168,7 @@ const SubscribePage = () => {
                         style={{
                           height: "100px",
                         }}
-                        // ref={post_image}
+                        ref={messageInput}
                       ></textarea>
                     </div>
                   </div>
@@ -155,21 +179,21 @@ const SubscribePage = () => {
             <DialogActions>
               <div className="button">
                 <button
-                  // onClick={createPost}
                   type="reset"
                   value="Reset"
                   className="btn btn-primary text-center"
+                  onClick={handleCreate}
                 >
-                  Thêm
+                  Add
                 </button>
                 <button
-                  onClick={() => setOpen(false)}
+                  onClick={handleClickOpen}
                   className="btn btn-danger"
                   type="reset"
                   value="Reset"
                   style={{ marginLeft: 20 }}
                 >
-                  Đóng
+                  Cancel
                 </button>
               </div>
             </DialogActions>

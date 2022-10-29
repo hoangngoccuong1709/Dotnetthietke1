@@ -18,6 +18,8 @@ const apiCall = ({ action, dispatch, getState }) => {
     download,
   } = action;
 
+  console.log(body, params);
+
   method = !method ? "GET" : method.toUpperCase();
 
   if (actions && actions.start) {

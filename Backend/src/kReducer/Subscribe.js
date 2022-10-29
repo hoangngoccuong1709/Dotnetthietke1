@@ -5,9 +5,14 @@ export const slice = createSlice({
   initialState: {
     list: [],
   },
+
   reducers: {
     setList: (state, action) => {
       state.list = [...action.payload.data];
+    },
+    addNew: (state, action) => {
+      console.log(action.payload);
+      state.list.push(action.payload);
     },
   },
 });
