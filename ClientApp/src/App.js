@@ -14,11 +14,14 @@ import Account from "./pages/account/Account";
 import Cart from "./pages/cart/Cart";
 import Product from "./component/body/Product";
 import { Provider } from "react-redux";
-import SignUp from "./pages/signin/Signup";
+import Signup from "./pages/signin/Signup";
+// import Signin from "./pages/signin/Signin";
 import { checkToken } from "./actions/user";
+import Checkout from "./component/body/Checkout";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-
+import Navigator from "./Router";
+import Layout from "./layout";
 function App() {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
@@ -53,6 +56,8 @@ function App() {
           <Route path="giohang" element={<Cart />} />
           <Route path="thongtinnguoidung" element={<Account />} />
           <Route path=":idproduct" element={<Product />} />
+          <Route path="checkout" element={<Checkout />} />
+          <Route path="dangki" element={<Signup />} />
         </Routes>
       }
 

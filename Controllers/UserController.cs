@@ -33,24 +33,24 @@ namespace dotnetthietke1.Controllers
             this.signInManager = signInManager;
             this.configuration = configuration;
         }
-[HttpPost]
-public async Task<IActionResult> PostAsync([FromBody] Info user )
-{
-      if (!ModelState.IsValid) return BadRequest("lỗi");
-    var user2 =  new User()
+        [HttpPost]
+        public async Task<IActionResult> PostAsync([FromBody] RegisterViewModel user)
+        {
+            if (!ModelState.IsValid) return BadRequest("lỗi");
+            var user2 = new User()
             {
                 // Id = user.Id,
-                FullName= user.FullName,
-                PhoneNumber=user.PhoneNumber,
-                Email=user.Email,
-                Avatar= user.Avatar,
-                Description= user.Description
+                FullName = user.FullName,
+                PhoneNumber = user.Phonenumber,
+                UserName = user.UserName,
+                PasswordHash = user.Password,
+                Description = user.Description
                 // u.PhoneNumber
             };
             await db.Users.AddAsync(user2);
-	        await db.SaveChangesAsync();
-	return Ok(user);
-}
+            await db.SaveChangesAsync();
+            return Ok(user);
+        }
         [HttpPost("login")]
         public async Task<IActionResult> LoginUser([FromBody] LoginModel model)
         {
@@ -128,26 +128,28 @@ public async Task<IActionResult> PostAsync([FromBody] Info user )
                 ExpiresIn = expires,
                 User = new
                 {
+                    user.Id,
                     user.UserName,
                     user.Email,
                     user.PhoneNumber
                 }// đoạn ăng nhập ni trả về ừng trả về thông tin user
                  // thông tin user chạy 1 api riêng
-                
+
 
             }
             );
         }
-        
+
         [HttpGet("info")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> GetInfo()
         {
-             var userName = User.Identity?.Name;
+            var userName = User.Identity?.Name;
             //var user = await userManager.FindByNameAsync(userName);
 
             var user2 = await db.Users.Select(u => new
             {
+                u.Id,
                 u.FullName,
                 u.Description,
                 u.Avatar,
@@ -163,29 +165,30 @@ public async Task<IActionResult> PostAsync([FromBody] Info user )
             //             .Select(c => c.Value).FirstOrDefault();
             // var userName = User.Identity.Name;
             //var user = await userManager.Users.Where(u => u.UserName == model.UserName).FirstOrDefaultAsync();
-            
+
 
             return Ok(user2);
         }
 
-        [HttpGet("Register")]
-        public async Task<IActionResult> CreateUser(string username, string password,string avatar ,string description, string fullName)
-        {
-            var result = await userManager.CreateAsync(new User
-            {
-                UserName = username,
-                Email = username + "@gmail.com",
-                Avatar = avatar,
-                Description = description,
-                FullName = fullName
-            }, password);
+        //     [HttpGet("Register")]
+        //     public async Task<IActionResult> CreateUser(string username, string password, string phonenumber, string description, string fullName)
+        //     {
+        //         var result = await userManager.CreateAsync(new User
+        //         {
+        //             UserName = username,
+        //             FullName = fullName,
+        //             // Email = username + "@gmail.com",
+        //             PhoneNumber = phonenumber,
+        //             Description = description
 
-            if (result.Succeeded)
-            {
-                return Ok("Tạo tài khoản thành công");
-            }
-            return BadRequest(result.Errors);
-        }
+        //         }, password);
+
+        //         if (result.Succeeded)
+        //         {
+        //             return Ok("Tạo tài khoản thành công");
+        //         }
+        //         return BadRequest(result.Errors);
+        //     }
     }
     public class LoginModel
     {
@@ -195,17 +198,21 @@ public async Task<IActionResult> PostAsync([FromBody] Info user )
     }
     public class RegisterViewModel
     {
-        public string Email { get; set; }
-        public string Password { get; set; }
+        // public string Email { get; set; }
+        public string FullName { get; set; }
         public string UserName { get; set; }
+        public string Phonenumber { get; set; }
+        public string Description { get; set; }
+        public string Password { get; set; }
     }
-    public class Info{
-        public string  FullName  {get ; set;}
-        public string PhoneNumber{get; set;}
-         public string Email{get; set;}
-        public string Avatar{get; set;}
-        public string Description{get; set;}
-        // public int Idproduct {get;set;}
+    public class Info
+    {
+        public string FullName { get; set; }
+        public string PhoneNumber { get; set; }
+        public string Email { get; set; }
+        public string Avatar { get; set; }
+        public string Description { get; set; }
+        public string Id { get; set; }
         // public DateTime Date{get; set;}
         // public float Total { get; set; }
         //  public int Quantity { get; set; }

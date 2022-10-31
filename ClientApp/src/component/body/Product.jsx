@@ -13,13 +13,15 @@ function Product(props) {
   const dispatch = useDispatch();
   const { idproduct } = useParams();
   const [Writedetails, setData] = useState([]);
-  const post_soluong = useRef(null);
+  const post_soluong = useRef();
+  var soluong = document.getElementById("soluong");
+  console.log(soluong, "soluong");
   const product_current = {
     id: Writedetails.idproduct,
     name: Writedetails.nameProduct,
     image: Writedetails.image,
     price: Writedetails.price,
-    //quantity:post_soluong,
+    //quantity: soluong,
     // price: props.price,
   };
   console.log("name", product_current);
@@ -32,7 +34,7 @@ function Product(props) {
       method: "GET",
       redirect: "follow",
     };
-    fetch(`/api/product/idproduct?id=${idproduct}`, requestOptions)
+    fetch(`/api/product/idproduct?nameProduct=${idproduct}`, requestOptions)
       .then((response) => response.json())
       .then((data) => setData(data))
       .catch((error) => console.log("error", error));
@@ -55,7 +57,6 @@ function Product(props) {
       </div>
       <div className="card">
         <div className="container-fliud">
-          g
           <form
             name="frmsanphamchitiet"
             id="frmsanphamchitiet"

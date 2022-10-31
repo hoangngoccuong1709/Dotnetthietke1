@@ -89,10 +89,10 @@ export default function Titleproduct() {
                 {/* <p>{item.price}</p> */}
                 <Link
                   className="link"
-                  key={item.idproduct}
+                  key={item.idProduct}
                   item={item}
                   setProduct={setProduct}
-                  to={`${item.idproduct}`}
+                  to={`${item.nameProduct}`}
                 >
                   READ MORE
                 </Link>

@@ -4,6 +4,8 @@ import React, { Component } from "react";
 import { Button } from "antd";
 import { useParams } from "react-router";
 import { connect } from "../../lib/connect";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 //import { connect, useSelector } from "react-redux";
 import {
   deleteProduct,
@@ -15,8 +17,10 @@ import { Modal } from "react-bootstrap";
 import Item from "antd/lib/list/Item";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 //import { createOrder, clearOrder } from "../../actions/orderActions";
 function Cart(props) {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   // class Cart extends Component {
   //     constructor(props) {
@@ -33,14 +37,25 @@ function Cart(props) {
   //   navigate('thongtinnguoidung');
   // }
   //let cart = [];
+  const user = useSelector((state) => state.user);
+  useEffect(() => {
+    console.log("account", user.account);
+    if (user.tokenChecked == true) {
+      navigate("/giohang");
+    } else {
+      alert("Đề nghị quý khách hàng đăng nhập để được mua hàng ");
+      navigate("/signin");
+    }
+  }, [user]);
+
   const cart = useSelector((state) => state.cartReducer.cart);
   console.log(`abc`, cart);
-  const post_name = useRef(null);
-  const post_sodienthoai = useRef(null);
-  const post_email = useRef(null);
-  const post_diachi = useRef(null);
-  const post_anh = useRef(null);
-  const post_mota = useRef(null);
+  // const post_name = useRef(null);
+  // const post_sodienthoai = useRef(null);
+  // const post_email = useRef(null);
+  // const post_diachi = useRef(null);
+  // const post_anh = useRef(null);
+  // const post_mota = useRef(null);
 
   const [post, setPost] = useState({
     idorder: "",
@@ -73,21 +88,14 @@ function Cart(props) {
   // TotalCart+=props.cart[item].quantity*props.cart[item].price;
   // });
   async function createPost() {
-    const postData = {
-      FullName: post_name.current.value,
-      PhoneNumber: post_sodienthoai.current.value,
-      Email: post_email.current.value,
-      Avatar: post_anh.current.value,
-      Description: post_mota.current.value,
-      Orders: props.cart,
-    };
-
-    // const postorder ={
-    //   idorder :props.cart.idproduct,
-    //   idproduct: props.cart.idproduct,
-    //   Total: TotalCart,
-    //   UserId: 2
-    // }
+    // const postData = {
+    //   FullName: post_name.current.value,
+    //   PhoneNumber: post_sodienthoai.current.value,
+    //   Email: post_email.current.value,
+    //   Avatar: post_anh.current.value,
+    //   Description: post_mota.current.value,
+    //   Orders: props.cart,
+    // };
     try {
       const res = await fetch(`/user`, {
         method: "post",
@@ -95,7 +103,7 @@ function Cart(props) {
           "Content-Type": "application/json",
           "x-access-token": "token-value",
         },
-        body: JSON.stringify(postData),
+        body: JSON.stringify(),
       });
       if (!res.ok) {
         const message = `An error has occured: ${res.status} - ${res.statusText}`;
@@ -180,7 +188,15 @@ function Cart(props) {
             </tr>
           </tbody>
           <td>
-            <Button onClick={() => setOpen(true)}>Order</Button>
+            <Link
+              to={"/checkout"}
+              TotalPrice={TotalPrice}
+              TotalCart={TotalCart}
+              item={props}
+              // onPress={() => this.props.navigation.navigate("Home")}
+            >
+              Order
+            </Link>
           </td>
         </table>
       </div>
@@ -191,7 +207,6 @@ function Cart(props) {
 const mapStateToProps = (state) => {
   return {
     cart: state.cartReducer,
-    //total: state.cart.total,
   };
 };
 const mapDispatchToProps = (dispatch) => {

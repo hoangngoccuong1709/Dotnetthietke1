@@ -26,28 +26,30 @@ namespace dotnetthietke1.Controller
         [HttpGet]
         public async Task<IActionResult> GetAsync()
         {
-            var query =
-            from p in db.Product
-            join o in db.Orders on p.Idproduct equals o.Idproduct
-            join c in db.Users on o.UserId equals c.Id
-            select new
+            var query = db.Orders.AsNoTracking();
+            var data = await query.Select(s => new
             {
-                UserName = c.UserName,
-                ProductName = p.NameProduct,
-                Id = o.Id,
-                Total = o.Total,
-                Date = o.Date
-            };
-
-            foreach (var ownerAndPet in query)
+                Id = s.Id,
+                Product = s.OrderDetails.Select(o => new
+                {
+                    Id = o.Product.Idproduct,
+                    o.Product.NameProduct
+                }),
+            }).ToListAsync();
+            var total = data.Count();
+            //foreach (var ownerAndPet in query)
+            //{
+            // Console.WriteLine($"\"{ownerAndPet.ProductName}\" is owned by {ownerAndPet.Total}");
+            //}
+            return Ok(new
             {
-                Console.WriteLine($"\"{ownerAndPet.ProductName}\" is owned by {ownerAndPet.Total}");
-            }
-            return Ok(query);
+                total = total,
+                items = data
+            });
         }
         [HttpGet]
         [Route("idorder")]
-        public async Task<IActionResult> GetInfo(string id)
+        public async Task<IActionResult> GetInfo(int id)
         {
             //var user = await userManager.FindByNameAsync(userName);
             var user2 = await db.Orders.Select(u => new
@@ -82,17 +84,30 @@ namespace dotnetthietke1.Controller
         public async Task<IActionResult> CreateOrder([FromBody] BodyOrder body)
         {
             if (!ModelState.IsValid) return BadRequest("lỗi");
-            
+
             var order = new Orders()
             {
-               
-                Id = body.OrderId, 
+
+                // Id = body.Id,
                 Date = DateTime.UtcNow,
                 Quantity = body.Quantity,
                 Total = body.Total,
-                Idproduct = body.Idproduct,
-                UserId = body.UserId
+                UserId = body.UserId,
+                // OrderDetails =OrderDetailNews,
+
             };
+            var OrderDetailNews = new List<OrderDetail>();
+            OrderDetailNews.Add(new OrderDetail
+            {
+                ProductId = body.Idproduct,
+                Quantity = body.Quantity,
+                Price = body.Price,
+                UserId = body.UserId,
+                // OrderId = body.Id,
+                //dươuowis ni em điền giá với chi nha
+                //lưu 2 file cấy e
+            });
+            order.OrderDetails = OrderDetailNews;
             await _applicationDbContetext.Orders.AddAsync(order);
             await _applicationDbContetext.SaveChangesAsync();
             return Ok(body);
@@ -103,29 +118,30 @@ namespace dotnetthietke1.Controller
         // 	var cakes = await _applicationDbContetext.Product.ToListAsync();
         // 	return Ok(cakes);
         // }
-        [HttpPut]
-        public async Task<IActionResult> PutAsync([FromBody] BodyOrder model)
-        {
-            var found = _applicationDbContetext.Orders.FirstOrDefault(o => o.Id == model.OrderId);
-            if (found != null)
-            {
-                found.Idproduct = model.Idproduct;
-                // sửa thì k phải sua id mo 
-                // found ni là mình lấy từ db ra nên gán hấn cho cấy mình truyền từ client
-                found.Quantity = model.Quantity;
-                found.Total = model.Total;
-                found.UserId = model.UserId;
-                await _applicationDbContetext.SaveChangesAsync();
-            }
+        // [HttpPut]
+        // public async Task<IActionResult> PutAsync([FromBody] BodyOrder model)
+        // {
+        //     var found = _applicationDbContetext.Orders.FirstOrDefault(o => o.Id == model.OrderId);
+        //     if (found != null)
+        //     {
+        //         found.Idproduct = model.Idproduct;
+        //         // sửa thì k phải sua id mo 
+        //         // found ni là mình lấy từ db ra nên gán hấn cho cấy mình truyền từ client
+        //         found.Quantity = model.Quantity;
+        //         found.Total = model.Total;
+        //         found.UserId = model.UserId;
+        //         await _applicationDbContetext.SaveChangesAsync();
+        //     }
 
-            return Ok(found);
-        }
+        //     return Ok(found);
+        // }
         public class BodyOrder
         {
-             public string OrderId { get; set; }
+            public int Id { get; set; }
             public string UserId { get; set; }
             public int Quantity { get; set; }
             public float Total { get; set; }
+            public float Price { get; set; }
             public int Idproduct { get; set; }
         }
 
