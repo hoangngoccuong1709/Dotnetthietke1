@@ -31,15 +31,9 @@ namespace dotnetthietke1.Controller
         }
         [HttpGet]
         [Route("get-product-by-id")]
-<<<<<<< HEAD
-        public async Task<IActionResult> GetProductByIdAsync(string nameProduct)
-        {
-            var cake = await _applicationDbContetext.Product.FindAsync(nameProduct);
-=======
         public async Task<IActionResult> GetProductByIdAsync(int id)
         {
             var cake = await _applicationDbContetext.Product.FindAsync(id);
->>>>>>> ded81b7098b819846d5aeb2bd12ed0d881495dd1
             return Ok(cake);
         }
         [HttpPost]
@@ -81,11 +75,7 @@ namespace dotnetthietke1.Controller
         }
         [HttpGet]
         [Route("idproduct")]
-<<<<<<< HEAD
         public async Task<IActionResult> GetInfo(string nameProduct)
-=======
-        public async Task<IActionResult> GetInfo(int id)
->>>>>>> ded81b7098b819846d5aeb2bd12ed0d881495dd1
         {
             //var user = await userManager.FindByNameAsync(userName);
             var user2 = await db.Product.Select(u => new
