@@ -197,6 +197,7 @@ const SubscribePage = () => {
               add
             </button>
             <button className="btn btn-primary ml-3 ">Send Email</button>
+            <button className="btn btn-primary ml-3">Export Excel</button>
           </div>
 
           <DataGrid

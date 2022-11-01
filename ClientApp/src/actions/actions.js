@@ -1,6 +1,5 @@
 import { CREATE_ORDER, CLEAR_CART } from "../reducer/types";
 export const addToCart = (Writedetails) => {
-  console.log("dâda", Writedetails);
   return {
     type: "ADDITEM",
     data: Writedetails,
