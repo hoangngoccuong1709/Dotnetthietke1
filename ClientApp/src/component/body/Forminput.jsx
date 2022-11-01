@@ -1,4 +1,3 @@
-import React from "react";
 import React, { useState } from "react";
 import "../body/css/Forminput.css";
 export default function Forminput() {

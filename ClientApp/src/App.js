@@ -23,13 +23,6 @@ import { useEffect } from "react";
 import Navigator from "./Router";
 import Layout from "./layout";
 
-import store from "../src/reducer/stor";
-import SignUp from "./pages/signin/Signup";
-import { checkToken } from "./actions/user";
-import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
-import routes from "./routes";
-
 function App() {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
