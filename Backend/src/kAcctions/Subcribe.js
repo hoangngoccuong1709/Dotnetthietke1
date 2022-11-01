@@ -11,7 +11,6 @@ export const getList = () => {
 };
 
 export const addNewSub = (body) => {
-  console.log(body);
   return {
     url: "/api/subscribe",
     method: "POST",
@@ -27,7 +26,19 @@ export const removeSub = (id) => {
     url: `/api/subscribe/${id}`,
     method: "DELETE",
     actions: {
-      success: actions.addNew,
+      success: actions.removeSub,
+    },
+  };
+};
+
+export const updateSub = (id, body) => {
+  console.log("action data", id, body);
+  return {
+    url: `/api/subscribe/${id}`,
+    method: "PUT",
+    params: body,
+    actions: {
+      success: actions.updateSub,
     },
   };
 };

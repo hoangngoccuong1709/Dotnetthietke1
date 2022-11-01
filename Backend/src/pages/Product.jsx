@@ -52,9 +52,6 @@ const IdProduct = () => {
       .then((response) => response.json())
       .then((data) => setData(data))
       .catch((error) => console.log("error", error));
-    // const { data } = await fetch('/api/conten')
-    // console.log(data)
-    // setData(data)
   }
   async function createPost() {
     const postData = {

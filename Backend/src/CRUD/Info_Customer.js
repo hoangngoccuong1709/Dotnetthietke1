@@ -6,12 +6,15 @@ import DialogActions, {
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import { useDispatch, useSelector } from "react-redux";
-import { getList, addNewSub } from "../kAcctions/Subcribe";
-import { Link } from "react-router-dom";
+import {
+  getList,
+  addNewSub,
+  removeSub,
+  updateSub,
+} from "../kAcctions/Subcribe";
 import { DataGrid } from "@mui/x-data-grid";
 import Sidebar from "../components/sidebar/Sidebar";
 import Navbar from "../components/navbar/Navbar";
-import "./Info_Customer.scss";
 
 const SubscribePage = () => {
   const nameInput = useRef(null);
@@ -19,6 +22,13 @@ const SubscribePage = () => {
   const messageInput = useRef(null);
 
   const dispatch = useDispatch();
+  const [data, setData] = useState({
+    id: "",
+    name: "",
+    email: "",
+    message: "",
+    updateAt: "",
+  });
 
   const subscribe = useSelector((state) => state.Subscribe);
 
@@ -27,8 +37,7 @@ const SubscribePage = () => {
   }, []);
 
   const getAllSubscribeFormReact = async () => {
-    const sub = dispatch(getList());
-    console.log(sub);
+    await Promise.all([dispatch(getList())]);
   };
 
   const [open, setOpen] = useState(false);
@@ -36,6 +45,13 @@ const SubscribePage = () => {
     setOpen(!open);
   };
 
+  const [openEdit, setOpenEdit] = useState(false);
+
+  const handleClickOpenEdit = () => {
+    setOpenEdit(!openEdit);
+  };
+
+  //TODO: chuyển time lên backend c#
   const formatDate = (date) => {
     var year = date.getFullYear().toString();
     var month = (date.getMonth() + 101).toString().substring(1);
@@ -48,14 +64,61 @@ const SubscribePage = () => {
 
   const date = formatDate(new Date());
 
-  const handleCreate = () => {
+  //TODO: set các điều kiện if else
+  //chưa tối ưu
+  const handleCreate = async () => {
     const listData = {
       name: nameInput.current.value,
       email: emailInput.current.value,
       message: messageInput.current.value,
       createAt: date,
     };
-    dispatch(addNewSub(listData));
+    const createdb = new Promise((resole, reject) => {
+      try {
+        dispatch(addNewSub(listData));
+        resole(createdb);
+      } catch (e) {
+        reject(e);
+      }
+    });
+
+    alert("add success!");
+    setOpen(!open);
+  };
+
+  const handleUpdate = (params) => {
+    setOpenEdit(!openEdit);
+    setData({
+      id: params.id,
+      name: params.name,
+      email: params.email,
+      message: params.message,
+      updateAt: date,
+    });
+  };
+
+  const handleSave = async (id) => {
+    id = data.id;
+    const updatedb = new Promise((resolve, reject) => {
+      try {
+        dispatch(updateSub(id, data));
+        resolve(updatedb);
+      } catch (e) {
+        reject(e);
+      }
+    });
+    alert("update success");
+    setOpenEdit(!openEdit);
+    getAllSubscribeFormReact();
+  };
+
+  //TODO: chưa tối hưu hiệu năng khi state thay đổi bị render lại
+  const handleOnchange = (e, id) => {
+    let copystate = { ...data };
+    copystate[id] = e.target.value;
+    setData({
+      ...copystate,
+    });
   };
 
   const rows = subscribe.list?.map((post) => ({
@@ -91,12 +154,29 @@ const SubscribePage = () => {
       field: "action",
       headerName: "Status",
       width: 200,
-      renderCell: () => {
+      renderCell: (params) => {
         return (
           <div className="cellAction">
-            <Link to="/ " style={{ textDecoration: "none" }}>
-              <div className="viewButton">New</div>
-            </Link>
+            <button
+              className="btn btn-primary ml-3"
+              onClick={() => handleUpdate(params.row)}
+            >
+              edit
+            </button>
+
+            <button
+              onClick={() => {
+                //TODO: try catch
+                if (window.confirm("Bạn có muốn xóa không")) {
+                  dispatch(removeSub(params.row.id));
+                  alert("delete success");
+                  getAllSubscribeFormReact();
+                }
+              }}
+              className="btn btn-danger ml-3"
+            >
+              delete
+            </button>
           </div>
         );
       },
@@ -116,8 +196,7 @@ const SubscribePage = () => {
             <button className="btn btn-primary ml-3 " onClick={handleClickOpen}>
               add
             </button>
-            <button className="btn btn-primary ml-3 ">edit</button>
-            <button className="btn btn-danger ml-3">delete</button>
+            <button className="btn btn-primary ml-3 ">Send Email</button>
           </div>
 
           <DataGrid
@@ -128,8 +207,84 @@ const SubscribePage = () => {
             columns={Columns.concat(actionColumn)}
             pageSize={9}
             rowsPerPageOptions={[9]}
-            checkboxSelection
+            getRowId={(row) => row.id}
           />
+
+          <Dialog
+            open={openEdit}
+            onClose={handleClickOpenEdit}
+            PaperProps={{
+              style: {
+                width: "100%",
+              },
+            }}
+          >
+            <DialogTitle>Edit Subscribe</DialogTitle>
+
+            <DialogContent>
+              <form>
+                <div className="row">
+                  <div>
+                    <div className="form-group ">
+                      <label className="required">Name</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        value={data.name || ""}
+                        onChange={(e) => handleOnchange(e, "name")}
+                      ></input>
+                    </div>
+
+                    <div className="form-group " style={{ marginTop: 20 }}>
+                      <label className="required">Email</label>
+                      <input
+                        type="text"
+                        className="form-control "
+                        value={data.email || ""}
+                        onChange={(e) => handleOnchange(e, "email")}
+                      ></input>
+                    </div>
+
+                    <div className="form-group " style={{ marginTop: 20 }}>
+                      <label className="required">Message</label>
+                      <textarea
+                        onChange={(e) => handleOnchange(e, "message")}
+                        value={data.message || ""}
+                        type="text"
+                        className="form-control "
+                        style={{
+                          height: "100px",
+                        }}
+                      ></textarea>
+                    </div>
+                  </div>
+                </div>
+              </form>
+              ;
+            </DialogContent>
+
+            <DialogActions>
+              <div className="button">
+                <button
+                  type="reset"
+                  value="Reset"
+                  className="btn btn-primary text-center"
+                  onClick={handleSave}
+                >
+                  save
+                </button>
+                <button
+                  onClick={handleClickOpenEdit}
+                  className="btn btn-danger"
+                  type="reset"
+                  value="Reset"
+                  style={{ marginLeft: 20 }}
+                >
+                  Cancel
+                </button>
+              </div>
+            </DialogActions>
+          </Dialog>
 
           <Dialog
             open={open}
@@ -144,7 +299,7 @@ const SubscribePage = () => {
 
             <DialogContent>
               <form>
-                <div className="row ">
+                <div className="row">
                   <div>
                     <div className="form-group ">
                       <label className="required">Name</label>

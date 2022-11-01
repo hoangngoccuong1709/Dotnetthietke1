@@ -4,6 +4,8 @@ export const slice = createSlice({
   name: "subscribe",
   initialState: {
     list: [],
+    isLoading: false,
+    error: false,
   },
 
   reducers: {
@@ -11,12 +13,13 @@ export const slice = createSlice({
       state.list = [...action.payload.data];
     },
     addNew: (state, action) => {
-      console.log(action.payload);
-      state.list.push(action.payload);
+      state.list.push(action.payload.data);
     },
-    updateSub: (state, action) => {},
+    updateSub: (state, action) => {
+      return [...state, action.payload.data];
+    },
     removeSub: (state, action) => {
-      state.list.filter((arrow) => arrow.id !== action.payload);
+      state.list = state.list.filter((item) => item.id != action.payload.id);
     },
   },
 });

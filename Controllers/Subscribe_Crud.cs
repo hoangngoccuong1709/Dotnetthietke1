@@ -25,18 +25,12 @@ namespace dotnetthietke1.Controller
         [HttpPost]
         public async Task<ActionResult<Subscribe>> CreateSubscribe([FromBody] Subscribe info)
         {
-            if (!ModelState.IsValid) return BadRequest("lỗi");
-
-            var info2 = new Subscribe()
+            if (!ModelState.IsValid)
             {
-                name = info.name,
-                email = info.email,
-                message = info.message,
-                createAt = info.createAt,
-                // createAt = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"),
-                updateAt = info.updateAt
+                return BadRequest("lỗi");
             };
-            await db.Subscribe.AddAsync(info2);
+
+            await db.Subscribe.AddAsync(info);
             await db.SaveChangesAsync();
             return Ok(info);
 
@@ -44,10 +38,12 @@ namespace dotnetthietke1.Controller
         [HttpGet("{id}")]
         public async Task<IActionResult> getInforById(int id)
         {
-            // int idint = Convert.ToInt32($"{id}");
+
             var check = await db.Subscribe.FindAsync(id);
             return Ok(check);
         }
+
+
         [HttpDelete("{id}")]
 
         public async Task<IActionResult> deleteSubscribe(int id)
@@ -60,6 +56,23 @@ namespace dotnetthietke1.Controller
                 return Ok(new { success = true });
             }
             return NotFound();
+        }
+
+        //edit subscribe by id
+        [HttpPut("{id}")]
+        public async Task<IActionResult> updateSubscribe(int id, [FromBody] Subscribe subscribe)
+        {
+            var sub = db.Subscribe.Find(id);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("k có subscribe");
+            }
+            sub.name = subscribe.name;
+            sub.email = subscribe.email;
+            sub.message = subscribe.message;
+            sub.updateAt = subscribe.updateAt;
+            await db.SaveChangesAsync();
+            return Ok(1);
         }
     }
 }
