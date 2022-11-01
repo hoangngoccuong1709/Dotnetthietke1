@@ -8,7 +8,6 @@ import Introduce1 from "../../component/body/Introduce1";
 import Forminput from "../../component/body/Forminput";
 import { Input, Typography } from "antd";
 import { Routes, Route } from "react-router-dom";
-
 import Product from "../../component/body/Product";
 
 import Cart from "../cart/Cart";

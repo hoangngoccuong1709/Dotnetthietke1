@@ -15,11 +15,9 @@ import Product from "./component/body/Product";
 import { Provider } from "react-redux";
 import Signup from "./pages/signin/Signup";
 import Checkout from "./component/body/Checkout";
-
 import { useEffect } from "react";
 import Navigator from "./Router";
 import Layout from "./layout";
-
 import { checkToken } from "./actions/user";
 import { useSelector, useDispatch } from "react-redux";
 import routes from "./routes";
