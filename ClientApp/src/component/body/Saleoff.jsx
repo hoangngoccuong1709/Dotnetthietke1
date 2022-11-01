@@ -13,7 +13,6 @@ export default function Saleoff() {
               left: "5rem",
               width: "8.3rem",
               height: "13.1rem",
-              
             }}
           />
           <h1>20%</h1>

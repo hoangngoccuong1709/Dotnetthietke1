@@ -6,7 +6,7 @@ namespace dotnetthietke1.Models
     public class Orders
     {
         [Key]
-        public string Id { get; set; }
+        public int Id { get; set; }
 
         public string UserId { get; set; }
         public int Quantity { get; set; }
@@ -17,8 +17,6 @@ namespace dotnetthietke1.Models
 
         [ForeignKey("UserId")]
         public virtual User User { get; set; }
-        public int Idproduct { get; set; }
-        [ForeignKey("Idproduct")]
-        public virtual Product Product { get; set; }
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

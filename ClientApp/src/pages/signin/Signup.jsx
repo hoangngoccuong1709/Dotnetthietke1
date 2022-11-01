@@ -1,167 +1,133 @@
-// import * as React from 'react';
-// import Avatar from '@mui/material/Avatar';
-// import Button from '@mui/material/Button';
-// import CssBaseline from '@mui/material/CssBaseline';
-// import TextField from '@mui/material/TextField';
-// import FormControlLabel from '@mui/material/FormControlLabel';
-// import Checkbox from '@mui/material/Checkbox';
-// import Link from '@mui/material/Link';
-// import Grid from '@mui/material/Grid';
-// import Box from '@mui/material/Box';
-// import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-// import Typography from '@mui/material/Typography';
-// import Container from '@mui/material/Container';
-// import { createTheme, ThemeProvider } from '@mui/material/styles';
-// import { Controller, FormProvider, useForm } from "react-hook-form";
-// import {useDispatch} from "react-redux";
-// import {useNavigate} from 'react-router-dom';
-// import { Register } from '../../../Store/authSlide';
+import { Button, Input, Typography, Form, Checkbox } from "antd";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../../actions/user";
+import { useEffect } from "react";
+import { useNavigate } from "react-router";
+import "./csssignup.css";
+import { useRef } from "react";
 
-// function Copyright(props) {
-//   return (
-//     <Typography variant="body2" color="text.secondary" align="center" {...props}>
-//       {'Copyright © '}
-//       <Link color="inherit" href="https://www.youtube.com/channel/UCaa_xnRA69WTJ7dsp8M34rA">
-//         VMB Tech
-//       </Link>{' '}
-//       {new Date().getFullYear()}
-//       {'.'}
-//     </Typography>
-//   );
-// }
+const AccountLogin = (props) => {
+  const navigate = useNavigate();
+  const post_name = useRef(null);
+  const post_password = useRef(null);
+  const post_fullname = useRef(null);
+  const post_diachi = useRef(null);
+  const post_sodienthoai = useRef(null);
 
-// const theme = createTheme();
-
-// export default function SignUp() {
-
-//   const dispatch=useDispatch();
-//   const navigate=useNavigate();
-
-//   const formObjects=useForm({
-//     mode:'onSubmit',
-//     reValidateMode:'onChange',
-//     defaultValues:{
-//       email:"",
-//       userName:"",
-//       password:"",
-//     }
-//   })
-//   const { register, handleSubmit, control } = formObjects;
-//   const onSubmit = data => {
-//     dispatch(Register(data)).then((action)=>{
-//       if(action.payload.status==="Success"){
-//         console.log(action.payload.status);
-//         navigate('/signIn');
-//       }
-//       else{
-//         console.log(action.payload.status);
-//       }
-//     })
-//     console.log(data)
-//   }
-
-//   return (
-//     <ThemeProvider theme={theme}>
-//       <Container component="main" maxWidth="xs">
-//         <CssBaseline />
-//         <Box
-//           sx={{
-//             marginTop: 8,
-//             display: 'flex',
-//             flexDirection: 'column',
-//             alignItems: 'center',
-//           }}
-//         >
-//           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-//             <LockOutlinedIcon />
-//           </Avatar>
-//           <Typography component="h1" variant="h5">
-//             Sign up
-//           </Typography>
-//           <FormProvider {...formObjects}>
-//           <form onSubmit={handleSubmit(onSubmit)}>
-//             <Grid container spacing={2}>
-//               <Grid item xs={12} sm={12}>
-//                 <Controller
-//                 render={({field})=>(
-//                     <TextField
-//                     {...field}
-//                       autoComplete="given-name"
-//                       required
-//                       fullWidth
-//                       //id="userName"
-//                       label="User Name"
-//                       autoFocus
-//                     />
-//                 )}
-//                 name='userName'
-//                 control={control}
-//                 />
-//               </Grid>
-
-//               <Grid item xs={12}>
-//               <Controller
-//                 render={({field})=>(
-//                     <TextField
-//                     {...field}
-//                       autoComplete="given-name"
-//                       required
-//                       fullWidth
-//                       //id="email"
-//                       label="Email Address"
-//                       autoFocus
-//                     />
-//                 )}
-//                 name='email'
-//                 control={control}
-//                 />
-//               </Grid>
-//               <Grid item xs={12}>
-//               <Controller
-//                 render={({field})=>(
-//                     <TextField
-//                     {...field}
-//                       autoComplete="given-name"
-//                       required
-//                       fullWidth
-//                       //id="password"
-//                       label="Password"
-//                       autoFocus
-//                       type="password"
-//                     />
-//                 )}
-//                 name='password'
-//                 control={control}
-//                 />
-//               </Grid>
-//               <Grid item xs={12}>
-//                 <FormControlLabel
-//                   control={<Checkbox value="allowExtraEmails" color="primary" />}
-//                   label="I want to receive inspiration, marketing promotions and updates via email."
-//                 />
-//               </Grid>
-//             </Grid>
-//             <Button
-//               type="submit"
-//               fullWidth
-//               variant="contained"
-//               sx={{ mt: 3, mb: 2 }}
-//             >
-//               Sign Up
-//             </Button>
-//             <Grid container justifyContent="flex-end">
-//               <Grid item>
-//                 <Link href="/signin" variant="body2">
-//                   Already have an account? Sign in
-//                 </Link>
-//               </Grid>
-//             </Grid>
-//           </form>
-//           </FormProvider>
-//         </Box>
-//         <Copyright sx={{ mt: 5 }} />
-//       </Container>
-//     </ThemeProvider>
-//   );
-// }
-// Footer
+  async function createPost() {
+    const postData = {
+      userName: post_name.current.value,
+      password: post_password.current.value,
+      fullName: post_fullname.current.value,
+      Description: post_diachi.current.value,
+      phonenumber: post_sodienthoai.current.value,
+    };
+    try {
+      fetch(`/user`, {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(postData),
+      })
+        .then((res) => {
+          if (res.ok) {
+            console.log("HTTP request successful");
+          } else {
+            console.log("HTTP request unsuccessful");
+          }
+          return res;
+        })
+        .then((res) => res.json());
+      //.then(data => setData(data))
+      alert("Thêm thành công !");
+      window.location.reload(navigate("/signin"));
+    } catch (err) {
+      // setPostResult(err.message);
+      alert("Thêm  ko thành công !");
+    }
+  }
+  return (
+    <form action>
+      <div className="container">
+        <h1>Form Đăng Ký</h1>
+        <p>Xin hãy nhập biểu mẫu bên dưới để đăng ký.</p>
+        <hr />
+        <label htmlFor="email">
+          <b>Tên Tài Khoản</b>
+        </label>
+        <input
+          type="text"
+          placeholder="Nhập Tên Tài Khoản"
+          name="email"
+          required
+          ref={post_name}
+        />
+        <label htmlFor="email">
+          <b>Tên Họ Và Tên</b>
+        </label>
+        <input
+          type="text"
+          placeholder="Nhập Họ Và Tên"
+          name="email"
+          required
+          ref={post_fullname}
+        />
+        <label htmlFor="psw">
+          <b>Mật Khẩu</b>
+        </label>
+        <input
+          ref={post_password}
+          type="password"
+          placeholder="Nhập Mật Khẩu"
+          name="psw"
+          required
+        />
+        <label htmlFor="psw-repeat">
+          <b>Nhập Lại Mật Khẩu</b>
+        </label>
+        <input
+          type="password"
+          placeholder="Nhập Lại Mật Khẩu"
+          name="psw-repeat"
+          required
+        />
+        <label htmlFor="email">
+          <b>Số điện thoại</b>
+        </label>
+        <input
+          type="text"
+          placeholder="Nhập Phone"
+          name="diachi"
+          required
+          ref={post_sodienthoai}
+        />
+        <label htmlFor="email">
+          <b>Tên Địa chỉ</b>
+        </label>
+        <input
+          type="text"
+          placeholder="Nhập Địa chỉ"
+          name="diachi"
+          required
+          ref={post_diachi}
+        />
+        {/* <label>
+          <input
+            type="checkbox"
+            defaultChecked="checked"
+            name="remember"
+            style={{ marginBottom: "15px" }}
+          />{" "}
+          Nhớ Đăng Nhập
+        </label> */}
+        <div className="clearfix">
+          <button type="submit" className="signupbtn" onClick={createPost}>
+            Sign Up
+          </button>
+        </div>
+      </div>
+    </form>
+  );
+};
+export default AccountLogin;

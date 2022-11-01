@@ -8,12 +8,14 @@ import Introduce1 from "../../component/body/Introduce1";
 import Forminput from "../../component/body/Forminput";
 import { Input, Typography } from "antd";
 import { Routes, Route } from "react-router-dom";
+
 import Product from "../../component/body/Product";
 import { Provider } from "react-redux";
 import store from "../../reducer/stor";
 import Signin from "../signin/Signin";
 import Cart from "../cart/Cart";
 import { useSelector, useDispatch } from "react-redux";
+
 export default function Home() {
   return (
     <div>

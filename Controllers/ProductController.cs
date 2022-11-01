@@ -75,7 +75,7 @@ namespace dotnetthietke1.Controller
         }
         [HttpGet]
         [Route("idproduct")]
-        public async Task<IActionResult> GetInfo(int id)
+        public async Task<IActionResult> GetInfo(string nameProduct)
         {
             //var user = await userManager.FindByNameAsync(userName);
             var user2 = await db.Product.Select(u => new
@@ -85,9 +85,7 @@ namespace dotnetthietke1.Controller
                 u.Title,
                 u.Image,
                 u.Price
-                // u.Email,
-                // u.PhoneNumber
-            }).Where(u => u.Idproduct == id)
+            }).Where(u => u.NameProduct == nameProduct)
             .FirstOrDefaultAsync();
             return Ok(user2);
         }

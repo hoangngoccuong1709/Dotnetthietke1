@@ -34,16 +34,17 @@ namespace dotnetthietke1.Controllers
             this.configuration = configuration;
         }
         [HttpPost]
-        public async Task<IActionResult> PostAsync([FromBody] Info user)
+        public async Task<IActionResult> PostAsync([FromBody] RegisterViewModel user)
         {
             if (!ModelState.IsValid) return BadRequest("lỗi");
             var user2 = new User()
             {
                 // Id = user.Id,
                 FullName = user.FullName,
-                PhoneNumber = user.PhoneNumber,
-                Email = user.Email,
-                Avatar = user.Avatar,
+
+                PhoneNumber = user.Phonenumber,
+                UserName = user.UserName,
+                PasswordHash = user.Password,
                 Description = user.Description
                 // u.PhoneNumber
             };
@@ -128,6 +129,7 @@ namespace dotnetthietke1.Controllers
                 ExpiresIn = expires,
                 User = new
                 {
+                    user.Id,
                     user.UserName,
                     user.Email,
                     user.PhoneNumber
@@ -148,6 +150,7 @@ namespace dotnetthietke1.Controllers
 
             var user2 = await db.Users.Select(u => new
             {
+                u.Id,
                 u.FullName,
                 u.Description,
                 u.Avatar,
@@ -186,6 +189,25 @@ namespace dotnetthietke1.Controllers
             }
             return BadRequest(result.Errors);
         }
+        //     [HttpGet("Register")]
+        //     public async Task<IActionResult> CreateUser(string username, string password, string phonenumber, string description, string fullName)
+        //     {
+        //         var result = await userManager.CreateAsync(new User
+        //         {
+        //             UserName = username,
+        //             FullName = fullName,
+        //             // Email = username + "@gmail.com",
+        //             PhoneNumber = phonenumber,
+        //             Description = description
+
+        //         }, password);
+
+        //         if (result.Succeeded)
+        //         {
+        //             return Ok("Tạo tài khoản thành công");
+        //         }
+        //         return BadRequest(result.Errors);
+        //     }
     }
     public class LoginModel
     {
@@ -195,9 +217,12 @@ namespace dotnetthietke1.Controllers
     }
     public class RegisterViewModel
     {
-        public string Email { get; set; }
-        public string Password { get; set; }
+        // public string Email { get; set; }
+        public string FullName { get; set; }
         public string UserName { get; set; }
+        public string Phonenumber { get; set; }
+        public string Description { get; set; }
+        public string Password { get; set; }
     }
     public class Info
     {
@@ -207,6 +232,7 @@ namespace dotnetthietke1.Controllers
         public string Avatar { get; set; }
         public string Description { get; set; }
         // public int Idproduct {get;set;}
+        public string Id { get; set; }
         // public DateTime Date{get; set;}
         // public float Total { get; set; }
         //  public int Quantity { get; set; }

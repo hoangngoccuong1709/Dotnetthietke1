@@ -17,6 +17,12 @@
   line-height: 3rem;
   margin-bottom: 0;
 }
+.form input{
+    font-size: 1.6rem;
+    padding: 2rem;
+    width: 65% !important;
+    margin-top: 2.8rem;
+}
 .form input {
   font-size: 1.6rem;
   padding: 2rem;

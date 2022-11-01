@@ -1,5 +1,7 @@
 import { setAccount, setLoginError, tokenChecked } from "../reducer/user";
-
+import { useNavigate } from "react-router-dom";
+import { Routes, Route, Outlet } from "react-router-dom";
+import Home from "../pages/home/Home";
 export function checkToken(params) {
   let token = localStorage.getItem("token");
   return (dispatch) => {
@@ -52,6 +54,20 @@ export function login(params) {
           if (res.status == 200) {
             localStorage.setItem("token", data.accessToken);
             dispatch(setAccount(data));
+            // .then(
+            //     () => {
+            //  navigate("/home");
+            window.location.reload();
+            // },
+            // )
+            // .then(() => {
+            // <Route path="/" element={<Home />} />
+            // window.location.reload();
+            //   })
+            //   .catch(() => {
+            //     // setLoading(false);
+            //   });
+            // navigate("/");
           } else {
             dispatch(setLoginError(data));
           }

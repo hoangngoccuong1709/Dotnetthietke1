@@ -1,6 +1,6 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
-import * as accountActions from "../actions/account";
+import * as accountActions from "../actions/user";
 import * as appActions from "../actions/app";
 import { connect, ContextProvider } from "../lib/connect";
 import { Layout } from "antd";

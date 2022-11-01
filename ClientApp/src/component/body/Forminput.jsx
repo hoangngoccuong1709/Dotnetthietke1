@@ -1,3 +1,4 @@
+import React from "react";
 import React, { useState } from "react";
 import "../body/css/Forminput.css";
 import { addNewSub } from "../../actions/Subcribe";
@@ -64,6 +65,7 @@ export default function Forminput() {
         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
         <br /> tempor incididunt ut labore et dolore magna aliqua.
       </p>
+
       {display === true && (
         <p style={{ color: "red" }} className="mt-3">
           Đăng ký thành công!
@@ -95,6 +97,14 @@ export default function Forminput() {
           <button onClick={handleSubmit}>SEND MESSAGE</button>
         </div>
       )}
+      <div className="form">
+        <form>
+          <input type="text" name="Your Name" placeholder="Your Name" />
+          <input type="text" placeholder="Mail" />
+          <textarea placeholder="Messages" defaultValue={""} />
+        </form>
+        <button>SEND MESSAGE</button>
+      </div>
     </div>
   );
 }

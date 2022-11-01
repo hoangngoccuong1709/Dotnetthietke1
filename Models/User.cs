@@ -17,6 +17,7 @@ namespace dotnetthietke1
 
         [MaxLength(100)]
         public string FullName { get; set; }
+        // public string Address{set;get;}
         public virtual ICollection<Orders> Orders { get; set; }
     }
 

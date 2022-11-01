@@ -1,9 +1,11 @@
 import React from "react";
 import "../header/css/Header.css";
 import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-
-export default function Header() {
+import { connect } from "../../lib/connect";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+function Header() {
+  const cart = useSelector((state) => state.cartReducer.numberCart);
   return (
     <div>
       <div className="containner">
@@ -59,6 +61,8 @@ export default function Header() {
                 style={{ width: "1.9rem", height: "2.3rem" }}
                 src="image/Shop.png"
               />
+              <i className="navlink">{cart}</i>
+              {/* <li className="nav-item"><Link to="/carts" className="nav-link">Carts : {cart}</Link></li>  */}
             </Link>
             <a href>
               <img
@@ -74,7 +78,7 @@ export default function Header() {
 }
 // const mapStateToProps = state =>{
 //   return{
-//       numberCart:state._todoProduct.numberCart
+//       numberCart:state.cart.numberCart
 //   }
 // }
-// export default connect(mapStateToProps,null)(Header)
+export default Header;
