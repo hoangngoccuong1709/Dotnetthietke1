@@ -1,4 +1,3 @@
-import React from "react";
 import React, { useState } from "react";
 import "../body/css/Forminput.css";
 import { addNewSub } from "../../actions/Subcribe";
@@ -97,14 +96,6 @@ export default function Forminput() {
           <button onClick={handleSubmit}>SEND MESSAGE</button>
         </div>
       )}
-      <div className="form">
-        <form>
-          <input type="text" name="Your Name" placeholder="Your Name" />
-          <input type="text" placeholder="Mail" />
-          <textarea placeholder="Messages" defaultValue={""} />
-        </form>
-        <button>SEND MESSAGE</button>
-      </div>
     </div>
   );
 }
