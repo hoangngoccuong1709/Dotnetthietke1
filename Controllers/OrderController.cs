@@ -87,12 +87,6 @@ namespace dotnetthietke1.Controller
 
             var order = new Orders()
             {
-
-<<<<<<< HEAD
-                // Id = body.Id,
-=======
-                Id = body.OrderId,
->>>>>>> ded81b7098b819846d5aeb2bd12ed0d881495dd1
                 Date = DateTime.UtcNow,
                 Quantity = body.Quantity,
                 Total = body.Total,
@@ -141,11 +135,8 @@ namespace dotnetthietke1.Controller
         // }
         public class BodyOrder
         {
-<<<<<<< HEAD
             public int Id { get; set; }
-=======
-            public string OrderId { get; set; }
->>>>>>> ded81b7098b819846d5aeb2bd12ed0d881495dd1
+
             public string UserId { get; set; }
             public int Quantity { get; set; }
             public float Total { get; set; }
