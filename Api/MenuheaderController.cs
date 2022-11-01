@@ -24,7 +24,6 @@ namespace dotnetthietke1.Api
         public async Task<IActionResult> GetList()
         {
             var list = await db.Contens.ToListAsync();
-
             return Ok(list);
 
         }

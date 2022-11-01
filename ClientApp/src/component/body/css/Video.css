@@ -1,76 +1,75 @@
-.tieude2{
-    text-align: center;
-    margin-top: 10.8rem;
+.tieude2 {
+  text-align: center;
+  margin-top: 10.8rem;
 }
-.tieude2 h3{
-    margin: 0 0;
-    font-family: 'Playfair Display', serif;
-    font-size: 58px;
-    color: #484a4b;
+.tieude2 h3 {
+  margin: 0 0;
+  font-family: "Playfair Display", serif;
+  font-size: 58px;
+  color: #484a4b;
 }
-.tieude2 p{
-    margin-top: 25px;
-    margin: 0 0;
-    font-family: 'Montserrat Alternates', sans-serif;
-    font-size: 25px;
-    color: #765a33;
+.tieude2 p {
+  margin-top: 25px;
+  margin: 0 0;
+  font-family: "Montserrat Alternates", sans-serif;
+  font-size: 25px;
+  color: #765a33;
+}
+.anhchunhat1 {
+  float: right;
+  position: relative;
+  top: 160px;
+  right: 155px;
+}
+.video {
+  position: relative;
+  padding-top: 132px;
+  margin-left: 13%;
+  margin-right: 13%;
+  z-index: 1;
+}
+.hinhchunhat2 {
+  float: left;
+  position: relative;
 
-}
-.anhchunhat1{
-    float: right;
-    position: relative;
-    top: 160px;
-    right: 155px;
-}
-.video{
-    position: relative;
-    padding-top: 132px;
-    margin-left: 13%;
-    margin-right: 13%;
-    z-index: 1;
-}
-.hinhchunhat2{
-    float: left;
-    position: relative;
-   
-    left: 162px;
-    top: -232px;   
+  left: 162px;
+  top: -232px;
 }
 
-.img2{
-    position: absolute;
-    float: right;
-   right:0px;
-   margin-top: -180px;
+.img2 {
+  position: absolute;
+  float: right;
+  right: 0px;
+  margin-top: -180px;
 }
-.click-video{
-    flex: 1;
-    margin: 5rem auto 0;
-    text-align: center;
-    position: relative;
-    margin-top: 12.5rem;
+.click-video {
+  flex: 1;
+  margin: 5rem auto 0;
+  text-align: center;
+  position: relative;
+  margin-top: 12.5rem;
 }
-.click-video::before{
-    content: "";
-    display:block;
-    width: 39%;
-    height: 55%;
-    border: 3px solid #8a6a3e;
-    position: absolute;
-    top: -45px;
-    right: -30px;
-    margin-right: 13%;
-    z-index: -1;
+.click-video::before {
+  content: "";
+  display: block;
+  width: 39%;
+  height: 55%;
+  border: 3px solid #8a6a3e;
+  position: absolute;
+  top: -45px;
+  right: -30px;
+  margin-right: 13%;
+  z-index: -1;
 }
-.click-video::after{
-    content: "";
-    display:block;
-    width: 20%;
-    height: 42%;
-    background: #c87e6b;
-    position: absolute;
-    bottom: -30px;
-    left: -30px;
-    margin-left: 13%;
-    z-index: -1;
+.click-video::after {
+  content: "";
+  display: block;
+  width: 20%;
+  height: 42%;
+  background: #c87e6b;
+  position: absolute;
+  bottom: -30px;
+  left: -30px;
+  margin-left: 13%;
+  z-index: -1;
 }

@@ -49,6 +49,7 @@ export default function Titleproduct() {
       .then((response) => response.json())
       .then((data) => setProduct(data))
       .catch((error) => console.log("error", error));
+    console.log("data", product);
   }
   const [count, setCount] = useState(0);
   const increment = () => {

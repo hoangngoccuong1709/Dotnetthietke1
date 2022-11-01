@@ -7,7 +7,7 @@ export function checkToken(params) {
   return (dispatch) => {
     if (!token) {
       dispatch(setAccount(null));
-      dispatch(tokenChecked(false));
+      dispatch(tokenChecked(true));
     } else {
       fetch(`/user/info`, {
         method: "GET",
@@ -42,8 +42,6 @@ export function checkToken(params) {
 }
 
 export function login(params) {
-  //let navigate = useNavigate();
-  // const navigate = useNavigate();
   return (dispatch) => {
     fetch(`/user/login`, {
       method: "POST",

@@ -1,4 +1,3 @@
-
 import { CREATE_ORDER, CLEAR_CART } from "../reducer/types";
 export const addToCart = (Writedetails) => {
   console.log("dâda", Writedetails);
@@ -30,4 +29,3 @@ export const createOrder = (order) => (dispatch) => {
       dispatch({ type: CLEAR_CART });
     });
 };
-

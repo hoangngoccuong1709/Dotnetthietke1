@@ -50,6 +50,31 @@ namespace dotnetthietke1.Migrations
                     b.ToTable("Contens");
                 });
 
+            modelBuilder.Entity("dotnetthietke1.Models.Menu", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
+
+                    b.Property<string>("linkto")
+                        .HasColumnType("text");
+
+                    b.Property<string>("nameMenu")
+                        .HasColumnType("text");
+
+                    b.Property<string>("options")
+                        .HasColumnType("text");
+
+                    b.Property<string>("type")
+                        .HasColumnType("text");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Menu");
+                });
+
             modelBuilder.Entity("dotnetthietke1.Models.Orders", b =>
                 {
                     b.Property<int>("Id")
@@ -100,6 +125,34 @@ namespace dotnetthietke1.Migrations
                     b.HasKey("Idproduct");
 
                     b.ToTable("Product");
+                });
+
+            modelBuilder.Entity("dotnetthietke1.Subscribe", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
+
+                    b.Property<DateTime?>("createAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("email")
+                        .HasColumnType("text");
+
+                    b.Property<string>("message")
+                        .HasColumnType("text");
+
+                    b.Property<string>("name")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("updateAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Subscribe");
                 });
 
             modelBuilder.Entity("dotnetthietke1.User", b =>
@@ -347,6 +400,7 @@ namespace dotnetthietke1.Migrations
                     b.HasOne("dotnetthietke1.User", "User")
                         .WithMany("Orders")
                         .HasForeignKey("UserId");
+                    b.Navigation("Product");
 
                     b.Navigation("User");
                 });

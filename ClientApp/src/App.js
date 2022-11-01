@@ -22,6 +22,14 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import Navigator from "./Router";
 import Layout from "./layout";
+
+import store from "../src/reducer/stor";
+import SignUp from "./pages/signin/Signup";
+import { checkToken } from "./actions/user";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
+import routes from "./routes";
+
 function App() {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
@@ -30,6 +38,8 @@ function App() {
   useEffect(() => {
     dispatch(checkToken());
   }, []);
+
+  console.log("ab", user);
 
   return (
     //<Provider store={store}>
@@ -59,6 +69,11 @@ function App() {
           <Route path="checkout" element={<Checkout />} />
           <Route path="dangki" element={<Signup />} />
         </Routes>
+        // user.tokenChecked == false ?
+        //     <div>Loading..</div> :
+        // user == null ?
+        //     <Signin /> :
+        //     <Home />
       }
 
       {/* <Routes>
@@ -89,6 +104,16 @@ function App() {
       <Route path="giohang" element={<Cart />} />
       <Route path=":idproduct" element ={<Product />} />
       </Routes> */}
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="service" element={<Service />} />
+        <Route path="abount" element={<Abount />} />
+        <Route path="contact" element={<Contact />} />
+        <Route path="signin" element={<Signin />} />
+        <Route path="giohang" element={<Cart />} />
+        <Route path=":idproduct" element={<Product />} />
+      </Routes>
       <Footer />
     </div>
     // </Provider>

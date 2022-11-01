@@ -189,6 +189,7 @@ const IdConten = () => {
             className="datagrid"
             autoHeight
             autoPageSize
+            key={post.id}
             rows={rows}
             columns={Columns.concat(actionColumn)}
             pageSize={9}

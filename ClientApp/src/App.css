@@ -3,42 +3,42 @@
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@900&display=swap");
-@import url("./responsive.css");  
+@import url("./responsive.css");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital@1&display=swap");
 
-.App{
+.App {
   display: block;
   width: 100%;
   height: auto;
-  background: url('../public/image/Background.png');
+  background: url("../public/image/Background.png");
   position: relative;
   z-index: 0;
 }
 img,
 video,
 iframe {
-max-inline-size: 100%;
-block-size: auto;
+  max-inline-size: 100%;
+  block-size: auto;
 }
-h3{
+h3 {
   margin: 0;
 }
-.container{
+.container {
   text-align: center;
   padding: 5rem 20rem;
 }
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 /* html{
@@ -47,20 +47,20 @@ code {
 img,
 video,
 iframe {
-max-inline-size: 100%;
-block-size: auto;
+  max-inline-size: 100%;
+  block-size: auto;
 }
-h3{
+h3 {
   margin: 0;
 }
-a{
+a {
   text-decoration: none;
 }
 li {
   list-style: none;
 }
-.container{
-  padding-left:20rem ;
+.container {
+  padding-left: 20rem;
   padding-right: 20rem;
 }
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
@@ -73,7 +73,7 @@ li {
  * 2. Prevent adjustments of font size after orientation changes in iOS.
  */
 
- html {
+html {
   line-height: 1.15; /* 1 */
   -webkit-text-size-adjust: 100%; /* 2 */
 }
@@ -239,7 +239,8 @@ textarea {
  */
 
 button,
-input { /* 1 */
+input {
+  /* 1 */
   overflow: visible;
 }
 
@@ -249,7 +250,8 @@ input { /* 1 */
  */
 
 button,
-select { /* 1 */
+select {
+  /* 1 */
   text-transform: none;
 }
 
