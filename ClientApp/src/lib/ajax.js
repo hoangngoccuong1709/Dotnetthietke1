@@ -160,7 +160,6 @@ const apiCall = ({ action, dispatch, getState }) => {
       return onError(new DataError(data), reject);
     }
     if (actions && actions.success) {
-      //dispatch actions
       dispatch(
         actions.success({
           params,

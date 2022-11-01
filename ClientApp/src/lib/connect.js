@@ -1,5 +1,5 @@
 import React from "react";
-import User from "./user";
+import User from "../reducer/user";
 import { connect as rdConnect, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 
@@ -54,15 +54,15 @@ export const connect = (
     throw new Error("Component can not be null");
   }
 
-  if (component.prototype.render) {
-    component.contextType = AppContext;
-  }
+  // if (component.prototype.render) {
+  //     component.contextType = AppContext;
+  // }
 
-  component.prototype.redirect = function (to, push) {
-    if (this.context.redirect) {
-      this.context.redirect(to, push);
-    }
-  };
+  // component.prototype.redirect = function (to, push) {
+  //     if (this.context.redirect) {
+  //         this.context.redirect(to, push);
+  //     }
+  // }
 
   const make = actions
     ? rdConnect(
@@ -86,4 +86,5 @@ export const connect = (
 
   return make(component);
 };
+
 export default connect;
