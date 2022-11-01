@@ -1,19 +1,17 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from "@reduxjs/toolkit";
 
 export const slice = createSlice({
-    name: 'app',
-    initialState: {
-        enums: []
+  name: "app",
+  initialState: {
+    enums: [],
+  },
+  reducers: {
+    setEnums: (state, action) => {
+      state.enums = [...action.payload.data];
     },
-    reducers: {
-        setEnums: (state, action) => {
-            state.enums = [
-                ...action.payload.data
-            ]
-        }
-    },
-})
+  },
+});
 
-export const actions = slice.actions
+export const actions = slice.actions;
 
-export default slice.reducer
+export default slice.reducer;

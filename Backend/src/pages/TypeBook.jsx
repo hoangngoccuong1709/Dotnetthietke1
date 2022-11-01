@@ -34,7 +34,7 @@
 //     };
 //     fetch('/api/Products',option)
 //     .then(response => response.json())
-//     .then(data => setProduct(data)) 
+//     .then(data => setProduct(data))
 //     .catch(error => console.log('error', error));
 //   }
 //   const planlist = async () => {
@@ -53,7 +53,7 @@
 //   //       console.log(results)
 //   //       //resolve(results.rows);
 //   //     })
-//   //   }) 
+//   //   })
 //   // }
 //   async function createPost() {
 //     const { error } = await supabase

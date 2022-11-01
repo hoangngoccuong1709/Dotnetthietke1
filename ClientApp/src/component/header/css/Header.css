@@ -69,3 +69,8 @@ img{
 .iconmenu a {
     padding-left: 3rem;
 }
+.navlink{
+    font-size: 1.6rem;
+    color: white;
+    padding-bottom: 1rem;
+}

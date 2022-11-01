@@ -10,13 +10,14 @@ namespace dotnetthietke1
     public class User : IdentityUser
     {
         public static object Identity { get; internal set; }
-      
+
         public string Avatar { get; set; }
 
         public string Description { get; set; }
 
         [MaxLength(100)]
         public string FullName { get; set; }
+        // public string Address{set;get;}
         public virtual ICollection<Orders> Orders { get; set; }
     }
 

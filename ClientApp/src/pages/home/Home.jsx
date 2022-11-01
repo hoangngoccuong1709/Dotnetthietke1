@@ -10,7 +10,6 @@ import { Input,Typography } from 'antd'
 import { Routes, Route } from "react-router-dom";
 import Product from '../../component/body/Product'
 import { Provider } from 'react-redux'
-import store from '../../reducer/stor'
 import Signin from '../signin/Signin';
 import Cart from '../cart/Cart'
 import { useSelector, useDispatch } from 'react-redux';
