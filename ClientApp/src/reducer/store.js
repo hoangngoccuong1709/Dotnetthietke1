@@ -16,4 +16,5 @@ export default configureStore({
     app,
   },
   // middleware: [thunk, logger],
+  middleware: (getDefaultMiddleware) => [ajaxCall, ...getDefaultMiddleware()],
 });
