@@ -46,6 +46,9 @@ function App() {
         <Route path="signin" element={<Signin />} />
         <Route path="giohang" element={<Cart />} />
         <Route path=":idproduct" element={<Product />} />
+        <Route path="thongtinnguoidung" element={<Account />} />
+        <Route path="checkout" element={<Checkout />} />
+        <Route path="dangki" element={<Signup />} />
       </Routes>
       <Footer />
     </div>
