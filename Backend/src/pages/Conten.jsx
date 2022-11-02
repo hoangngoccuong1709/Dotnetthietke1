@@ -4,12 +4,13 @@ import { Link } from "react-router-dom";
 import { useState, useRef } from "react";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
+import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useEffect } from "react";
 import Sidebar from "../components/sidebar/Sidebar";
 import Navbar from "../components/navbar/Navbar";
-
+import "../components/datatable/datatable.scss";
 const IdConten = () => {
   const baseURL = "/api";
   const post_name = useRef(null);
@@ -21,6 +22,7 @@ const IdConten = () => {
   const fortmatResponse = (res) => {
     return JSON.stringify(res, null, 2);
   };
+  const [image, setImage] = useState();
   const [data, setData] = useState([]);
   const [post, setPost] = useState({
     idconten: "",
@@ -28,9 +30,8 @@ const IdConten = () => {
     title: "",
     pharagraph: "",
     posion: "",
-    imageconten: "",
   });
-  const { idconten, nameConten, title, pharagraph, posion, imageconten } = post;
+  const { idconten, nameConten, title, pharagraph, posion } = post;
 
   const [open, setOpen] = useState(false);
 
@@ -64,7 +65,7 @@ const IdConten = () => {
       title: post_title.current.value,
       paragraph: post_paragraph.current.value,
       posion: post_posion.current.value,
-      imageconten: post_imageconten.current.value,
+      imageconten: image.name,
     };
     //   try {
     fetch(`${baseURL}/conten/by-id`, {
@@ -203,58 +204,109 @@ const IdConten = () => {
             <DialogContent>
               <form>
                 <div className="row">
-                  <div>
-                    <div className="form-group ">
-                      <label className="required">Nhập tên bài viết</label>
-                      <input
-                        type="text"
-                        className="form-control "
-                        ref={post_name}
-                        required
-                        pattern="\S+"
-                      ></input>
+                  <div className="bottom">
+                    <div className="left">
+                      <img
+                        src={
+                          image
+                            ? URL.createObjectURL(image)
+                            : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
+                        }
+                        alt=""
+                      />
                     </div>
+                    <div className="right">
+                      <form>
+                        <div className="formInput">
+                          <label htmlFor="file">
+                            Image:{" "}
+                            <DriveFolderUploadOutlinedIcon className="icon" />
+                          </label>
+                          <input
+                            type="file"
+                            id="file"
+                            onChange={(e) => setImage(e.target.files[0])}
+                            style={{ display: "none" }}
+                          />
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                  <div className="card-body">
+                    <div className="row">
+                      <div className="row">
+                        <div>
+                          <div className="form-group ">
+                            <label className="required">
+                              Nhập tên bài viết
+                            </label>
+                            <input
+                              type="text"
+                              className="form-control "
+                              ref={post_name}
+                              required
+                              pattern="\S+"
+                            ></input>
+                          </div>
 
-                    <div className="form-group " style={{ marginTop: 20 }}>
-                      <label className="required">Nhập tiêu đề bài viết </label>
-                      <input
-                        type="text"
-                        className="form-control "
-                        ref={post_title}
-                        required
-                        pattern="\S+"
-                      ></input>
-                    </div>
+                          <div
+                            className="form-group "
+                            style={{ marginTop: 20 }}
+                          >
+                            <label className="required">
+                              Nhập tiêu đề bài viết{" "}
+                            </label>
+                            <input
+                              type="text"
+                              className="form-control "
+                              ref={post_title}
+                              required
+                              pattern="\S+"
+                            ></input>
+                          </div>
 
-                    <div className="form-group " style={{ marginTop: 20 }}>
-                      <label className="required">Nhập nội dung bài viết</label>
-                      <input
-                        type="text"
-                        className="form-control "
-                        ref={post_paragraph}
-                        required
-                        pattern="\S+"
-                      ></input>
-                    </div>
-                    <select
-                      id="cars"
-                      style={{ marginTop: 20 }}
-                      ref={post_posion}
-                    >
-                      <option value="Slidetop">Slidetop</option>
-                      <option value="Bodytop">Bodytop</option>
-                      <option value="Bodybetween">Bodybetween</option>
-                      <option value="Bodypading">Bodypading</option>
-                    </select>
-                    <div className="form-group " style={{ marginTop: 20 }}>
-                      <label className="required">Nhập hình ảnh bài viết</label>
-                      <input
-                        type="text"
-                        className="form-control "
-                        ref={post_imageconten}
-                        required
-                        pattern="\S+"
-                      ></input>
+                          <div
+                            className="form-group "
+                            style={{ marginTop: 20 }}
+                          >
+                            <label className="required">
+                              Nhập nội dung bài viết
+                            </label>
+                            <input
+                              type="text"
+                              className="form-control "
+                              ref={post_paragraph}
+                              required
+                              pattern="\S+"
+                            ></input>
+                          </div>
+                          <select
+                            id="cars"
+                            style={{ marginTop: 20 }}
+                            ref={post_posion}
+                          >
+                            <option value="Slidetop">Slidetop</option>
+                            <option value="Bodytop">Bodytop</option>
+                            <option value="Bodybetween">Bodybetween</option>
+                            <option value="Bodypading">Bodypading</option>
+                          </select>
+                          {/* <div
+                            className="form-group "
+                            style={{ marginTop: 20 }}
+                          >
+                            <label className="required">
+                              Nhập hình ảnh bài viết
+                            </label>
+                            <input
+                              type="text"
+                              className="form-control "
+                              ref={post_imageconten}
+                              required
+                              pattern="\S+"
+                            ></input>
+                          </div> */}
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>

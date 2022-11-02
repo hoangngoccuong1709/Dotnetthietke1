@@ -10,25 +10,26 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { useEffect } from "react";
 import Sidebar from "../components/sidebar/Sidebar";
 import Navbar from "../components/navbar/Navbar";
+import "../components/datatable/datatable.scss";
 const IdProduct = () => {
   const baseURL = "/api";
   const post_name = useRef(null);
   const post_title = useRef(null);
-  const post_image = useRef(null);
+  // const post_image = useRef(null);
   const post_price = useRef(null);
   const [postResult, setPostResult] = useState(null);
   const fortmatResponse = (res) => {
     return JSON.stringify(res, null, 2);
   };
+  const [image, setImage] = useState();
   const [data, setData] = useState([]);
   const [post, setPost] = useState({
     idproduct: "",
     nameProduct: "",
     title: "",
-    image: "",
     price: "",
   });
-  const { idproduct, nameProduct, title, image, price } = post;
+  const { idproduct, nameProduct, title, price } = post;
 
   const [open, setOpen] = useState(false);
 
@@ -57,8 +58,8 @@ const IdProduct = () => {
     const postData = {
       nameProduct: post_name.current.value,
       title: post_title.current.value,
-      image: post_image.current.value,
-      image: post_price.current.value,
+      image: image.name,
+      price: post_price.current.value,
     };
     try {
       const res = await fetch(`${baseURL}/product`, {
@@ -110,8 +111,8 @@ const IdProduct = () => {
     id: post.idproduct,
     nameProduct: post.nameProduct,
     title: post.title,
-    image: post.image,
     price: post.price,
+    image: post.image,
   }));
 
   const Columns = [
@@ -191,40 +192,72 @@ const IdProduct = () => {
             <DialogContent>
               <form>
                 <div className="row">
-                  <div>
-                    <div className="form-group ">
-                      <label className="required">Nhập tên sản phẩm</label>
-                      <input
-                        type="text"
-                        className="form-control "
-                        ref={post_name}
-                      ></input>
+                  <div className="bottom">
+                    <div className="left">
+                      <img
+                        src={
+                          image
+                            ? URL.createObjectURL(image)
+                            : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
+                        }
+                        alt=""
+                      />
                     </div>
+                    <div className="right">
+                      <form>
+                        <div className="formInput">
+                          <label htmlFor="file">
+                            Image:{" "}
+                            <DriveFolderUploadOutlinedIcon className="icon" />
+                          </label>
+                          <input
+                            type="file"
+                            id="file"
+                            onChange={(e) => setImage(e.target.files[0])}
+                            style={{ display: "none" }}
+                          />
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                  <div className="card-body">
+                    <div className="row">
+                      <div className="form-group ">
+                        <label className="required">Nhập tên sản phẩm</label>
+                        <input
+                          type="text"
+                          className="form-control "
+                          ref={post_name}
+                        ></input>
+                      </div>
 
-                    <div className="form-group " style={{ marginTop: 20 }}>
-                      <label className="required">Nhập tiêu đề sản phẩm </label>
-                      <input
-                        type="text"
-                        className="form-control "
-                        ref={post_title}
-                      ></input>
-                    </div>
+                      <div className="form-group " style={{ marginTop: 20 }}>
+                        <label className="required">
+                          Nhập tiêu đề sản phẩm{" "}
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control "
+                          ref={post_title}
+                        ></input>
+                      </div>
+                      <div className="form-group " style={{ marginTop: 20 }}>
+                        <label className="required">Nhập giá sản phẩm</label>
+                        <input
+                          type="text"
+                          className="form-control "
+                          ref={post_price}
+                        ></input>
+                      </div>
 
-                    <div className="form-group " style={{ marginTop: 20 }}>
-                      <label className="required">Nhập image sản phẩm</label>
-                      <input
-                        type="text"
-                        className="form-control "
-                        ref={post_image}
-                      ></input>
-                    </div>
-                    <div className="form-group " style={{ marginTop: 20 }}>
-                      <label className="required">Nhập giá sản phẩm</label>
-                      <input
-                        type="text"
-                        className="form-control "
-                        ref={post_price}
-                      ></input>
+                      {/* <div className="form-group " style={{ marginTop: 20 }}>
+                        <label className="required">Nhập image sản phẩm</label>
+                        <input
+                          type="text"
+                          className="form-control "
+                          ref={post_image}
+                        ></input>
+                      </div> */}
                     </div>
                   </div>
                 </div>

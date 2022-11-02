@@ -30,9 +30,15 @@ namespace dotnetthietke1.Controller
             var data = await query.Select(s => new
             {
                 Id = s.Id,
+                date = s.Date,
+                quantity = s.Quantity,
+                total = s.Total,
+                fullname = s.User.FullName,
+                phonenumber = s.User.PhoneNumber,
+                adress = s.User.Description,
                 Product = s.OrderDetails.Select(o => new
                 {
-                    Id = o.Product.Idproduct,
+                    // Id = o.Product.Idproduct,
                     o.Product.NameProduct
                 }),
             }).ToListAsync();
@@ -41,11 +47,11 @@ namespace dotnetthietke1.Controller
             //{
             // Console.WriteLine($"\"{ownerAndPet.ProductName}\" is owned by {ownerAndPet.Total}");
             //}
-            return Ok(new
-            {
-                total = total,
-                items = data
-            });
+            return Ok(data);
+            // {
+            //     total = total,
+            //     items = data
+            // });
         }
         [HttpGet]
         [Route("idorder")]

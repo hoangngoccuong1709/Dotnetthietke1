@@ -22,27 +22,15 @@ const Author = () => {
       .then((data) => setData(data))
       .catch((error) => console.log("error", error));
   }
-  // const remove = async (id) => {
-  //     const { error } = await supabase
-  //         .from('BookType')
-  //         .delete()
-  //         .match({ IdAuthor: id })
-
-  //     if (error) {
-  //         console.log("lỗi")
-  //         alert("Không thể xóa lỗi khóa ngoại ! ")
-  //         return
-  //     }
-
-  // author()
-  // }
 
   const rows = data.map((post) => ({
     id: post.id,
     productName: post.product,
+    quantity: post.quantity,
     total: post.total,
+    fullname: post.fullname,
+    Description: post.adress,
     date: post.date,
-    username: post.userName,
     // Hometown: post.Hometown
   }));
 
@@ -54,14 +42,22 @@ const Author = () => {
       width: 200,
       editable: true,
     },
+    { field: "quantity", headerName: "So luong", width: 180, editable: true },
     { field: "total", headerName: "Tổng tiền", width: 180, editable: true },
-    { field: "date", headerName: "Ngay mua hang", width: 200, editable: true },
     {
-      field: "username",
-      headerName: "Ten nguoi mua hang",
-      width: 200,
+      field: "fullname",
+      headerName: "Ho va ten nguoi mua",
+      width: 180,
       editable: true,
     },
+    { field: "Description", headerName: "Dia chi", width: 180, editable: true },
+    { field: "date", headerName: "Ngay mua hang", width: 200, editable: true },
+    // {
+    //   field: "username",
+    //   headerName: "Ten nguoi mua hang",
+    //   width: 200,
+    //   editable: true,
+    // },
   ];
   // { field: 'year', headerName: "Tổng tiền", width: 100, editable: true }];
   // // { field: 'Hometown', headerName: "Quê quán", width: 400, editable: true }];
