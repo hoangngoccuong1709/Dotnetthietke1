@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
+import { CSVDownload, CSVLink } from "react-csv";
 import Dialog from "@mui/material/Dialog";
-import DialogActions, {
-  dialogActionsClasses,
-} from "@mui/material/DialogActions";
+import DialogActions from "@mui/material/DialogActions";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,13 +14,21 @@ import {
 import { DataGrid } from "@mui/x-data-grid";
 import Sidebar from "../components/sidebar/Sidebar";
 import Navbar from "../components/navbar/Navbar";
+import SendEmailSubscribe from "./SendEmailSubscribe";
 
 const SubscribePage = () => {
   const nameInput = useRef(null);
   const emailInput = useRef(null);
   const messageInput = useRef(null);
 
+  const [toggle, setToggle] = useState(false);
+
+  const handlePutToggle = () => {
+    setToggle(!toggle);
+  };
+
   const dispatch = useDispatch();
+
   const [data, setData] = useState({
     id: "",
     name: "",
@@ -112,7 +119,7 @@ const SubscribePage = () => {
     getAllSubscribeFormReact();
   };
 
-  //TODO: chưa tối hưu hiệu năng khi state thay đổi bị render lại
+  //TODO: chưa tối hưu hiệu năng khi state thay đổi bị render lại => gõ bị chậm/đơ (thay đổi  =  ref())
   const handleOnchange = (e, id) => {
     let copystate = { ...data };
     copystate[id] = e.target.value;
@@ -146,6 +153,20 @@ const SubscribePage = () => {
       headerName: "Update At",
       width: 200,
       editable: true,
+    },
+  ];
+  const header = [
+    {
+      label: "Tên khách hàng",
+      key: "name",
+    },
+    {
+      label: "Email",
+      key: "email",
+    },
+    {
+      label: "Message",
+      key: "message",
     },
   ];
 
@@ -196,8 +217,20 @@ const SubscribePage = () => {
             <button className="btn btn-primary ml-3 " onClick={handleClickOpen}>
               add
             </button>
-            <button className="btn btn-primary ml-3 ">Send Email</button>
-            <button className="btn btn-primary ml-3">Export Excel</button>
+            <button className="btn btn-primary ml-3 " onClick={handlePutToggle}>
+              Send Email
+            </button>
+
+            <CSVLink
+              target="_blank"
+              filename={"ListSubscribe.csv"}
+              enclosingCharacter={`'`}
+              data={rows}
+              className="btn btn-primary ml-3  "
+              headers={header}
+            >
+              Export excel
+            </CSVLink>
           </div>
 
           <DataGrid
@@ -209,6 +242,11 @@ const SubscribePage = () => {
             pageSize={9}
             rowsPerPageOptions={[9]}
             getRowId={(row) => row.id}
+          />
+
+          <SendEmailSubscribe
+            handlePutToggle={handlePutToggle}
+            toggle={toggle}
           />
 
           <Dialog

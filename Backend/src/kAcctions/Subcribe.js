@@ -42,3 +42,15 @@ export const updateSub = (id, body) => {
     },
   };
 };
+
+export const sendEmailAll = (body) => {
+  console.log("sendSub", body);
+  return {
+    url: "/api/subscribe/emails",
+    method: "POST",
+    params: body,
+    actions: {
+      success: actions.addNew,
+    },
+  };
+};
