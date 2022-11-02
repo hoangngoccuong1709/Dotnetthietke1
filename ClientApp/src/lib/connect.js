@@ -86,4 +86,5 @@ export const connect = (
 
   return make(component);
 };
+
 export default connect;

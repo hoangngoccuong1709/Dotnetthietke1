@@ -96,14 +96,6 @@ export default function Forminput() {
           <button onClick={handleSubmit}>SEND MESSAGE</button>
         </div>
       )}
-      <div className="form">
-        <form>
-          <input type="text" name="Your Name" placeholder="Your Name" />
-          <input type="text" placeholder="Mail" />
-          <textarea placeholder="Messages" defaultValue={""} />
-        </form>
-        <button>SEND MESSAGE</button>
-      </div>
     </div>
   );
 }

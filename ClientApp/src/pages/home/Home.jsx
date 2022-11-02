@@ -9,6 +9,7 @@ import Forminput from "../../component/body/Forminput";
 import { Input, Typography } from "antd";
 import { Routes, Route } from "react-router-dom";
 import Product from "../../component/body/Product";
+
 import Cart from "../cart/Cart";
 
 export default function Home() {
