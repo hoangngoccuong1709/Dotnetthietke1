@@ -78,9 +78,18 @@ namespace dotnetthietke1.Controller
         }
         [HttpPost("emails")]
 
-        public async Task<IActionResult> getAllEmail()
-        //giữa các email phân cách bằng dâu ; nó không hnhận
+        public async Task<IActionResult> getAllEmail([FromBody] SendEmail data)
+
         {
+            Console.WriteLine(data);
+            var newData = new SendEmail
+            {
+                SendName = data.SendName,
+                SendNameEmail = data.SendNameEmail,
+                PassSMTP = data.PassSMTP,
+                Title = data.Title,
+                Content = data.Content
+            };
 
             var ListEmail = await db.Subscribe.Select(x => x.email).ToListAsync();
             // var ListName = await db.Subscribe.Select(x => x.name).ToListAsync();
@@ -96,12 +105,12 @@ namespace dotnetthietke1.Controller
             {
                 try
                 {
-                    var fromAddress = new MailAddress("khaik59dhv@gmail.com", "kahi");
+                    var fromAddress = new MailAddress(newData.SendNameEmail, newData.SendName);
                     var test = new MailAddress(item, "kahi");
-                    // dưới ni em cho chạy hàm gửi từng email
-                    const string fromPassword = "moetnosozdtxmshf";
-                    const string subject = "test";
-                    const string body = "test";
+
+                    string fromPassword = newData.PassSMTP;
+                    string subject = newData.Content;
+                    string body = newData.Title;
 
                     var smtp = new SmtpClient
                     {

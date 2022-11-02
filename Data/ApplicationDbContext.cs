@@ -18,6 +18,7 @@ namespace dotnetthietke1
         public DbSet<Orders> Orders { get; set; }
         public DbSet<Menu> Menu { get; set; }
         public DbSet<Subscribe> Subscribe { get; set; }
+        public DbSet<SMTPs> SMTPs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

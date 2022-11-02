@@ -1,9 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { CSVDownload, CSVLink } from "react-csv";
 import Dialog from "@mui/material/Dialog";
-import DialogActions, {
-  dialogActionsClasses,
-} from "@mui/material/DialogActions";
+import DialogActions from "@mui/material/DialogActions";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,7 +15,6 @@ import { DataGrid } from "@mui/x-data-grid";
 import Sidebar from "../components/sidebar/Sidebar";
 import Navbar from "../components/navbar/Navbar";
 import SendEmailSubscribe from "./SendEmailSubscribe";
-import { toggleButtonClasses } from "@mui/material";
 
 const SubscribePage = () => {
   const nameInput = useRef(null);
@@ -31,6 +28,7 @@ const SubscribePage = () => {
   };
 
   const dispatch = useDispatch();
+
   const [data, setData] = useState({
     id: "",
     name: "",
