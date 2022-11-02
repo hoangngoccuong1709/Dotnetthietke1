@@ -1,6 +1,8 @@
 using dotnetthietke1.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
+using System.Net.Mail;
 
 namespace dotnetthietke1.Controller
 {
@@ -74,5 +76,60 @@ namespace dotnetthietke1.Controller
             await db.SaveChangesAsync();
             return Ok(1);
         }
+        [HttpPost("emails")]
+
+        public async Task<IActionResult> getAllEmail()
+        //giữa các email phân cách bằng dâu ; nó không hnhận
+        {
+
+            var ListEmail = await db.Subscribe.Select(x => x.email).ToListAsync();
+            // var ListName = await db.Subscribe.Select(x => x.name).ToListAsync();
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("k có Email");
+            }
+            List<string> Emails = new List<string>();
+
+            // chưa tối ưu. Hàm chạy còn chậm (có thể sẽ triển khai sử dụng thử mailkit)
+            foreach (var item in ListEmail)
+            {
+                try
+                {
+                    var fromAddress = new MailAddress("khaik59dhv@gmail.com", "kahi");
+                    var test = new MailAddress(item, "kahi");
+                    // dưới ni em cho chạy hàm gửi từng email
+                    const string fromPassword = "moetnosozdtxmshf";
+                    const string subject = "test";
+                    const string body = "test";
+
+                    var smtp = new SmtpClient
+                    {
+                        Host = "smtp.gmail.com",
+                        Port = 587,
+                        EnableSsl = true,
+                        DeliveryMethod = SmtpDeliveryMethod.Network,
+                        UseDefaultCredentials = false,
+                        Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
+                    };
+                    using (var message = new MailMessage(fromAddress, test)
+                    {
+                        Subject = subject,
+                        Body = body
+                    })
+                    {
+                        smtp.Send(message);
+                    }
+
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+
+            }
+            return Ok();
+        }
+
     }
 }
