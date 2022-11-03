@@ -6,6 +6,9 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 function Header() {
   const cart = useSelector((state) => state.cartReducer.numberCart);
+
+  const user = useSelector((state) => state.user.account);
+
   return (
     <div>
       <div className="containner">

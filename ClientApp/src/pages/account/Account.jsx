@@ -2,9 +2,14 @@
 import { Link } from "react-router-dom";
 import { useState, useRef } from "react";
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router";
+import { logout } from "../../reducer/user";
 import "./profile.css";
+import { Button } from "antd";
 const Account = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const user = useSelector((state) => state.user);
   return (
     <div className="container">
@@ -31,7 +36,13 @@ const Account = () => {
                 <Link to={"/"} type="button" className="btn btn-success btn-sm">
                   Trang chủ
                 </Link>
-                <Link to={"/"} type="button" className="btn btn-danger btn-sm">
+
+                <Link
+                  onClick={() => dispatch(logout())}
+                  to={"/signin"}
+                  type="button"
+                  className="btn btn-danger btn-sm"
+                >
                   Thoát ra
                 </Link>
               </div>

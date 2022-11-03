@@ -13,7 +13,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-
 namespace dotnetthietke1.Controllers
 {
     [Route("/user")]
@@ -32,25 +31,6 @@ namespace dotnetthietke1.Controllers
             this.roleManager = roleManager;
             this.signInManager = signInManager;
             this.configuration = configuration;
-        }
-        [HttpPost]
-        public async Task<IActionResult> PostAsync([FromBody] RegisterViewModel user)
-        {
-            if (!ModelState.IsValid) return BadRequest("lỗi");
-            var user2 = new User()
-            {
-                // Id = user.Id,
-                FullName = user.FullName,
-
-                PhoneNumber = user.Phonenumber,
-                UserName = user.UserName,
-                PasswordHash = user.Password,
-                Description = user.Description
-                // u.PhoneNumber
-            };
-            await db.Users.AddAsync(user2);
-            await db.SaveChangesAsync();
-            return Ok(user);
         }
         [HttpPost("login")]
         public async Task<IActionResult> LoginUser([FromBody] LoginModel model)
@@ -87,7 +67,6 @@ namespace dotnetthietke1.Controllers
             {
                 error = "Tài khoản hoặc mật khẩu không đúng";
             }
-
             if (error != null)
             {
                 return BadRequest(new
@@ -140,7 +119,6 @@ namespace dotnetthietke1.Controllers
             }
             );
         }
-
         [HttpGet("info")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> GetInfo()
@@ -171,43 +149,51 @@ namespace dotnetthietke1.Controllers
             return Ok(user2);
         }
 
-        [HttpGet("Register")]
-        public async Task<IActionResult> CreateUser(string username, string password, string avatar, string description, string fullName)
+        // [HttpGet("register")]
+        // public async Task<IActionResult> CreateUser(string UserName, string Phonenumber, string Description, string FullName, string Password)
+        // {
+        //     var result = await userManager.CreateAsync(new User
+        //     {
+        //         UserName = UserName,
+        //         Email = UserName + "@gmail.com",
+        //         PhoneNumber = Phonenumber,
+        //         Description = Description,
+        //         FullName = FullName
+        //     }, Password);
+
+        //     if (result.Succeeded)
+        //     {
+        //         return Ok("Tạo tài khoản thành công");
+        //     }
+        //     return BadRequest(result.Errors);
+        // }
+
+        [HttpPost]
+        public async Task<IActionResult> RegisterUserAsync([FromBody] RegisterViewModel model)
         {
-            var result = await userManager.CreateAsync(new User
+            var identityUser = new User
             {
-                UserName = username,
-                Email = username + "@gmail.com",
-                Avatar = avatar,
-                Description = description,
-                FullName = fullName
-            }, password);
+                UserName = model.UserName,
+                Email = model.UserName + "@gmail.com",
+                PhoneNumber = model.Phonenumber,
+                Description = model.Description,
+                FullName = model.FullName
+
+            };
+            var result = await userManager.CreateAsync(identityUser, model.Password);
 
             if (result.Succeeded)
             {
-                return Ok("Tạo tài khoản thành công");
+                var confirmEmailToken = await userManager.GenerateEmailConfirmationTokenAsync(identityUser);
+                var encodedEmailToken = Encoding.UTF8.GetBytes(confirmEmailToken);
+                return Ok("Đăng ký thành công");
+
             }
-            return BadRequest(result.Errors);
+            return BadRequest(new
+            {
+                Error = "Đăng ký thất bại",
+            });
         }
-        //     [HttpGet("Register")]
-        //     public async Task<IActionResult> CreateUser(string username, string password, string phonenumber, string description, string fullName)
-        //     {
-        //         var result = await userManager.CreateAsync(new User
-        //         {
-        //             UserName = username,
-        //             FullName = fullName,
-        //             // Email = username + "@gmail.com",
-        //             PhoneNumber = phonenumber,
-        //             Description = description
-
-        //         }, password);
-
-        //         if (result.Succeeded)
-        //         {
-        //             return Ok("Tạo tài khoản thành công");
-        //         }
-        //         return BadRequest(result.Errors);
-        //     }
     }
     public class LoginModel
     {

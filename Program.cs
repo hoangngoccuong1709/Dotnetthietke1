@@ -24,7 +24,8 @@ internal class Program
         var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
         builder.Services.AddDbContext<ApplicationDbContext>(x => x.UseNpgsql(connectionString));
         builder.Services.AddIdentity<User, IdentityRole>()
-        .AddEntityFrameworkStores<ApplicationDbContext>();
+        .AddEntityFrameworkStores<ApplicationDbContext>()
+        .AddTokenProvider<DataProtectorTokenProvider<User>>(TokenOptions.DefaultProvider);
         builder.Services.Configure<IdentityOptions>(options =>
         {
             // Password settings.
