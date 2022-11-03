@@ -21,6 +21,9 @@ export const slice = createSlice({
     removeSub: (state, action) => {
       state.list = state.list.filter((item) => item.id != action.payload.id);
     },
+    sendEmail: (state, action) => {
+      state.list.push(action.payload.data);
+    },
   },
 });
 

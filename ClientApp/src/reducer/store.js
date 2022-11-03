@@ -1,11 +1,10 @@
-import { configureStore } from "@reduxjs/toolkit";
-import ajaxCall from "../lib/ajax";
-import user from "./user";
-import app from "./app";
 import Subscribe from "./Subscribe";
-// import department from "./department";
+import { configureStore } from "@reduxjs/toolkit";
 import logger from "redux-logger";
 import thunk from "redux-thunk";
+import ajaxCall from "../lib/ajax";
+import app from "./app";
+import user from "./user";
 import cartReducer from "./cartReducer";
 // import cartReducer from "./cartReducer";
 export default configureStore({
@@ -17,4 +16,5 @@ export default configureStore({
     app,
   },
   // middleware: [thunk, logger],
+  middleware: (getDefaultMiddleware) => [ajaxCall, ...getDefaultMiddleware()],
 });
