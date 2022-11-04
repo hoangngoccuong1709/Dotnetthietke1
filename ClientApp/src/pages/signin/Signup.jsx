@@ -16,12 +16,12 @@ const Register = (props) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const navigate = useNavigate();
-  useEffect(() => {
-    if (user.register == true) {
-      alert("Đăng kí thành công tài khoản");
-      window.location.reload(navigate("/"));
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   if (user.register == true) {
+  //     alert("Đăng kí thành công tài khoản");
+  //     window.location.reload(navigate("/"));
+  //   }
+  // }, [user]);
   // useEffect(() => {
   //   if (user.tokenChecked == true) {
   //   window.location.reload();

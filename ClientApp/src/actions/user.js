@@ -84,8 +84,14 @@ export function register(params) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(params),
     }).then((res) => {
-      res
-        .json()
+      res.json();
+      if (res.status == 200) {
+        alert("Bạn đã đăng ki thành công");
+      } else {
+        alert("Tài khoản đã có vui lòng thử lại");
+      }
+      window.location
+        .reload()
         .then((data) => {
           if (res.status == 200) {
             alert("Bạn đã đăng ki thành công");

@@ -11,6 +11,7 @@
  .ant-form-item-explain-error{
   text-align: center;
   margin-left: 30rem;
+  color: red;
  }
  .ant-form-item-control-input-content button{
    margin: 2rem;
