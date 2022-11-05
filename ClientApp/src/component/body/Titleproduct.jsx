@@ -2,7 +2,7 @@ import React, { Profiler } from "react";
 import "../body/css/Title.css";
 import Product from "./Product";
 import { useEffect, useState } from "react";
-import Slider from "react-slick";
+// import Slider from "react-slick";
 import { Button } from "antd";
 import { Link } from "react-router-dom";
 export default function Titleproduct() {
@@ -64,7 +64,6 @@ export default function Titleproduct() {
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
   };
-
   return (
     <div>
       <div className="tieude">
@@ -75,6 +74,7 @@ export default function Titleproduct() {
         </div>
         <img className="imgtd2" src="image/Leaf2.png" />
       </div>
+      {/* <Slider {...settings}> */}
       <div className="cot">
         {product.map((item) => {
           return (
@@ -90,7 +90,7 @@ export default function Titleproduct() {
                 {/* <p>{item.price}</p> */}
                 <Link
                   className="link"
-                  key={item.idProduct}
+                  key={item.idproduct}
                   item={item}
                   setProduct={setProduct}
                   to={`${item.nameProduct}`}
@@ -102,6 +102,7 @@ export default function Titleproduct() {
           );
         })}
       </div>
+      {/* </Slider> */}
       <div className="chuyentrang">
         <img
           src="image/Leaf3.png"

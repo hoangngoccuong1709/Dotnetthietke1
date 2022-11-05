@@ -12,7 +12,7 @@ const AccountLogin = (props) => {
   //const loginError = useSelector(state => state.user.loginError);
   const navigate = useNavigate();
   useEffect(() => {
-    console.log("account", user.account);
+    console.log("account", user.tokenChecked);
     if (user.tokenChecked == true) {
       navigate("/thongtinnguoidung");
     }
@@ -23,12 +23,6 @@ const AccountLogin = (props) => {
 
   return (
     <section>
-      {/* <div style={{ width: 500, margin: "20px auto" }}> */}
-      {/* <Typography.Title level={3}>Login</Typography.Title> */}
-      {
-        //  loginError && <div>{loginError.message}</div>
-      }
-      {/*Bắt Đầu Phần Hình Ảnh*/}
       <div className="img-bg">
         <img
           src="https://niemvuilaptrinh.ams3.cdn.digitaloceanspaces.com/tao_trang_dang_nhap/hinh_anh_minh_hoa.jpg"

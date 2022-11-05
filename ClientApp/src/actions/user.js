@@ -1,4 +1,9 @@
-import { setAccount, setLoginError, tokenChecked } from "../reducer/user";
+import {
+  setAccount,
+  setLoginError,
+  tokenChecked,
+  setRegister,
+} from "../reducer/user";
 import { useNavigate } from "react-router-dom";
 import { Routes, Route, Outlet } from "react-router-dom";
 import Home from "../pages/home/Home";
@@ -7,7 +12,7 @@ export function checkToken(params) {
   return (dispatch) => {
     if (!token) {
       dispatch(setAccount(null));
-      dispatch(tokenChecked(true));
+      dispatch(tokenChecked(false));
     } else {
       fetch(`/user/info`, {
         method: "GET",
@@ -16,7 +21,6 @@ export function checkToken(params) {
           Authorization: "Bearer " + token,
         },
       }).then((res) => {
-        console.log(res, "reslogi");
         res
           .json()
           .then((data) => {
@@ -56,18 +60,45 @@ export function login(params) {
             dispatch(setAccount(data));
             // .then(
             //     () => {
-            //  navigate("/home");
+
             window.location.reload();
-            // },
-            // )
-            // .then(() => {
-            // <Route path="/" element={<Home />} />
+          } else {
+            dispatch(setLoginError(data));
+          }
+        })
+        .catch((e) => {
+          dispatch(
+            setLoginError({
+              error: e.name,
+              message: e.message,
+            })
+          );
+        });
+    });
+  };
+}
+export function register(params) {
+  return (dispatch) => {
+    fetch(`/user`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(params),
+    }).then((res) => {
+      res.json();
+      if (res.status == 200) {
+        alert("Bạn đã đăng ki thành công");
+      } else {
+        alert("Tài khoản đã có vui lòng thử lại");
+      }
+      window.location
+        .reload()
+        .then((data) => {
+          if (res.status == 200) {
+            alert("Bạn đã đăng ki thành công");
+            // window.location.reload(navigate("/"));
+            dispatch(setRegister(true));
+            dispatch(setAccount(data));
             // window.location.reload();
-            //   })
-            //   .catch(() => {
-            //     // setLoading(false);
-            //   });
-            // navigate("/");
           } else {
             dispatch(setLoginError(data));
           }
