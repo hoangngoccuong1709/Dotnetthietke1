@@ -1,39 +1,53 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Dialog from "@mui/material/Dialog";
-import DialogActions, {
-  dialogActionsClasses,
-} from "@mui/material/DialogActions";
+import DialogActions from "@mui/material/DialogActions";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { sendEmailAll } from "../kAcctions/Subcribe";
+import { getListSMTP } from "../kAcctions/ConfigSmtp";
+import Select from "react-select";
 
 export default function SendEmailSubscribe(handlePutToggle) {
-  const dispatch = useDispatch();
-
-  const [data, setData] = useState({
-    sendName: "",
-    sendNameEmail: "",
-    passSMTP: "",
-    title: "",
-    content: "",
+  const title = useRef(null);
+  const content = useRef(null);
+  const [selectedOption, setSelectedOption] = useState({
+    value: "",
+    label: "",
   });
 
-  const handleOnchange = (e, id) => {
-    let copyState = { ...data };
-    copyState[id] = e.target.value;
-    setData({
-      ...copyState,
-    });
+  const dispatch = useDispatch();
+  const dataSMTP = useSelector((state) => state.ConfigSmtp);
+
+  useEffect(() => {
+    getAllSMTP();
+  }, []);
+
+  const data = dataSMTP.list.map((state) => {
+    return {
+      value: state.email,
+      label: state.email,
+    };
+  });
+
+  const getAllSMTP = async () => {
+    await Promise.all([dispatch(getListSMTP())]);
   };
 
   const handleOnSend = async () => {
-    const onSend = new Promise((resole, reject) => {
+    const dataSend = {
+      SendNameEmail: selectedOption.value,
+      Title: title.current.value,
+      Content: content.current.value,
+    };
+    // console.log(dataSend);
+    await new Promise((resole, reject) => {
       try {
-        dispatch(sendEmailAll(data));
+        dispatch(sendEmailAll(dataSend));
       } catch (e) {
         reject(e);
       }
+      alert("Gửi thành công");
     });
   };
 
@@ -52,61 +66,36 @@ export default function SendEmailSubscribe(handlePutToggle) {
         <DialogContent>
           <p style={{ color: "red", fontSize: "13px" }}>
             * Nội dung email sẽ được gửi đến tất cả các email có trong danh sách
-            đăng ký <br />
-            <a
-              href="https://support.google.com/mail/answer/185833?hl=vi"
-              target="_blank"
-            >
-              - Hướng dẫn thiết lập mật khẩu ứng dụng
-            </a>
+            đăng ký
           </p>
 
           <form>
             <div className="row">
               <div>
                 <div className="form-group ">
-                  <label className="required">Tên người gửi</label>
-
-                  <input
-                    type="text"
-                    className="form-control"
-                    onChange={(e) => handleOnchange(e, "sendName")}
-                  ></input>
+                  <label className="required">Gửi từ Email</label>
+                  <Select
+                    defaultValue={data[0]}
+                    options={data}
+                    name="true"
+                    onChange={setSelectedOption}
+                  ></Select>
                 </div>
-
-                <div className="form-group ">
-                  <label className="required">Email người gửi</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    onChange={(e) => handleOnchange(e, "sendNameEmail")}
-                  ></input>
-                </div>
-
-                <div className="form-group ">
-                  <label className="required">Pass SMTP</label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    onChange={(e) => handleOnchange(e, "passSMTP")}
-                  ></input>
-                </div>
-
                 <div className="form-group ">
                   <label className="required">Tiêu đề</label>
                   <input
                     type="text"
                     className="form-control"
-                    onChange={(e) => handleOnchange(e, "title")}
+                    ref={title}
                   ></input>
                 </div>
 
                 <div className="form-group " style={{ marginTop: 20 }}>
                   <label className="required">Nội dung</label>
                   <textarea
+                    ref={content}
                     type="text"
                     className="form-control "
-                    onChange={(e) => handleOnchange(e, "content")}
                     style={{
                       height: "200px",
                     }}
@@ -124,6 +113,7 @@ export default function SendEmailSubscribe(handlePutToggle) {
               value="Reset"
               className="btn btn-primary text-center"
               onClick={handleOnSend}
+              // onClick={check}
             >
               Send
             </button>

@@ -1,12 +1,21 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
-import { addNewSmtp } from "../kAcctions/ConfigSmtp";
+import { updateConfig } from "../kAcctions/ConfigSmtp";
 import { useDispatch } from "react-redux";
+import { Switch } from "antd";
+import "antd/dist/antd.css";
 
-export default function ConfigSMTPs(handlePutConfig) {
+export default function ConfigSMTPs(handlePutConfigEdit) {
+  const fill = handlePutConfigEdit.fillConfig;
+  console.log(fill.Status);
+  const [isTaxable, setIsTaxable] = useState(fill.Status);
+
+  const checkeds = () => {
+    setIsTaxable(!isTaxable);
+  };
   const dispatch = useDispatch();
   //TODO: chuyển time lên backend c#
   const formatDate = (date) => {
@@ -24,7 +33,7 @@ export default function ConfigSMTPs(handlePutConfig) {
     Name: "",
     Email: "",
     PassSMTP: "",
-    Status: true,
+    Status: isTaxable,
     CreateAt: date,
   });
 
@@ -62,20 +71,17 @@ export default function ConfigSMTPs(handlePutConfig) {
         break;
       }
     }
-
     return isValidate;
   };
 
-  const handleSaveConfig = () =>
+  const handleSaveConfigEdit = () =>
     new Promise((resole, reject) => {
       let isValidate = checkValidateInput();
-
       if (isValidate == true) {
         let isValidateEmail = checkValidateEmail();
         if (isValidateEmail == true) {
           try {
-            dispatch(addNewSmtp(data));
-            handlePutConfig.handlePutConfig();
+            dispatch(updateConfig(data));
             resole();
           } catch (e) {
             reject(e);
@@ -87,22 +93,28 @@ export default function ConfigSMTPs(handlePutConfig) {
   return (
     <div>
       <Dialog
-        open={handlePutConfig.config}
+        open={handlePutConfigEdit.configEdit}
         PaperProps={{
           style: {
             width: "100%",
           },
         }}
       >
-        <DialogTitle>Thêm cấu hình gửi thư</DialogTitle>
+        <DialogTitle>Sửa cấu hình gửi thư</DialogTitle>
 
         <DialogContent>
+          <div className="mb-3">
+            <a style={{ color: "red", fontSize: "13px" }}>
+              * Máy chủ gửi thư mặc định là "smtp.gmail.com" Port 587
+            </a>
+          </div>
           <form>
             <div className="row">
               <div>
                 <div className="form-group ">
                   <label className="required">Name</label>
                   <input
+                    value={fill.Name || ""}
                     type="text"
                     className="form-control"
                     onChange={(e) => handleOnChange(e, "Name")}
@@ -112,6 +124,7 @@ export default function ConfigSMTPs(handlePutConfig) {
                 <div className="form-group ">
                   <label className="required">Email</label>
                   <input
+                    value={fill.Email || ""}
                     type="text"
                     className="form-control"
                     onChange={(e) => handleOnChange(e, "Email")}
@@ -121,10 +134,21 @@ export default function ConfigSMTPs(handlePutConfig) {
                 <div className="form-group ">
                   <label className="required">SMTP</label>
                   <input
+                    value={fill.PassSMTP || ""}
                     type="password"
                     className="form-control"
                     onChange={(e) => handleOnChange(e, "PassSMTP")}
                   ></input>
+                </div>
+                <div className="form-group ">
+                  <label className="required">Trạng thái</label>
+
+                  <Switch
+                    // defaultChecked
+                    className="ml-3"
+                    checked={isTaxable}
+                    onChange={checkeds}
+                  />
                 </div>
               </div>
             </div>
@@ -137,7 +161,7 @@ export default function ConfigSMTPs(handlePutConfig) {
               type="reset"
               value="Reset"
               className="btn btn-primary text-center"
-              onClick={handleSaveConfig}
+              onClick={handleSaveConfigEdit}
             >
               Save
             </button>
@@ -146,7 +170,7 @@ export default function ConfigSMTPs(handlePutConfig) {
               value="Reset"
               style={{ marginLeft: 20 }}
               className="btn btn-danger"
-              onClick={handlePutConfig.handlePutConfig}
+              onClick={handlePutConfigEdit.handlePutConfigEdit}
             >
               Cancel
             </button>
