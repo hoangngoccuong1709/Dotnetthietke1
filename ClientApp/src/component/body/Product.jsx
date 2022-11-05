@@ -154,9 +154,9 @@ function Product(props) {
                 </div>
                 <div className="action">
                   <Button
-                    className="add-to-cart btn btn-default"
-                    id="btnThemVaoGioHang"
-                    key={Writedetails.idproduct}
+                    // className="add-to-cart btn btn-default"
+                    // // id="btnThemVaoGioHang"
+                    // key={Writedetails.idproduct}
                     onClick={() => dispatch(addToCart(product_current))}
                   >
                     Thêm vào giỏ hàng

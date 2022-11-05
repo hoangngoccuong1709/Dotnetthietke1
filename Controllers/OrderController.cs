@@ -89,6 +89,7 @@ namespace dotnetthietke1.Controller
         [HttpPost]
         public async Task<IActionResult> CreateOrder([FromBody] BodyOrder body)
         {
+            var orderDetails = new List<OrderDetail>();
             if (!ModelState.IsValid) return BadRequest("lỗi");
 
             var order = new Orders()
@@ -97,25 +98,42 @@ namespace dotnetthietke1.Controller
                 Quantity = body.Quantity,
                 Total = body.Total,
                 UserId = body.UserId,
-                // OrderDetails =OrderDetailNews,
+
 
             };
-            var OrderDetailNews = new List<OrderDetail>();
-            OrderDetailNews.Add(new OrderDetail
+
+
+            foreach (var item in body.orderDetails)
             {
-                ProductId = body.Idproduct,
-                Quantity = body.Quantity,
-                Price = body.Price,
-                UserId = body.UserId,
-                // OrderId = body.Id,
-                //dươuowis ni em điền giá với chi nha
-                //lưu 2 file cấy e
-            });
-            order.OrderDetails = OrderDetailNews;
-            await _applicationDbContetext.Orders.AddAsync(order);
-            await _applicationDbContetext.SaveChangesAsync();
+                orderDetails.Add(new OrderDetail
+                {
+                    ProductId = item.ProductId,
+                    Price = item.Price,
+                    Quantity = item.Quantity,
+                });
+            }
+            order.OrderDetails = orderDetails;
+            // var OrderDetailNews = new List<OrderDetail>();
+            // OrderDetailNews.Add(new OrderDetail
+            // {
+
+            //     // ProductId = body.Idproduct,
+            //     Quantity = body.Quantity,
+            //     Price = body.Price,
+            //     UserId = body.UserId,
+            //     // OrderId = body.Id,
+
+            // });
+            // order.OrderDetails = OrderDetailNews;
+            try
+            {
+                await _applicationDbContetext.Orders.AddAsync(order);
+                await _applicationDbContetext.SaveChangesAsync();
+            }
+            catch (Exception ex) { }
             return Ok(body);
         }
+
         //     [HttpGet]
         // public async Task<IActionResult> GetAsync()
         // {
@@ -139,15 +157,15 @@ namespace dotnetthietke1.Controller
 
         //     return Ok(found);
         // }
+
         public class BodyOrder
         {
             public int Id { get; set; }
-
             public string UserId { get; set; }
             public int Quantity { get; set; }
             public float Total { get; set; }
-            public float Price { get; set; }
-            public int Idproduct { get; set; }
+            //        public float Price { get; set; }
+            public ICollection<OrderDetail> orderDetails;
         }
 
     }

@@ -9,6 +9,12 @@ function Checkout(props) {
   const navigate = useNavigate();
   const cart = useSelector((state) => state.cartReducer.cart);
   const user = useSelector((state) => state.user.account);
+  let TotalCart = 0;
+  Object.keys(cart).forEach(function (item) {
+    //return Number(price * tonggia).toLocaleString('en-US');
+    TotalCart += cart[item].price * cart[item].quantity;
+  });
+
   // const quantity = useSelector((state) => state.cartReducer.cart.quantity);
   async function createPost() {
     // const userId = () => {
@@ -31,16 +37,26 @@ function Checkout(props) {
     // var userId = user.map((item) => {
     //   return item.id;
     // });
-    var price = cart.map((item) => item.price);
-    var idproduct = cart.map((item) => item.id);
+    //  var price = cart.map((item) => item.price);
+
     const postData = {
+      // total: TotalCart,
+      // quantity: quantity,
+      //userId: userId,
+      orderDetails: cart.map((item) => ({
+        productId: item.id,
+        quantity: item.quantity,
+        price: item.price,
+        userId,
+      })),
       total: TotalCart,
-      quantity: parseInt(quantity),
-      userId: userId,
-      idproduct: parseInt(idproduct),
-      price: parseInt(price),
+      userId,
+      // idproduct,
+      // price,
+
+      // price: price,
     };
-    console.log("q", idproduct);
+
     try {
       const res = await fetch(`/api/order`, {
         method: "POST",
@@ -116,11 +132,11 @@ function Checkout(props) {
               {cart.map((item) => {
                 return (
                   <li className="list-group-item d-flex justify-content-between lh-condensed">
-                    <div>
+                    <div className="font">
                       <h6 className="my-0">{item.name}</h6>
                       <small className="text-muted">{item.price}</small>
                     </div>
-                    <span className="text-muted">4000</span>
+                    {/* <span className="text-muted">4000</span> */}
                   </li>
                 );
               })}
@@ -148,7 +164,7 @@ function Checkout(props) {
               </li> */}
               <li className="list-group-item d-flex justify-content-between">
                 <span>Tổng thành tiền</span>
-                <strong>6000</strong>
+                <strong>{TotalCart}</strong>
               </li>
             </ul>
             <div className="input-group">

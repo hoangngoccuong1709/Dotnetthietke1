@@ -1,4 +1,4 @@
-@import url("//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css");
+/* @import url("//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"); */
 .tieude {
   margin-bottom: 12.7rem;
   margin-top: 12.7rem;
@@ -37,12 +37,20 @@
 }
 /* product */
 .cot {
-  display: grid;
+  width: auto !important;
+    display: flex!important;
+    /* grid-template-columns: 1fr 1fr 1fr 1fr; */
+     align-items: center; 
+    margin-left: 20px;
+    margin-right: 20px;
+    grid-gap: 20px;
+    grid-template-rows:1; 
+  /* display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   align-items: center;
   margin-left: 54px;
   margin-right: 54px;
-  grid-gap: 50px;
+  grid-gap: 50px; */
 }
 .cot img {
   width: 100%;
@@ -109,13 +117,34 @@ a:hover {
 .griditem:hover {
   /* .icon img{}  */
 }
-.chuyentrang {
+/* .chuyentrang {
+  position: absolute;
   margin-top: 63px;
-  display: flex;
+  display: block;
   justify-content: space-around;
-}
+} */
 .imgtd2-1 {
   margin-top: 38px;
   position: absolute;
   left: 0;
+}
+/* .next {
+  bottom: -50px;
+}
+.prev {
+  bottom: -50px;
+} */
+.chuyentrang .next,
+.chuyentrang .prev {
+  position: absolute;
+  border-radius: 50%;
+  transform: 0.5s;
+  z-index: 5;
+}
+.chuyentrang .prev {
+  left: 45%;
+}
+.chuyentrang .next {
+  top: 100%;
+  right: 45%;
 }

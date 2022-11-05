@@ -42,7 +42,7 @@ namespace dotnetthietke1.Controller
         {
             _applicationDbContetext.Contens.Add(conten);
             await _applicationDbContetext.SaveChangesAsync();
-            return Created($"/get-conten-by-id?id={conten.Idconten}", conten);
+            return Created($"/get-conten-by-id?id={conten.Posion}", conten);
         }
         [HttpPut]
         public async Task<IActionResult> PutAsync(Contens contenToUpdate)

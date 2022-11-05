@@ -73,7 +73,6 @@ article {
   font-weight: bold;
   margin-right: 5px;
 }
-
 .cart_box div:nth-child(3) button {
   padding: 5px 10px;
   font-weight: bold;
@@ -81,7 +80,7 @@ article {
   font-size: 15px;
   border: none;
   outline: none;
-  color: white;
+  /* color: white; */
   /* background-color: skyblue; */
   border-radius: 5px;
   cursor: pointer;

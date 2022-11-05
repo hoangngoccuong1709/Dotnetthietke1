@@ -30,19 +30,13 @@ const Register = (props) => {
   // }, []);
   //const loginError = useSelector(state => state.user.loginError);
   // const navigate = useNavigate();
-  // useEffect(() => {
-  //   console.log("account", user.tokenChecked);
-  //   if (user.tokenChecked == true) {
-  //     navigate("/thongtinnguoidung");
-  //   }
-  // }, [user]);
   const onFinish = () => {
     dispatch(register(form.getFieldsValue()));
   };
 
-  // const showLoginForm = () => {
-  //   props.set(false);
-  // };
+  const showLoginForm = () => {
+    navigate("/signin");
+  };
 
   // const onFinish = (values) => {
   //   const { register } = props;
@@ -141,7 +135,8 @@ const Register = (props) => {
             <Button
               className="register_form--wrap__register-btn"
               type="danger"
-              // onClick={showLoginForm}
+              action="/signin"
+              onClick={showLoginForm}
             >
               Đăng nhập
             </Button>
