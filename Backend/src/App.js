@@ -3,7 +3,7 @@ import Login from "./pages/login/Login";
 import List from "./pages/list/List";
 import Single from "./pages/single/Single";
 import New from "./pages/new/New";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import { productInputs, userInputs } from "./formSource";
 import "./style/dark.scss";
 import { useContext } from "react";
@@ -12,7 +12,9 @@ import Product from "./pages/Product";
 import Conten from "./pages/Conten";
 import Bill from "./pages/Bill";
 import Customer from "./pages/Customer";
+import Subscribes from "./CRUD/Subcribe";
 import Subscribe from "./CRUD/Info_Customer";
+import PageConfig from "./CRUD/PageConfig";
 // import Setting from "./pages/setting/Setting";
 
 function App() {
@@ -40,9 +42,12 @@ function App() {
             <Route path="baiviet" element={<Conten />}></Route>
             <Route path="donhang" element={<Bill />}></Route>
 
-            <Route path="subscribe" element={<Subscribe />}></Route>
-
             <Route path="Customer" element={<Customer />}></Route>
+          </Route>
+
+          <Route path="subscribe" element={<Subscribes />}>
+            <Route index element={<Subscribe />} />
+            <Route path="pageConfig" element={<PageConfig />} />
           </Route>
         </Routes>
       </BrowserRouter>

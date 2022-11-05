@@ -81,34 +81,37 @@ namespace dotnetthietke1.Controller
         public async Task<IActionResult> getAllEmail([FromBody] SendEmail data)
 
         {
-            Console.WriteLine(data);
             var newData = new SendEmail
             {
-                SendName = data.SendName,
                 SendNameEmail = data.SendNameEmail,
-                PassSMTP = data.PassSMTP,
                 Title = data.Title,
                 Content = data.Content
             };
 
-            var ListEmail = await db.Subscribe.Select(x => x.email).ToListAsync();
-            // var ListName = await db.Subscribe.Select(x => x.name).ToListAsync();
 
-            if (!ModelState.IsValid)
+            var ListEmail = await db.Subscribe.Select(x => x.email).ToListAsync();
+
+            var dataEmails = await db.SMTPs.Select(u =>
+            new DataEmailSend()
             {
-                return BadRequest("k có Email");
-            }
-            List<string> Emails = new List<string>();
+                Email = u.Email,
+                name = u.name,
+                PassSMTP = u.PassSMTP,
+                Status = u.Status
+            }).Where(u => u.Email == $"{newData.SendNameEmail}").FirstOrDefaultAsync();
+            // return DataEmailSend();
+
+            // List<string> Emails = new List<string>();
 
             // chưa tối ưu. Hàm chạy còn chậm (có thể sẽ triển khai sử dụng thử mailkit)
             foreach (var item in ListEmail)
             {
                 try
                 {
-                    var fromAddress = new MailAddress(newData.SendNameEmail, newData.SendName);
+                    var fromAddress = new MailAddress(dataEmails.Email, dataEmails.name);
                     var test = new MailAddress(item, "kahi");
 
-                    string fromPassword = newData.PassSMTP;
+                    string fromPassword = dataEmails.PassSMTP;
                     string subject = newData.Content;
                     string body = newData.Title;
 
@@ -137,7 +140,7 @@ namespace dotnetthietke1.Controller
                 }
 
             }
-            return Ok();
+            return Ok("send Success");
         }
 
     }
