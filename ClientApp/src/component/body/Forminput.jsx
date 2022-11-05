@@ -35,11 +35,50 @@ export default function Forminput() {
     });
   };
 
+  const checkValidateEmail = () => {
+    let x = input.email;
+    let atPosition = x.indexOf("@");
+    let dotPosition = x.lastIndexOf(".");
+    if (
+      atPosition < 1 ||
+      dotPosition < atPosition + 2 ||
+      dotPosition + 2 >= x.length
+    ) {
+      alert("Please enter a valid e-mail address.");
+      return false;
+    }
+    return true;
+  };
+
+  const checkValidateInput = () => {
+    let isValidate = true;
+
+    let arr = ["name", "email", "message"];
+    for (let i = 0; i < arr.length; i++) {
+      //   console.log(this.state[arr[i]]);
+      if (!input[arr[i]]) {
+        alert("missing perameter " + arr[i]);
+        isValidate = false;
+        break;
+      }
+    }
+
+    return isValidate;
+  };
+
   const handleSubmit = async (e) => {
     const createdb = new Promise((resole, reject) => {
       try {
-        dispatch(addNewSub(input));
-        resole(createdb);
+        let isValidate = checkValidateInput();
+        let isValidateEmail = checkValidateEmail();
+        if (isValidateEmail == true) {
+          if (isValidate == true) {
+            dispatch(addNewSub(input));
+            setDisplay(true);
+            resole(createdb);
+          }
+        }
+        setDisplay(false);
       } catch (e) {
         reject(e);
       }
@@ -50,7 +89,7 @@ export default function Forminput() {
       message: "",
     });
 
-    setDisplay(!display);
+    // setDisplay(!display);
   };
 
   return (
