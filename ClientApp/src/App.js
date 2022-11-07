@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route, Outlet } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import AppFE from "./AppFE";
 import Product from "./pages/pageBE/Product";
 import Conten from "./pages/pageBE/Conten";
@@ -10,7 +10,7 @@ import PageConfig from "./CRUD/PageConfig";
 import Setting from "./pages/Setting/Setting";
 import SettingPage from "./pages/pageBE/Setting/SetingPage";
 import NewSetting from "./pages/pageBE/Setting/NewSetting";
-import HomeBE from "./pages/homeBE/HomeBE";
+import HomeBE from "./pages/pageBE/homeBE/HomeBE";
 import { userInputs } from "./formSource";
 import Login from "./pages/login/Login";
 import List from "./pages/pageBE/list/List";
@@ -18,7 +18,7 @@ import Single from "./pages/single/Single";
 import New from "./pages/new/New";
 import { DarkModeContext } from "./context/darkModeContext";
 import { useContext } from "react";
-import Dashboard from "./pages/homeBE/Dashboard";
+import Dashboard from "./pages/pageBE/homeBE/Dashboard";
 
 export default function App() {
   const { darkMode } = useContext(DarkModeContext);

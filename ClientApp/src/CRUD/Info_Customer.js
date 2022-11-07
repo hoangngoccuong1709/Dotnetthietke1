@@ -42,7 +42,7 @@ const SubscribePage = () => {
     updateAt: "",
   });
 
-  const subscribe = useSelector((state) => state.Subscribe);
+  const subscribe = useSelector((state) => state.SubscribeBE);
   console.log(subscribe, "check");
 
   useEffect(() => {
@@ -210,7 +210,7 @@ const SubscribePage = () => {
   ];
 
   return (
-    <div className="Table">
+    <div>
       <div className="d-flex flex-row mb-3">
         <button className="btn btn-primary ml-3 " onClick={handleClickOpen}>
           add
