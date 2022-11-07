@@ -7,7 +7,7 @@ import { Link, Outlet } from "react-router-dom";
 //so hash
 const Subscribe = () => {
   return (
-    <div className="home">
+    <div>
       <Navbar bg="primary mb-3 " variant="dark">
         <Container>
           <Nav>

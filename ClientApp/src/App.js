@@ -50,8 +50,7 @@ export default function App() {
       <div className={darkMode ? "app dark" : "app"}>
         <Routes>
           {/* UI Customer */}
-
-          <Route path="FE" element={<HomeBase />}>
+          <Route path="/" element={<HomeBase />}>
             <Route index element={<HomeFE />} />
             <Route path="giohang" element={<Cart />}></Route>
             <Route path="service" element={<Service />} />

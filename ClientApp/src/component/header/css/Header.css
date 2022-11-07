@@ -16,6 +16,7 @@ html {
   height: 10rem;
   background-color: #c87e6b;
 }
+
 .nav ul {
   list-style: none;
 }
@@ -63,10 +64,10 @@ img {
   padding: 3.6rem 5.8rem 3.6rem 0;
 }
 .iconmenu a {
-    padding-left: 3rem;
+  padding-left: 3rem;
 }
-.navlink{
-    font-size: 1.6rem;
-    color: white;
-    padding-bottom: 1rem;
+.navlink {
+  font-size: 1.6rem;
+  color: white;
+  padding-bottom: 1rem;
 }

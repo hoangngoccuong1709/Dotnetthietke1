@@ -6,6 +6,7 @@ import Titleproduct from "../../component/body/Titleproduct";
 import Video from "../../component/body/Video";
 import Introduce1 from "../../component/body/Introduce1";
 import Forminput from "../../component/body/Forminput";
+import "../../App.css";
 
 export default function Home() {
   return (

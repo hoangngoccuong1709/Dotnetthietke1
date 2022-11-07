@@ -6,11 +6,11 @@ function Header() {
   const cart = useSelector((state) => state.cartReducer.numberCart);
 
   const user = useSelector((state) => state.user.account);
-
+  const Background = "#333";
   return (
     <div>
       <div className="containner">
-        <div className="nav">
+        <div className="nav" style={{ background: Background }}>
           <div className="logo">
             <a href>
               <img

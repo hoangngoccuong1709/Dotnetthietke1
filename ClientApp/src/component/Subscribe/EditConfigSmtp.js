@@ -8,6 +8,8 @@ import { useDispatch } from "react-redux";
 import { Switch } from "antd";
 import "antd/dist/antd.css";
 
+//TODO: đang lỗi fill text
+
 export default function ConfigSMTPs(handlePutConfigEdit) {
   const fill = handlePutConfigEdit.fillConfig;
   console.log(fill.Status);
