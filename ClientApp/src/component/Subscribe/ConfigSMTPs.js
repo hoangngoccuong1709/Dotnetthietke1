@@ -3,7 +3,7 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
-import { addNewSmtp } from "../actions/actionBE/ConfigSmtp";
+import { addNewSmtp } from "../../actions/actionBE/ConfigSmtp";
 import { useDispatch } from "react-redux";
 
 export default function ConfigSMTPs(handlePutConfig) {

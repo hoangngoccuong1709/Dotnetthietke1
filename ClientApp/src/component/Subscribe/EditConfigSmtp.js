@@ -1,9 +1,9 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
-import { updateConfig } from "../actions/actionBE/ConfigSmtp";
+import { updateConfig } from "../../actions/actionBE/ConfigSmtp";
 import { useDispatch } from "react-redux";
 import { Switch } from "antd";
 import "antd/dist/antd.css";

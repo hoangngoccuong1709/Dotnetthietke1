@@ -10,7 +10,7 @@ import {
   addNewSub,
   removeSub,
   updateSub,
-} from "../actions/actionBE/Subcribe";
+} from "../../actions/actionBE/Subcribe";
 import { DataGrid } from "@mui/x-data-grid";
 import SendEmailSubscribe from "./SendEmailSubscribe";
 import ConfigSMTPs from "./ConfigSMTPs";

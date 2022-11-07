@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { useDispatch, useSelector } from "react-redux";
-import { getListSMTP, removeSmtp } from "../actions/actionBE/ConfigSmtp";
+import { getListSMTP, removeSmtp } from "../../actions/actionBE/ConfigSmtp";
 import ConfigSMTPs from "./ConfigSMTPs";
 import EditConfigSmtp from "./EditConfigSmtp";
 

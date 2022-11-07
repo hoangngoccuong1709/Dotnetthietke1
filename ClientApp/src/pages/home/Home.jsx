@@ -6,11 +6,6 @@ import Titleproduct from "../../component/body/Titleproduct";
 import Video from "../../component/body/Video";
 import Introduce1 from "../../component/body/Introduce1";
 import Forminput from "../../component/body/Forminput";
-import { Input, Typography } from "antd";
-import { Routes, Route } from "react-router-dom";
-import Product from "../../component/body/Product";
-
-import Cart from "../cart/Cart";
 
 export default function Home() {
   return (
@@ -18,12 +13,6 @@ export default function Home() {
       <Slide />
       <Sale />
       <Titleproduct />
-      <Routes>
-        <Route path=":idproduct" element={<Product />}></Route>
-      </Routes>
-      <Routes>
-        <Route path="/giohang" element={<Cart />}></Route>
-      </Routes>
       <Video />
       <Saleoff />
       <Introduce1 />

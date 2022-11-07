@@ -4,8 +4,8 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import { useDispatch, useSelector } from "react-redux";
-import { sendEmailAll } from "../actions/actionBE/Subcribe";
-import { getListSMTP } from "../actions/actionBE/ConfigSmtp";
+import { sendEmailAll } from "../../actions/actionBE/Subcribe";
+import { getListSMTP } from "../../actions/actionBE/ConfigSmtp";
 import Select from "react-select";
 
 export default function SendEmailSubscribe(handlePutToggle) {

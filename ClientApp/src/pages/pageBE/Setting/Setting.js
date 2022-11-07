@@ -2,8 +2,6 @@ import React from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import Sidebar from "../../components/sidebar/Sidebar";
-import Navbars from "../../components/navbar/Navbar";
 import { Link, Outlet } from "react-router-dom";
 
 //so hash
