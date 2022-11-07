@@ -37,6 +37,8 @@ namespace dotnetthietke1.Controller
             return Ok(info);
 
         }
+
+
         [HttpGet("{id}")]
         public async Task<IActionResult> getInforById(int id)
         {
@@ -47,7 +49,6 @@ namespace dotnetthietke1.Controller
 
 
         [HttpDelete("{id}")]
-
         public async Task<IActionResult> deleteSubscribe(int id)
         {
             var check = await db.Subscribe.FindAsync(id);
@@ -76,10 +77,10 @@ namespace dotnetthietke1.Controller
             await db.SaveChangesAsync();
             return Ok(1);
         }
+
+
         [HttpPost("emails")]
-
         public async Task<IActionResult> getAllEmail([FromBody] SendEmail data)
-
         {
             var newData = new SendEmail
             {
@@ -90,7 +91,6 @@ namespace dotnetthietke1.Controller
 
 
             var ListEmail = await db.Subscribe.Select(x => x.email).ToListAsync();
-
             var dataEmails = await db.SMTPs.Select(u =>
             new DataEmailSend()
             {
@@ -99,9 +99,7 @@ namespace dotnetthietke1.Controller
                 PassSMTP = u.PassSMTP,
                 Status = u.Status
             }).Where(u => u.Email == $"{newData.SendNameEmail}").FirstOrDefaultAsync();
-            // return DataEmailSend();
 
-            // List<string> Emails = new List<string>();
 
             // chưa tối ưu. Hàm chạy còn chậm (có thể sẽ triển khai sử dụng thử mailkit)
             foreach (var item in ListEmail)
@@ -132,13 +130,11 @@ namespace dotnetthietke1.Controller
                     {
                         smtp.Send(message);
                     }
-
                 }
                 catch (Exception e)
                 {
                     throw e;
                 }
-
             }
             return Ok("send Success");
         }
