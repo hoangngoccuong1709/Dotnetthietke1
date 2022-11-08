@@ -32,6 +32,21 @@ namespace dotnetthietke1.Controllers
             this.signInManager = signInManager;
             this.configuration = configuration;
         }
+        [HttpGet("get")]
+        public async Task<IActionResult> GetAsync()
+        {
+            var user2 = await db.Users.Select(u => new
+            {
+                u.Id,
+                u.FullName,
+                u.Description,
+                u.Avatar,
+                u.UserName,
+                u.Email,
+                u.PhoneNumber
+            }).ToListAsync();
+            return Ok(user2);
+        }
         [HttpPost("login")]
         public async Task<IActionResult> LoginUser([FromBody] LoginModel model)
         {

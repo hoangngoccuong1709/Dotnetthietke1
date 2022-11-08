@@ -31,9 +31,18 @@ namespace dotnetthietke1.Controller
         }
         [HttpGet]
         [Route("get-conten-by-id")]
-        public async Task<IActionResult> GetCakeByIdAsync(int id)
+        public async Task<IActionResult> GetCakeByIdAsync(string Posion)
         {
-            var cake = await _applicationDbContetext.Contens.FindAsync(id);
+            var cake = _applicationDbContetext.Contens
+                .Where(p => p.Posion == Posion)
+                .OrderBy(p => p.Posion)
+                .ThenByDescending(p => p.Idconten)
+                .Take(1)
+                .ToList();  // Sắp xếp giảm dần, tăng dần là OrderBy
+                            // .Max(c => c.Idconten);
+
+
+            // var cake = await _applicationDbContetext.Contens.FindAsync(Posion);
             return Ok(cake);
         }
         [HttpPost]

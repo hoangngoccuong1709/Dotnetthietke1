@@ -89,7 +89,38 @@ namespace dotnetthietke1.Controller
             .FirstOrDefaultAsync();
             return Ok(user2);
         }
+        [HttpGet]
+        [Route("search")]
+        public async Task<IActionResult> GetName(string nameProduct)
+        {
+            //var user = await userManager.FindByNameAsync(userName);
+            var user2 = await db.Product.Select(u => new
+            {
+                u.NameProduct,
+                u.Title,
+                u.Image,
+                u.Price
+            }).Where(u => u.NameProduct == nameProduct)
+            .ToListAsync();
+            // .FirstOrDefaultAsync();
+            return Ok(user2);
+        }
+        // [HttpGet("abc")]
+        // public async Task OnGetAsync(int id)
+        // {
+        //     var products = from m in _applicationDbContetext.Product
+        //                    select m;
+        //     if (!string.IsNullOrEmpty(id.ToString()))
+        //     {
+        //         products = products.Where(s => s.NameProduct.Contains(id.ToString()));
+
+        //     }
+
+
+        //     //  Product = await products.ToListAsync();
+        // }
     }
+
     public class ModelProduct
     {
         public string nameProduct { get; set; }

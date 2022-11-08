@@ -84,18 +84,7 @@ function Cart(props) {
     // cart.push(cart[item]);
   });
 
-  // Object.keys(props.cart).forEach(function(item){
-  // TotalCart+=props.cart[item].quantity*props.cart[item].price;
-  // });
   async function createPost() {
-    // const postData = {
-    //   FullName: post_name.current.value,
-    //   PhoneNumber: post_sodienthoai.current.value,
-    //   Email: post_email.current.value,
-    //   Avatar: post_anh.current.value,
-    //   Description: post_mota.current.value,
-    //   Orders: props.cart,
-    // };
     try {
       const res = await fetch(`/user`, {
         method: "post",
@@ -216,6 +205,3 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 export default connect(Cart, mapStateToProps, mapDispatchToProps);
-// connect(mapStateToProps, mapDispatchToProps)
-//export default  (mapStateToProps,Cart);
-//export default Cart;

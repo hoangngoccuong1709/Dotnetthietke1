@@ -11,6 +11,9 @@ import { useEffect } from "react";
 import Sidebar from "../components/sidebar/Sidebar";
 import Navbar from "../components/navbar/Navbar";
 import "../components/datatable/datatable.scss";
+import { EditText, EditTextarea } from "react-edit-text";
+import Search from "../components/navbar/Search";
+import { filterByNames } from "./action/filter";
 const IdProduct = () => {
   const baseURL = "/api";
   const post_name = useRef(null);
@@ -21,6 +24,7 @@ const IdProduct = () => {
   const fortmatResponse = (res) => {
     return JSON.stringify(res, null, 2);
   };
+
   const [image, setImage] = useState();
   const [data, setData] = useState([]);
   const [post, setPost] = useState({
@@ -163,18 +167,36 @@ const IdProduct = () => {
       },
     },
   ];
+  const [value, setValue] = useState("");
+
+  const onChangeHandler = (event) => {
+    const { target } = event;
+    const val = target.value;
+    setValue(val);
+  };
+  // const sumData = () => {
+  //   const filterName = value.filter((el) => el.nameproduct == onChangeHandler);
+  // };
+  const results = !value ? data : filterByNames(data, value);
   return (
     <div className="home">
       <Sidebar />
       <div className="homeContainer">
         <Navbar />
         <div className="Table">
+          {/* <div className="demo">
+            <input type="text" value={value} onChange={onChangeHandler} />
+            <div className="demo-result">{publish(results)}</div>
+          </div> */}
           <div className="TableTitle">
             Quản lí sản phẩm
             <button onClick={handleClickOpen} className="link">
               Thêm mới
             </button>
           </div>
+          {/* <div className="search">
+            <Search />
+          </div> */}
           <DataGrid
             className="datagrid"
             autoHeight
@@ -233,13 +255,13 @@ const IdProduct = () => {
 
                       <div className="form-group " style={{ marginTop: 20 }}>
                         <label className="required">
-                          Nhập tiêu đề sản phẩm{" "}
+                          Nhập tiêu đề sản phẩm : {}
                         </label>
-                        <input
-                          type="text"
+                        <EditTextarea
+                          type="textarea"
                           className="form-control "
                           ref={post_title}
-                        ></input>
+                        ></EditTextarea>
                       </div>
                       <div className="form-group " style={{ marginTop: 20 }}>
                         <label className="required">Nhập giá sản phẩm</label>

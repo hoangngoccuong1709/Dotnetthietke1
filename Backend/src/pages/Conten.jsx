@@ -11,6 +11,7 @@ import { useEffect } from "react";
 import Sidebar from "../components/sidebar/Sidebar";
 import Navbar from "../components/navbar/Navbar";
 import "../components/datatable/datatable.scss";
+import { EditText, EditTextarea } from "react-edit-text";
 const IdConten = () => {
   const baseURL = "/api";
   const post_name = useRef(null);
@@ -270,15 +271,15 @@ const IdConten = () => {
                             style={{ marginTop: 20 }}
                           >
                             <label className="required">
-                              Nhập nội dung bài viết
+                              Nhập nội dung bài viết :
                             </label>
-                            <input
-                              type="text"
+                            <EditTextarea
+                              type="textarea"
                               className="form-control "
                               ref={post_paragraph}
                               required
                               pattern="\S+"
-                            ></input>
+                            ></EditTextarea>
                           </div>
                           <select
                             id="cars"

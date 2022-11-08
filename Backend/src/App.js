@@ -15,6 +15,7 @@ import Customer from "./pages/Customer";
 import Subscribes from "./CRUD/Subcribe";
 import Subscribe from "./CRUD/Info_Customer";
 import PageConfig from "./CRUD/PageConfig";
+import Xuli from "./pages/Xuli/Xuli";
 // import Setting from "./pages/setting/Setting";
 
 function App() {
@@ -49,6 +50,7 @@ function App() {
             <Route index element={<Subscribe />} />
             <Route path="pageConfig" element={<PageConfig />} />
           </Route>
+          <Route path="donhang/xuli" element={<Xuli />} />
         </Routes>
       </BrowserRouter>
     </div>

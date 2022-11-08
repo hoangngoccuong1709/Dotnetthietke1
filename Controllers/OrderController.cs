@@ -22,36 +22,26 @@ namespace dotnetthietke1.Controller
             _applicationDbContetext = applicationdDbContext;
             this.db = applicationdDbContext;
         }
-
         [HttpGet]
         public async Task<IActionResult> GetAsync()
         {
-            var query = db.Orders.AsNoTracking();
-            var data = await query.Select(s => new
+            var products = _applicationDbContetext.Orders.Include(x => x.OrderDetails)
+            .Select(x => new
             {
-                Id = s.Id,
-                date = s.Date,
-                quantity = s.Quantity,
-                total = s.Total,
-                fullname = s.User.FullName,
-                phonenumber = s.User.PhoneNumber,
-                adress = s.User.Description,
-                Product = s.OrderDetails.Select(o => new
-                {
-                    // Id = o.Product.Idproduct,
-                    o.Product.NameProduct
-                }),
-            }).ToListAsync();
-            var total = data.Count();
-            //foreach (var ownerAndPet in query)
-            //{
-            // Console.WriteLine($"\"{ownerAndPet.ProductName}\" is owned by {ownerAndPet.Total}");
-            //}
-            return Ok(data);
-            // {
-            //     total = total,
-            //     items = data
-            // });
+                Id = x.Id,
+                date = x.Date,
+                quantity = x.Quantity,
+                // Orderid = x.,
+                total = x.Total,
+                fullname = x.User.FullName,
+                phonenumber = x.User.PhoneNumber,
+                adress = x.User.Description,
+                nameproduct = x.OrderDetails.Select(a => a.Product.NameProduct),
+            }
+            ).ToList();
+            return Ok(products);
+
+
         }
         [HttpGet]
         [Route("idorder")]
@@ -166,6 +156,32 @@ namespace dotnetthietke1.Controller
             public float Total { get; set; }
             //        public float Price { get; set; }
             public ICollection<OrderDetail> orderDetails;
+        }
+        [HttpGet]
+        [Route("get-by-id")]
+        public async Task<IActionResult> GetCakeByIdAsync(string fullname)
+        {
+            var products = _applicationDbContetext.Orders.Include(x => x.OrderDetails)
+           .Select(x => new
+           {
+               Id = x.Id,
+               date = x.Date,
+               quantity = x.Quantity,
+               total = x.Total,
+               fullname = x.User.FullName,
+               phonenumber = x.User.PhoneNumber,
+               adress = x.User.Description,
+               nameproduct = x.OrderDetails.Select(a => a.Product.NameProduct),
+           }
+           ).Where(p => p.fullname == fullname)
+            //    .OrderBy(p => p.date)
+            //     .ThenByDescending(p => p.date)
+               .ToList();  // Sắp xếp giảm dần, tăng dần là OrderBy
+                           // .Max(c => c.Idconten);
+
+
+            // var cake = await _applicationDbContetext.Contens.FindAsync(Posion);
+            return Ok(products);
         }
 
     }

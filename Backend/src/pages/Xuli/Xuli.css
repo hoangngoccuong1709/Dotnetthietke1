@@ -1,0 +1,17 @@
+.Step {
+   align-items: center;
+
+    padding: 5rem  3rem;
+}
+.top-bar{
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
+.nav-tab{
+    display: block;
+    text-align: center;
+    padding: 1rem;
+    border: 2px hidden #b1154a;
+
+}
