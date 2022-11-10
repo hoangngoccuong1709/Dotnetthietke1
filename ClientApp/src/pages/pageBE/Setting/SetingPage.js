@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./SettingPage.scss";
 import { CirclePicker } from "react-color";
-import reactCSS from "reactcss";
+import Header from "../../../component/header/Header";
 
 export default function SettingPage() {
   const [status, setStatus] = useState(false);
@@ -33,6 +33,7 @@ export default function SettingPage() {
                     />
                   </div>
                 ) : null}
+                <Header />
               </div>
             </div>
           </div>

@@ -46,7 +46,6 @@ function Header() {
                   SIGN IN
                 </Link>
               </li>
-              {/* <li><button class="buttonthoat" >SIGN IN</button></li> */}
             </ul>
           </div>
           <div className="iconmenu">
@@ -57,13 +56,11 @@ function Header() {
               />
             </Link>
             <Link to="/giohang">
-              {/* cart : {this.props.numberCart} */}
               <img
                 style={{ width: "1.9rem", height: "2.3rem" }}
                 src="image/Shop.png"
               />
               <i className="navlink">{cart}</i>
-              {/* <li className="nav-item"><Link to="/carts" className="nav-link">Carts : {cart}</Link></li>  */}
             </Link>
             <a href>
               <img
@@ -77,9 +74,5 @@ function Header() {
     </div>
   );
 }
-// const mapStateToProps = state =>{
-//   return{
-//       numberCart:state.cart.numberCart
-//   }
-// }
+
 export default Header;

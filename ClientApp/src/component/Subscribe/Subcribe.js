@@ -11,7 +11,7 @@ const Subscribe = () => {
         <Container>
           <Nav>
             <Link
-              to=""
+              to=" "
               className=" ml-3 btn"
               style={{
                 color: "antiquewhite",

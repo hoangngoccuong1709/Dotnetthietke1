@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { CSVLink } from "react-csv";
+import { CSVDownload } from "react-csv";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogTitle from "@mui/material/DialogTitle";
@@ -15,6 +15,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import SendEmailSubscribe from "./SendEmailSubscribe";
 import ConfigSMTPs from "./ConfigSMTPs";
 import { Outlet } from "react-router-dom";
+import ExportCSV from "./ExportCSV";
 
 const SubscribePage = () => {
   const nameInput = useRef(null);
@@ -141,11 +142,23 @@ const SubscribePage = () => {
     updateAt: post.updateAt,
   }));
 
+  const wscols = [
+    { wch: 5 },
+    {
+      wch: Math.max(...rows.map((data) => data.name.length)),
+    },
+    { wch: Math.max(...rows.map((data) => data.email.length)) },
+    { wch: Math.max(...rows.map((data) => data.message.length)) },
+    { wch: 20 },
+    { wch: 20 },
+  ];
+
   const Columns = [
     { field: "id", headerName: "#", width: 50, hide: true },
     { field: "name", headerName: "Customer Name", width: 200, editable: false },
     { field: "email", headerName: "Email", width: 180, editable: false },
-    { field: "message", headerName: "Message", width: 200, editable: false },
+    { field: "message", headerName: "Message", width: 200, editable: false } +
+      5,
     {
       field: "createAt",
       headerName: "Create At",
@@ -218,17 +231,11 @@ const SubscribePage = () => {
         <button className="btn btn-primary ml-3 " onClick={handlePutToggle}>
           Send Email
         </button>
-
-        <CSVLink
-          target="_blank"
-          filename={"ListSubscribe.csv"}
-          enclosingCharacter={`'`}
-          data={rows}
-          className="btn btn-primary ml-3  "
-          headers={header}
-        >
-          Export excel
-        </CSVLink>
+        <ExportCSV
+          csvData={rows}
+          fileName="ListSubscribe.csv"
+          wscols={wscols}
+        />
       </div>
       <Outlet />
       <DataGrid
