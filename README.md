@@ -3,5 +3,5 @@
 3. yarn ssl
 4. yarn start
 
-FrontEnd host: https://localhost:44450/fe
+FrontEnd host: https://localhost:44450
 BackEnd host : https://localhost:44450/be
