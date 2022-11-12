@@ -21,6 +21,9 @@ public class OrderDetail
     [Display(Name = "Đơn hàng")]
     public int OrderId { get; set; }
 
+    [Display(Name = "Trạng Thái")]
+    public string Stattus { get; set; }
+
     [ForeignKey("OrderId")]
     public virtual Orders Order { get; set; }
 

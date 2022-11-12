@@ -31,8 +31,9 @@ namespace dotnetthietke1.Controller
                 Id = x.Id,
                 date = x.Date,
                 quantity = x.Quantity,
-                // Orderid = x.,
+                Orderid = x.OrderDetails.Select(x => x.Id),
                 total = x.Total,
+                status = x.OrderDetails.Select(x => x.Stattus),
                 fullname = x.User.FullName,
                 phonenumber = x.User.PhoneNumber,
                 adress = x.User.Description,
@@ -157,6 +158,12 @@ namespace dotnetthietke1.Controller
             //        public float Price { get; set; }
             public ICollection<OrderDetail> orderDetails;
         }
+        public class Body
+        {
+
+            public string status { get; set; }
+        }
+
         [HttpGet]
         [Route("get-by-id")]
         public async Task<IActionResult> GetCakeByIdAsync(string fullname)
@@ -182,6 +189,18 @@ namespace dotnetthietke1.Controller
 
             // var cake = await _applicationDbContetext.Contens.FindAsync(Posion);
             return Ok(products);
+        }
+        [HttpPut]
+        public async Task<IActionResult> updateSubscribe(int id, string status)
+        {
+            var sub = _applicationDbContetext.OrderDetails.Find(id);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("k có giá trị");
+            }
+            sub.Stattus = status;
+            await db.SaveChangesAsync();
+            return Ok();
         }
 
     }

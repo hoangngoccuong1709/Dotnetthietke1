@@ -3,7 +3,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { supabase } from "../client";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogTitle from "@mui/material/DialogTitle";
@@ -12,16 +12,31 @@ import Sidebar from "../components/sidebar/Sidebar";
 import Navbar from "../components/navbar/Navbar";
 import Search from "../components/navbar/Search";
 const Author = () => {
+  const baseURL = "/api";
+  const [order, setOrder] = useState({
+    id: "",
+    // productName: "",
+    status: "",
+    // quantity: "",
+    // Orderid: "",
+    // total: "",
+    // fullname: "",
+    // Description: "",
+    // date: "",
+  });
+
+  //   id: "",
+  //   status: "",
+  // }
   const [data, setData] = useState([]);
   useEffect(() => {
     author();
   }, []);
   const [openEdit, setOpenEdit] = useState(false);
-
+  const post_trangthai = useRef(null);
   const handleClickOpenEdit = () => {
     setOpenEdit(!openEdit);
   };
-
   function author() {
     var requestOptions = {
       method: "GET",
@@ -34,22 +49,16 @@ const Author = () => {
   }
   const handleUpdate = (params) => {
     setOpenEdit(!openEdit);
-    setData({
-      id: post.id,
-      productName: post.nameproduct,
-      quantity: post.quantity,
-      Orderid: post.orderid,
-      total: post.total,
-      fullname: post.fullname,
-      Description: post.adress,
-      date: post.date,
+    setOrder({
+      id: params.id,
+      status: params.status,
     });
   };
   const handleSave = async (id) => {
     id = data.id;
     const updatedb = new Promise((resolve, reject) => {
       try {
-        dispatch(updateSub(id, data));
+        dispatch(update(id, data));
         resolve(updatedb);
       } catch (e) {
         reject(e);
@@ -59,16 +68,60 @@ const Author = () => {
     setOpenEdit(!openEdit);
     getAllSubscribeFormReact();
   };
-  const handleOnchange = (e, id) => {
-    let copystate = { ...data };
-    copystate[id] = e.target.value;
-    setData({
-      ...copystate,
-    });
+  // const handleOnchange = (e, id) => {
+  //   let copystate = { ...data };
+  //   copystate[id] = e.target.value;
+  //   setData({
+  //     ...copystate,
+  //   });
+  // };
+  const update = async (id, status) => {
+    const Data = {
+      id: 15,
+      status: "Đã hoàn",
+    };
+    //   try {
+    fetch(`${baseURL}/order`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "x-access-token": "token-value",
+      },
+      body: JSON.stringify(Data),
+    })
+      .then((res) => {
+        if (res.ok) {
+          console.log("HTTP request successful");
+        } else {
+          console.log("HTTP request unsuccessful");
+        }
+        return res;
+      })
+      .then((res) => res.json())
+      .then((res) => setOrder(order));
+    alert("cập nhật thành công !");
+    // publish().catch((error) => console.log(error));
   };
+  async function toggleStatus(id) {
+    try {
+      let todo = data.find((data) => data.id == id);
+      data.status = !data.status;
+
+      let res = await update(todo);
+
+      data.forEach((todo, index) => {
+        if (todo.id == id) {
+          data[index] = res.data;
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
   const rows = data.map((post) => ({
     id: post.id,
     productName: post.nameproduct,
+    status: post.status,
     quantity: post.quantity,
     Orderid: post.orderid,
     total: post.total,
@@ -79,15 +132,15 @@ const Author = () => {
   }));
 
   const Columns = [
-    { field: "id", headerName: "Mã Hoá đơn", width: 120, height: 100 },
+    { field: "id", headerName: "Mã Hoá đơn", width: 70, height: 100 },
     {
       field: "productName",
       headerName: "Tên sản phẩm",
       width: 200,
       editable: true,
     },
-    { field: "quantity", headerName: "So luong", width: 180, editable: true },
-    { field: "total", headerName: "Tổng tiền", width: 180, editable: true },
+    { field: "quantity", headerName: "So luong", width: 100, editable: true },
+    { field: "total", headerName: "Tổng tiền", width: 100, editable: true },
     {
       field: "fullname",
       headerName: "Ho va ten nguoi mua",
@@ -98,10 +151,16 @@ const Author = () => {
     {
       field: "Orderid",
       headerName: "Mã đơn hàng",
-      width: 100,
+      width: 50,
       editable: true,
     },
-    { field: "date", headerName: "Ngay mua hang", width: 200, editable: true },
+    { field: "date", headerName: "Ngay mua hang", width: 100, editable: true },
+    {
+      field: "status",
+      headerName: "Trang thái đơn hàng",
+      width: 120,
+      editable: true,
+    },
     // {
     //   field: "username",
     //   headerName: "Ten nguoi mua hang",
@@ -120,21 +179,24 @@ const Author = () => {
       renderCell: (params) => {
         return (
           <div className="cellAction">
+            <select id="cars" ref={post_trangthai} onChange={toggleStatus}>
+              <option value="Thanh toán">Thanh Toán</option>
+              <option value="Xác Nhận Đơn">Xác nhận đơn</option>
+              <option value="Huỷ đơn hàng">Huỷ đơn hàng</option>
+              <option value="Đang đóng gói">Đang đóng gói</option>
+              <option value="Đang vận chuyển">Đang vận chuyển</option>
+              <option value="Giao hàng thành công">Giao hàng thành công</option>
+              <option value="Hàng hoàn">Đang hoàn</option>
+            </select>
             <Link to="xuli" style={{ textDecoration: "none" }}>
               <div className="viewButton">Đang xử lí</div>
             </Link>
-            {/* <div
-                            className="deleteButton"
-                            // onClick={() => { if (window.confirm("Bạn có muốn xóa không")) remove(params.row.id) }}
-                        >
-                            Delete
-                        </div> */}
             <button
               className="btn btn-primary ml-3"
               onClick={() => handleUpdate(params.row)}
-              // onClick={() => console.log(params)}
+              // onClick={() => console.log(params.row)}
             >
-              edit
+              Cập nhật trạng thái
             </button>
           </div>
         );
@@ -153,7 +215,7 @@ const Author = () => {
                             Thêm mới
                         </Link> */}
           </div>
-
+          {<text>Loading...</text>}
           <DataGrid
             className="datagrid"
             autoHeight
@@ -181,26 +243,32 @@ const Author = () => {
               <div className="row">
                 <div>
                   <div className="form-group ">
-                    <label className="required">Name</label>
-                    <input
+                    <label className="required">Trạng thái đơn hàng</label>
+                    {/* <input
                       type="text"
                       className="form-control"
-                      value={data.name || ""}
-                      onChange={(e) => handleOnchange(e, "name")}
-                    ></input>
+                      value={data.status || ""}
+                      // ref={handleOnchange(post_trangthai)}
+                      // onChange={(e) => handleOnchange(e, "status")}
+                    ></input> */}
+                    <select
+                      id="cars"
+                      style={{ marginTop: 20 }}
+                      ref={post_trangthai}
+                    >
+                      <option value="Thanh toán">Thanh Toán</option>
+                      <option value="Xác Nhận Đơn">Xác nhận đơn</option>
+                      <option value="Huỷ đơn hàng">Huỷ đơn hàng</option>
+                      <option value="Đang đóng gói">Đang đóng gói</option>
+                      <option value="Đang vận chuyển">Đang vận chuyển</option>
+                      <option value="Giao hàng thành công">
+                        Giao hàng thành công
+                      </option>
+                      <option value="Hàng hoàn">Đang hoàn</option>
+                    </select>
                   </div>
 
-                  <div className="form-group " style={{ marginTop: 20 }}>
-                    <label className="required">Email</label>
-                    <input
-                      type="text"
-                      className="form-control "
-                      value={data.email || ""}
-                      onChange={(e) => handleOnchange(e, "email")}
-                    ></input>
-                  </div>
-
-                  <div className="form-group " style={{ marginTop: 20 }}>
+                  {/* <div className="form-group " style={{ marginTop: 20 }}>
                     <label className="required">Message</label>
                     <textarea
                       onChange={(e) => handleOnchange(e, "message")}
@@ -211,19 +279,18 @@ const Author = () => {
                         height: "100px",
                       }}
                     ></textarea>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </form>
           </DialogContent>
-
           <DialogActions>
             <div className="button">
               <button
                 type="reset"
                 value="Reset"
                 className="btn btn-primary text-center"
-                onClick={handleSave}
+                onClick={update}
               >
                 save
               </button>
